@@ -1,0 +1,1135 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Racecourse</title>
+<meta name="description" content="Organizzazione dei campi di regata: squadre, boe, bandiere e percorsi.">
+<meta name="theme-color" content="#0F2740">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Racecourse">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<style>
+@font-face{font-family:"Barlow";font-weight:400;font-style:normal;font-display:swap;src:url(fonts/barlow-400.woff2) format("woff2")}
+@font-face{font-family:"Barlow";font-weight:500;font-style:normal;font-display:swap;src:url(fonts/barlow-500.woff2) format("woff2")}
+@font-face{font-family:"Barlow";font-weight:600;font-style:normal;font-display:swap;src:url(fonts/barlow-600.woff2) format("woff2")}
+@font-face{font-family:"Barlow Condensed";font-weight:600;font-style:normal;font-display:swap;src:url(fonts/barlow-condensed-600.woff2) format("woff2")}
+@font-face{font-family:"Barlow Condensed";font-weight:700;font-style:normal;font-display:swap;src:url(fonts/barlow-condensed-700.woff2) format("woff2")}
+:root{
+  --bg:#F3F6F9; --card:#FFFFFF; --ink:#0F2740; --muted:#5A6B7E; --line:#D5DEE8;
+  --red:#C8102E; --blue:#1D4E9E; --yellow:#F5C400; --ok:#1E7A4C; --tap:#E6EEF6; --field:#F7F9FB;
+  color-scheme: light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B1D31; --card:#12304F; --ink:#EAF1F8; --muted:#9DB1C5; --line:#22476C;
+    --red:#E0394F; --blue:#5B8BE0; --ok:#4CC488; --tap:#1A3B5E; --field:#0F2843;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B1D31; --card:#12304F; --ink:#EAF1F8; --muted:#9DB1C5; --line:#22476C;
+  --red:#E0394F; --blue:#5B8BE0; --ok:#4CC488; --tap:#1A3B5E; --field:#0F2843;
+  color-scheme: dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.45 Barlow,"Helvetica Neue",Arial,sans-serif;-webkit-text-size-adjust:100%}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:6px}
+.wrap{max-width:640px;margin:0 auto;padding:0 16px 48px}
+h1,h2,h3{font-family:"Barlow Condensed","Arial Narrow",Arial,sans-serif;font-weight:700;letter-spacing:.01em;margin:0}
+h1{font-size:38px;line-height:1.05}
+h2{font-size:24px;line-height:1.15;margin:28px 0 10px}
+h3{font-size:21px}
+.muted{color:var(--muted)}
+svg.fl{display:block;flex:none}
+
+/* home */
+.top{padding:24px 0 6px}
+.evname{width:100%;border:0;background:transparent;font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:38px;line-height:1.1;padding:0;color:var(--ink)}
+.evname::placeholder{color:var(--muted);opacity:.7}
+.stepper{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-top:16px}
+.stepper .lbl{font-weight:600}
+.stepper .lbl span{display:block;font-weight:400;font-size:14px;color:var(--muted)}
+.stepper .ctl{margin-left:auto;display:flex;align-items:center;gap:6px}
+.stepper button{width:44px;height:44px;border-radius:10px;border:1px solid var(--line);background:var(--tap);font-size:24px;font-weight:600;cursor:pointer}
+.stepper button:disabled{opacity:.35}
+.stepper b{font-family:"Barlow Condensed",sans-serif;font-size:34px;min-width:30px;text-align:center}
+.fields{list-style:none;margin:16px 0 0;padding:0;border-top:1px solid var(--line)}
+.fields a{display:flex;align-items:center;gap:16px;padding:14px 4px;border-bottom:1px solid var(--line);text-decoration:none}
+.fields a:active{background:var(--tap)}
+.fields .nm{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:30px;line-height:1}
+.fields .cl{color:var(--muted);font-size:15px;margin-top:3px}
+.fields .ch{margin-left:auto;text-align:right}
+.fields .ch b{display:block;font-family:"Barlow Condensed",sans-serif;font-size:30px;line-height:1}
+.fields .ch span{font-size:13px;color:var(--muted)}
+.links{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+.links a{display:block;padding:14px;border:1px solid var(--line);border-radius:10px;background:var(--card);text-decoration:none;font-weight:600}
+.links a span{display:block;font-weight:400;font-size:14px;color:var(--muted)}
+
+/* barra */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar .in{max-width:640px;margin:0 auto;display:flex;align-items:center;gap:10px;padding:10px 16px}
+.back{text-decoration:none;font-weight:600;padding:6px 8px 6px 0;color:var(--blue)}
+.bar .t{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:20px;margin-left:auto}
+.hero{display:flex;gap:16px;align-items:center;padding:20px 0 4px}
+.tabs{display:flex;gap:3px;margin:16px 0 0;background:var(--tap);padding:4px;border-radius:12px}
+.tabs button{flex:1;border:0;background:transparent;padding:9px 1px;border-radius:9px;font-weight:600;font-size:14px;cursor:pointer}
+.map{position:relative;margin-top:14px;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#D7E8F4;user-select:none;-webkit-user-select:none}
+.map img{display:block;width:100%;height:auto;pointer-events:none;-webkit-touch-callout:none}
+.map.blank{aspect-ratio:3/4;background-image:linear-gradient(rgba(29,78,158,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(29,78,158,.08) 1px,transparent 1px);background-size:32px 32px}
+.mapempty{position:absolute;inset:auto 0 12px;text-align:center;color:#5A6B7E;font-size:14px}
+.mk{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;touch-action:none;cursor:grab;padding:4px;z-index:1}
+.mk b{font:700 14px/1.2 "Barlow Condensed",sans-serif;background:#fff;color:#0F2740;border-radius:4px;padding:0 4px;margin-top:-1px;box-shadow:0 0 0 1px rgba(0,0,0,.25);white-space:nowrap}
+.mk.drag{cursor:grabbing;z-index:3}
+.mk.drag svg{transform:scale(1.15)}
+.mk svg{filter:drop-shadow(0 1px 1px rgba(0,0,0,.35))}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center}
+.btn{display:inline-block;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:10px 14px;font-weight:600;cursor:pointer}
+.btn.pri{background:var(--blue);color:#fff;border-color:var(--blue)}
+label.btn input{display:none}
+.hint{font-size:14px;color:var(--muted);margin:8px 0 0}
+.arw{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:1}
+.arw .hit{pointer-events:stroke;cursor:pointer}
+.map.drawing{touch-action:none;cursor:crosshair}
+.map.drawing .arw .hit{pointer-events:none}
+.mk.boa{z-index:2}
+.bd{width:22px;height:22px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 2px rgba(0,0,0,.45)}
+.bd.robo{border-radius:6px}
+.mk.sel .bd{outline:3px solid #1D4E9E;outline-offset:2px}
+.hd{position:absolute;width:30px;height:30px;transform:translate(-50%,-50%);border-radius:50%;background:rgba(29,78,158,.25);border:2px solid #1D4E9E;touch-action:none;z-index:4;cursor:grab}
+.seg{display:flex;gap:4px;background:var(--tap);padding:4px;border-radius:12px;margin-top:14px}
+.seg button{flex:1;border:0;background:transparent;padding:9px 4px;border-radius:9px;font-weight:600;font-size:15px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--card);box-shadow:0 1px 0 var(--line)}
+.selbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px;padding:10px 12px;background:var(--card);border:1px solid var(--blue);border-radius:12px}
+.selbar .n{font-weight:600;margin-right:auto}
+.selbar .btn{padding:8px 12px}
+.btn.del{color:var(--red)}
+.mk.sel svg{outline:3px solid #1D4E9E;outline-offset:3px;border-radius:6px}
+.hd.mid{background:rgba(245,196,0,.35);border-color:#B88F00}
+.qadd{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:4px}
+.qadd .btn{display:flex;align-items:center;gap:10px;text-align:left;font-size:15px}
+.qadd svg{flex:none}
+.tabs button[aria-selected="true"]{background:var(--card);box-shadow:0 1px 0 var(--line)}
+
+/* moduli */
+.blk{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-top:10px;overflow:hidden}
+.sec{padding:12px 14px;border-top:1px solid var(--line)}
+.sec:first-child{border-top:0}
+.r{font-size:13px;color:var(--muted)}
+.inp{width:100%;border:1px solid transparent;border-bottom-color:var(--line);background:var(--field);border-radius:8px 8px 0 0;padding:9px 10px;font-size:17px;min-width:0}
+.inp:focus{outline:none;border-color:var(--blue);border-radius:8px}
+.inp::placeholder{color:var(--muted);opacity:.75}
+.pp .pr{display:flex;gap:8px;margin-top:4px;flex-wrap:wrap}
+.pp .pr .nm{flex:1 1 200px}
+.pp .pr .tl{flex:1 1 130px;display:flex;gap:8px;align-items:center}
+.call{flex:none;display:inline-flex;align-items:center;text-decoration:none;font-weight:600;padding:8px 12px;border-radius:999px;background:var(--blue);color:#fff;font-size:15px}
+.call[hidden]{display:none}
+.kv2{display:grid;grid-template-columns:1fr 110px;gap:10px}
+.mzh{display:flex;align-items:center;gap:8px}
+.mzh .inp{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:21px;background:transparent;padding:4px 6px}
+.tag{flex:none;font-size:13px;color:var(--muted);background:var(--tap);padding:3px 8px;border-radius:999px}
+.x{flex:none;border:0;background:none;color:var(--red);font-weight:600;cursor:pointer;padding:8px 6px;font-size:15px}
+.x.armed{background:var(--red);color:#fff;border-radius:8px}
+.add{display:block;width:100%;margin-top:10px;padding:12px;border:1.5px dashed var(--line);border-radius:12px;background:transparent;font-weight:600;color:var(--blue);cursor:pointer;text-align:center}
+.addrow{display:flex;gap:8px;margin-top:10px}
+.addrow select{flex:1;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:10px}
+.addrow button{flex:none;border:0;border-radius:10px;background:var(--blue);color:#fff;font-weight:600;padding:10px 16px;cursor:pointer}
+textarea.inp{min-height:80px;resize:vertical}
+
+/* liste spunta */
+.pick{display:flex;gap:6px;overflow-x:auto;padding:2px 0 6px;margin-top:14px;scrollbar-width:none}
+.pick button{flex:none;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:8px 14px;font-weight:600;cursor:pointer;font-size:15px}
+.pick button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.prog{display:flex;align-items:center;gap:10px;margin:10px 0 0}
+.prog .track{flex:1;height:8px;background:var(--tap);border-radius:8px;overflow:hidden}
+.prog .fill{height:100%;background:var(--ok);transition:width .2s}
+.chk{display:flex;gap:12px;align-items:center;padding:8px 10px 8px 14px;border-top:1px solid var(--line)}
+.chk:first-child{border-top:0}
+.chk input[type=checkbox]{width:24px;height:24px;accent-color:var(--ok);flex:none;margin:0}
+.chk .inp{background:transparent;border-bottom-color:transparent}
+.chk.done .inp,.chk.done .fn{color:var(--muted);text-decoration:line-through}
+.chk .fn{flex:1}
+.chk .fn small{display:block;color:var(--muted);font-size:13px;text-decoration:none}
+.lnk{background:none;border:0;color:var(--red);font-weight:600;padding:8px 0;cursor:pointer;margin-top:8px}
+.empty{padding:18px 14px;color:var(--muted)}
+
+/* boe */
+.brow{display:flex;align-items:center;gap:8px;padding:8px 10px;border-top:1px solid var(--line);flex-wrap:wrap}
+.brow:first-child{border-top:0}
+.dot{width:28px;height:28px;border-radius:50%;flex:none;box-shadow:inset 0 0 0 2px rgba(0,0,0,.18)}
+.dot.robo{border-radius:7px}
+.brow .lb{width:90px;flex:none}
+.brow select{flex:1 1 120px;border:1px solid var(--line);border-radius:8px;background:var(--field);padding:8px}
+.brow .qt{width:56px;flex:none;text-align:center}
+.brow label{display:flex;align-items:center;gap:6px;font-size:14px;color:var(--muted)}
+.tot{font-family:"Barlow Condensed",sans-serif;font-size:22px;font-weight:700}
+
+/* archivio */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;margin-top:10px}
+.tile{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 6px;border:1.5px solid var(--line);border-radius:10px;background:var(--card);cursor:pointer;text-align:center;font-size:14px;line-height:1.2}
+.tile[aria-pressed="true"]{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--card));box-shadow:inset 0 0 0 1px var(--ok)}
+.tile .s{font-size:12px;color:var(--muted)}
+.arow{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-top:1px solid var(--line)}
+.arow:first-child{border-top:0}
+.arow .n{font-weight:600}
+.sheet{position:fixed;inset:0;z-index:20;background:rgba(5,15,28,.5);display:flex;align-items:flex-end;justify-content:center}
+.sheet .pane{background:var(--bg);width:100%;max-width:640px;max-height:88vh;max-height:88dvh;overflow:auto;border-radius:16px 16px 0 0;padding:0 16px calc(20px + env(safe-area-inset-bottom,0px))}
+.sheet .head{position:sticky;top:0;background:var(--bg);display:flex;align-items:center;padding:14px 0 10px;z-index:1;border-bottom:1px solid var(--line)}
+.sheet .head button{margin-left:auto;border:0;border-radius:10px;background:var(--blue);color:#fff;font-weight:600;padding:9px 18px;cursor:pointer}
+.sheet h3{margin-top:16px}
+
+/* tabelle */
+.tw{overflow-x:auto;margin-top:12px;background:var(--card);border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{padding:9px 4px;text-align:center;border-top:1px solid var(--line)}
+thead th{border-top:0}
+th:first-child,td:first-child{text-align:left;padding-left:12px;line-height:1.2}
+th:last-child,td:last-child{padding-right:12px}
+tbody th{font-weight:600;font-size:14px}
+tfoot th,tfoot td{font-weight:700}
+.search{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--card);margin-top:14px}
+.row{display:flex;align-items:center;gap:12px;padding:12px 14px;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.row .n{font-weight:600}
+.status{margin-top:28px;font-size:14px;color:var(--muted);display:flex;gap:8px;align-items:center}
+.status i{width:8px;height:8px;border-radius:50%;background:var(--muted);flex:none}
+.status.sh i{background:var(--ok)}
+.status.ro i{background:var(--red)}
+.status a{color:var(--blue);font-weight:600}
+.brand{display:flex;align-items:center;gap:10px;padding-top:18px}
+.brand img{width:28px;height:28px;border-radius:7px}
+.brand b{font:700 15px/1 "Barlow Condensed",sans-serif;letter-spacing:.12em;text-transform:uppercase}
+.brand .lang{margin-left:auto;display:flex;gap:2px;background:var(--tap);padding:3px;border-radius:9px}
+.brand .lang button{border:0;background:transparent;padding:5px 10px;border-radius:7px;font-weight:600;font-size:14px;cursor:pointer}
+.brand .lang button[aria-pressed="true"]{background:var(--card);box-shadow:0 1px 0 var(--line)}
+.top{padding-top:10px}
+.foot{margin-top:18px;font-size:13px;color:var(--muted)}
+.foot a{color:inherit}
+.install{margin-top:16px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--card);font-size:15px}
+.install b{display:block;margin-bottom:2px}
+.gate{min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:24px 16px}
+.gate .box{width:100%;max-width:360px;text-align:center}
+.gate img{width:84px;height:84px;border-radius:20px;margin-bottom:14px}
+.gate h1{font-size:34px}
+.gate p{color:var(--muted);margin:8px 0 18px}
+.gate .inp{text-align:center;font-size:22px;letter-spacing:.12em;text-transform:uppercase;border-radius:10px;border:1px solid var(--line)}
+.gate .pri{width:100%;margin-top:10px;padding:13px;font-size:17px}
+.gate .err{color:var(--red);margin:10px 0 0;min-height:1.4em}
+.gate .gl{display:inline-flex;margin-top:18px;gap:2px;background:var(--tap);padding:3px;border-radius:9px}
+.gate .gl button{border:0;background:transparent;padding:5px 12px;border-radius:7px;font-weight:600;cursor:pointer}
+.gate .gl button[aria-pressed="true"]{background:var(--card)}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="sheet"></div>
+<script>
+/* ---------- lingua ---------- */
+const EN = {"Racecourse": "Racecourse", "Codice di accesso": "Access code", "Inserisci il codice che ti ha dato l’organizzazione.": "Enter the code you received from the organisers.", "Entra": "Enter", "Codice non corretto.": "Wrong code.", "Nome della manifestazione": "Event name", "Campi da gestire": "Course areas", "Da 1 a 6": "From 1 to 6", "Un campo in meno": "One area less", "Un campo in più": "One area more", "Classi da inserire": "Classes to be added", "VHF campo": "Area VHF", "Dati evento": "Event details", "Segreteria, medico, classifiche, Victor": "Race office, doctor, scoring, Victor", "Archivio bandiere": "Flag library", "Codice internazionale e classi": "International code and classes", "Rubrica": "Contacts", "Cerca persone e barche": "Search people and boats", "Riepilogo mezzi": "Boats summary", "Battelli e gommoni per campo": "Boats and RIBs per area", "Esporta PDF per i circoli": "Export PDF for the clubs", "‹ Campi": "‹ Areas", "Campo": "Area", "Canale comune": "Common channel", "Es. 71": "e.g. 71", "A terra": "Ashore", "Segreteria": "Race office", "Medico": "Doctor", "Classifiche": "Scoring", "Responsabile classifiche": "Scoring manager", "Nessun responsabile.": "No one added.", "Aggiungi responsabile classifiche": "Add scoring manager", "Nuova manifestazione": "New event", "Svuota nomi, numeri, boe e spunte di tutti i campi. Le bandiere di classe dell’archivio restano.": "Clears names, numbers, marks and ticks in every area. Class flags in the library are kept.", "Svuota tutti i dati": "Clear all data", "Tocca di nuovo per svuotare tutto": "Tap again to clear everything", "Conferma": "Confirm", "Elimina": "Delete", "Esporta PDF di questo campo": "Export PDF of this area", "Squadra": "Team", "Boe": "Marks", "Dotazioni": "Equipment", "Bandiere": "Flags", "Percorso": "Course", "Classi": "Classes", "Es. ILCA 7, ILCA 6": "e.g. ILCA 7, ILCA 6", "Canale VHF": "VHF channel", "Es. 72": "e.g. 72", "Responsabile campo": "Area manager", "Comitato di regata": "Race committee", "Presidente": "Principal race officer", "Componente": "Member", "Aggiungi componente": "Add member", "Mezzi in acqua": "Boats on the water", "Imbarcazione": "Boat", "Nome o modello della barca": "Boat name or model", "Sigla": "Code", "Responsabile": "Skipper", "Aiuto": "Helper", "Assistente": "Crew", "Tipo di mezzo": "Boat type", "Aggiungi mezzo": "Add boat", "A terra e sicurezza": "Shore and safety", "Beach master": "Beach master", "Responsabile sicurezza campo": "Area safety officer", "Delegato di classe": "Class representative", "Note": "Notes", "Annotazioni per questo campo": "Notes for this area", "Nome e cognome": "Full name", "Telefono": "Phone", "Chiama": "Call", "Colori boe": "Mark colours", "Boa": "Mark", "Nome boa": "Mark name", "Colore": "Colour", "Colore…": "Colour…", "Quantità": "Quantity", "robotica": "robotic", "Nessuna boa.": "No marks.", "Aggiungi boa": "Add mark", "Totale boe:": "Total marks:", "Partenza": "Start", "Arrivo": "Finish", "Scegli il mezzo": "Choose the boat", "di": "of", "Aggiungi un mezzo nella scheda Squadra.": "Add a boat in the Team tab.", "Caricato": "Loaded", "Dotazione": "Item", "Nessuna dotazione per questo mezzo.": "No equipment for this boat.", "Nuova dotazione": "New item", "Aggiungi": "Add", "Azzera le spunte": "Clear ticks", "Nessuna bandiera assegnata a questo mezzo.": "No flags assigned to this boat.", "Scegli bandiere dall’archivio": "Choose flags from the library", "Modalità": "Mode", "Sposta e seleziona": "Move and select", "Disegna frecce": "Draw arrows", "Freccia": "Arrow", "Inverti verso": "Reverse direction", "Raddrizza": "Straighten", "Togli dal grafico": "Remove from drawing", "Apri scheda": "Open card", "Percorso del campo": "Course of the area", "Caricamento dell’immagine…": "Loading image…", "Carica l’immagine del percorso, oppure lavora sulla griglia": "Upload the course image, or work on the grid", "Tocca un mezzo per vederne la scheda.": "Tap a boat to see its card.", "Disegna col dito il percorso, dritto o curvo, partendo dall’inizio verso la direzione di percorrenza.": "Draw the course with your finger, straight or curved, starting from the beginning towards the sailing direction.", "Trascina i cerchi alle estremità per spostare la freccia e quello centrale per curvarla.": "Drag the end circles to move the arrow and the middle one to bend it.", "Trascina gli oggetti per spostarli. Toccane uno per selezionarlo e toglierlo dal grafico.": "Drag items to move them. Tap one to select it and remove it from the drawing.", "Caricamento…": "Loading…", "Sostituisci immagine": "Replace image", "Carica immagine percorso": "Upload course image", "Rimuovi immagine": "Remove image", "Cancella tutte le frecce": "Delete all arrows", "Tocca una boa per metterla sul percorso. Nomi e colori si cambiano nella scheda Boe.": "Tap a mark to place it on the course. Names and colours are changed in the Marks tab.", "Tutte le boe sono sul percorso.": "All marks are on the course.", "Aggiungi le boe nella scheda Boe.": "Add the marks in the Marks tab.", "Aggiungi un mezzo": "Add a boat", "Il mezzo compare sull’immagine e si apre la sua scheda da compilare.": "The boat appears on the image and its card opens, ready to fill in.", "Mezzi da posizionare": "Boats to place", "Tocca per aggiungere o togliere": "Tap to add or remove", "Fatto": "Done", "Aggiungile da Archivio bandiere nella pagina principale.": "Add them from the Flag library on the main page.", "Scheda mezzo": "Boat card", "Nome": "Name", "Sigla sulla mappa": "Code on the map", "Dotazioni e bandiere di questo mezzo sono nelle schede Dotazioni e Bandiere del campo.": "This boat’s equipment and flags are in the area’s Equipment and Flags tabs.", "Togli dal percorso": "Remove from course", "Metti sul percorso": "Place on course", "Elimina mezzo": "Delete boat", "Immagine troppo grande per essere salvata su questo dispositivo.": "Image too large to be saved on this device.", "Questo file non è un’immagine leggibile. Prova con un JPG o un PNG.": "This file is not a readable image. Try a JPG or PNG.", "Bandiere di classe": "Class flags", "Nome classe": "Class name", "Nessuna bandiera di classe. Aggiungi quelle delle classi in regata.": "No class flags. Add those of the classes racing.", "Aggiungi bandiera di classe": "Add class flag", "I significati sono indicativi: fanno fede il Regolamento di Regata e le Istruzioni di Regata della manifestazione.": "Meanings are indicative: the Racing Rules of Sailing and the event’s Sailing Instructions prevail.", "Classe": "Class", "responsabile campo": "area manager", "presidente comitato": "principal race officer", "componente comitato": "committee member", "beach master": "beach master", "sicurezza": "safety", "delegato di classe": "class representative", "responsabile": "skipper", "aiuto": "helper", "assistente": "crew", "Nome, barca o ruolo": "Name, boat or role", "Nessun risultato per": "No results for", "La rubrica si riempie man mano che inserisci i nomi nei campi.": "Contacts fill in as you add names in the areas.", "Mezzi per campo": "Boats per area", "Tot.": "Tot.", "Totale": "Total", "Il conteggio segue i mezzi inseriti nella scheda Squadra di ogni campo.": "The count follows the boats entered in each area’s Team tab.", "Preparo il PDF…": "Preparing the PDF…", "Manifestazione": "Event", "Organizzazione dei campi di regata": "Race course organisation", "Contatti e canali": "Contacts and channels", "Canale": "Channel", "Ruolo": "Role", "Campi": "Course areas", "VHF": "VHF", "Mezzo": "Boat", "Comitato di regata e responsabili": "Race committee and managers", "Presidente comitato": "Principal race officer", "Sicurezza campo": "Area safety", "Quantita'": "Qty", "Tipo": "Type", "Robotica": "Robotic", "Ancorata": "Anchored", "Dotazioni e bandiere per mezzo": "Equipment and flags per boat", "Pagina": "Page", "PDF pronto.": "PDF ready.", "Non sono riuscito a creare il PDF. Riprova.": "Could not create the PDF. Please try again.", "Battello comitato": "Committee boat", "Controstarter": "Pin end boat", "Battello arrivi": "Finish boat", "Gommone posaboe": "Mark-laying RIB", "Gommone assistenza": "Safety RIB", "Segnali a terra": "Shore signals", "Posaboe": "Mark boat", "Assistenza": "Safety", "Posaboe G1": "Mark boat G1", "Posaboe G2": "Mark boat G2", "Posaboe G3 + assistenza partenza": "Mark boat G3 + start support", "Assistenza A1": "Safety A1", "Assistenza A2": "Safety A2", "CdR": "RC", "Arrivi": "FIN", "Drizze o pali": "Halyards or poles", "Asta per 1° ripetitore": "Pole for 1st substitute", "Cime per ancoraggio": "Anchor lines", "VHF + scorta, GPS": "VHF + spare, GPS", "Trombe e ricariche": "Horns and refills", "Tabellone gradi bussola e percorso": "Bearing and course board", "Lavagna per UFD/BFD": "Board for UFD/BFD", "Pennarelli non indelebili": "Dry-erase markers", "Bandi, istruzioni, elenco iscritti": "NoR, SIs, entry list", "Registratore": "Recorder", "Binocolo": "Binoculars", "Bussola": "Compass", "Anemometro": "Anemometer", "Asta per bandiera": "Flag pole", "Ormeggio e cime": "Mooring and lines", "Trombe e fischietto": "Horns and whistle", "Carta, penna, registratore": "Paper, pen, recorder", "Boa arrivo": "Finish mark", "2 ormeggi e cime": "2 moorings and lines", "Carta e penna, registratore": "Paper and pen, recorder", "Moduli di arrivo": "Finish sheets", "Elenco iscritti": "Entry list", "Bussola, anemometro": "Compass, anemometer", "Filo di lana": "Wind tell-tale", "1 ormeggio e cime": "1 mooring and lines", "Identificativo del campo": "Area flag", "Pennelli numerici": "Numeral pennants", "Trombetta": "Horn", "Lettere": "Letters", "Intelligenza e ripetitori": "Answering pennant and substitutes", "Regata e colori": "Racing and colours", "Intelligenza": "Answering pennant", "1° ripetitore": "1st substitute", "2° ripetitore": "2nd substitute", "3° ripetitore": "3rd substitute", "Nera": "Black", "Arancione": "Orange", "Blu": "Blue", "Verde": "Green", "Gialla": "Yellow", "Bianca": "White", "Rossa": "Red", "Viola": "Purple", "arancione": "orange", "gialla": "yellow", "rossa": "red", "blu": "blue", "verde": "green", "viola": "purple", "bianca": "white", "nera": "black", "rosa": "pink", "Pennello 1": "Pennant 1", "Pennello 2": "Pennant 2", "Pennello 3": "Pennant 3", "Pennello 4": "Pennant 4", "Pennello 5": "Pennant 5", "Pennello 6": "Pennant 6", "Pennello 7": "Pennant 7", "Pennello 8": "Pennant 8", "Pennello 9": "Pennant 9", "Pennello 0": "Pennant 0", "Sotto intelligenza: nessun’altra prova oggi": "Over AP: no more racing today", "Protesta": "Protest", "Cambio di percorso": "Change of course", "A terra: si può uscire (vedi IdR)": "Ashore: boats may leave harbour (see SIs)", "Sotto intelligenza: altri segnali a terra": "Over AP: further signals ashore", "Regola del minuto (RRS 30.1)": "One-minute rule (RRS 30.1)", "A terra: comunicato esposto. In acqua: venite a portata di voce": "Ashore: notice posted. Afloat: come within hail", "Boa sostitutiva": "Mark replaced", "Annullamento": "Abandonment", "Pompaggio consentito (vedi IdR)": "Pumping allowed (see SIs)", "Segnale preparatorio": "Preparatory signal", "Percorso ridotto": "Shortened course", "Regola della bandiera U": "U flag rule", "Richiamo individuale": "Individual recall", "Obbligo di indossare il salvagente": "Life jackets required", "Regola Z (20%)": "Z flag rule (20%)", "Prove non partite differite": "Races not started are postponed", "Richiamo generale": "General recall", "Regola della bandiera nera": "Black flag rule", "Estremità della linea di partenza": "Starting line end", "Battello arrivi in posizione": "Finish boat on station", "Dati salvati su questo dispositivo.": "Data saved on this device.", "Fai un backup": "Make a backup", "per spostarli su un altro telefono o conservarli.": "to move it to another phone or keep it safe.", "Spazio esaurito su questo dispositivo: rimuovi qualche immagine per continuare a salvare.": "Storage full on this device: remove some images to keep saving.", "Backup dei dati": "Data backup", "Salva tutti i dati dell’evento, immagini comprese, in un file. Lo puoi riaprire su un altro telefono o tenere come copia di sicurezza.": "Saves all event data, images included, in a file. You can open it on another phone or keep it as a safety copy.", "Esporta backup": "Export backup", "Importa backup": "Import backup", "Backup salvato.": "Backup saved.", "Questo file non è un backup di Racecourse.": "This file is not a Racecourse backup.", "Sostituire i dati attuali con il backup del": "Replace current data with the backup from", "Sostituisci": "Replace", "Annulla": "Cancel", "Backup importato.": "Backup imported.", "Lingua": "Language", "Installa l’app": "Install the app", "Su iPhone: Condividi, poi «Aggiungi alla schermata Home». Su Android: menu ⋮, poi «Installa app». Così funziona anche offline e i dati restano al sicuro.": "On iPhone: Share, then “Add to Home Screen”. On Android: menu ⋮, then “Install app”. It then works offline and your data stays safe.", "Organizzazione dei campi di regata: squadre, boe, bandiere e percorsi.": "Race course organisation: teams, marks, flags and courses."};
+let LANG = (()=>{ try{ const s=localStorage.getItem("racecourse-lang"); if (s==="it"||s==="en") return s; }catch(e){} return /^it\b/i.test(navigator.language||"") ? "it" : "en"; })();
+function t(s){ return LANG==="en" && EN[s]!=null ? EN[s] : s; }
+document.documentElement.lang = LANG;
+/* ---------- archivio bandiere ---------- */
+const C = {R:"#C8102E",B:"#1D4E9E",Y:"#F5C400",K:"#1A1A1A",W:"#FFFFFF",O:"#F07A12"};
+const SHAPE = {
+  flag:"0,0 60,0 60,40 0,40",
+  swal:"0,0 60,0 46,20 60,40 0,40",
+  pen:"0,0 60,14 60,26 0,40",
+  sub:"0,0 60,20 0,40"
+};
+const r = (x,y,w,h,f) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${f}"/>`;
+const pg = (p,f) => `<polygon points="${p}" fill="${f}"/>`;
+const vs = (cols) => cols.map((c,i)=>r(i*60/cols.length,0,60/cols.length+.2,40,c)).join("");
+const hs = (cols,ws) => { let y=0; return cols.map((c,i)=>{const h=ws?ws[i]:40/cols.length; const s=r(0,y,60,h+.2,c); y+=h; return s;}).join(""); };
+const q4 = (a,b,c,d) => r(0,0,30,20,a)+r(30,0,30,20,b)+r(0,20,30,20,c)+r(30,20,30,20,d);
+const crossX = (bg,c) => r(0,0,60,40,bg)+`<path d="M0 0L60 40M60 0L0 40" stroke="${c}" stroke-width="8"/>`;
+const crossP = (bg,c,x=25) => r(0,0,60,40,bg)+r(x,0,10,40,c)+r(0,15,60,10,c);
+
+const FLAGS = [
+ // lettere
+ {id:"A",g:"L",nome:"Alfa",sh:"swal",d:r(0,0,30,40,C.W)+r(30,0,30,40,C.B),sig:"Sotto intelligenza: nessun’altra prova oggi"},
+ {id:"B",g:"L",nome:"Bravo",sh:"swal",d:r(0,0,60,40,C.R),sig:"Protesta"},
+ {id:"C",g:"L",nome:"Charlie",d:hs([C.B,C.W,C.R,C.W,C.B]),sig:"Cambio di percorso"},
+ {id:"D",g:"L",nome:"Delta",d:hs([C.Y,C.B,C.Y],[10,20,10]),sig:"A terra: si può uscire (vedi IdR)"},
+ {id:"E",g:"L",nome:"Echo",d:hs([C.B,C.R])},
+ {id:"F",g:"L",nome:"Foxtrot",d:r(0,0,60,40,C.W)+pg("30,4 56,20 30,36 4,20",C.R)},
+ {id:"G",g:"L",nome:"Golf",d:vs([C.Y,C.B,C.Y,C.B,C.Y,C.B])},
+ {id:"H",g:"L",nome:"Hotel",d:vs([C.W,C.R]),sig:"Sotto intelligenza: altri segnali a terra"},
+ {id:"I",g:"L",nome:"India",d:r(0,0,60,40,C.Y)+`<circle cx="30" cy="20" r="10" fill="${C.K}"/>`,sig:"Regola del minuto (RRS 30.1)"},
+ {id:"J",g:"L",nome:"Juliet",d:hs([C.B,C.W,C.B])},
+ {id:"K",g:"L",nome:"Kilo",d:vs([C.Y,C.B])},
+ {id:"L",g:"L",nome:"Lima",d:q4(C.Y,C.K,C.K,C.Y),sig:"A terra: comunicato esposto. In acqua: venite a portata di voce"},
+ {id:"M",g:"L",nome:"Mike",d:crossX(C.B,C.W),sig:"Boa sostitutiva"},
+ {id:"N",g:"L",nome:"November",d:(()=>{let s="";for(let i=0;i<4;i++)for(let j=0;j<4;j++)s+=r(i*15,j*10,15.2,10.2,(i+j)%2?C.W:C.B);return s;})(),sig:"Annullamento"},
+ {id:"O",g:"L",nome:"Oscar",d:r(0,0,60,40,C.Y)+pg("0,0 60,0 60,40",C.R),sig:"Pompaggio consentito (vedi IdR)"},
+ {id:"P",g:"L",nome:"Papa",d:r(0,0,60,40,C.B)+r(20,13,20,14,C.W),sig:"Segnale preparatorio"},
+ {id:"Q",g:"L",nome:"Quebec",d:r(0,0,60,40,C.Y)},
+ {id:"R",g:"L",nome:"Romeo",d:crossP(C.R,C.Y)},
+ {id:"S",g:"L",nome:"Sierra",d:r(0,0,60,40,C.W)+r(20,13,20,14,C.B),sig:"Percorso ridotto"},
+ {id:"T",g:"L",nome:"Tango",d:vs([C.R,C.W,C.B])},
+ {id:"U",g:"L",nome:"Uniform",d:q4(C.R,C.W,C.W,C.R),sig:"Regola della bandiera U"},
+ {id:"V",g:"L",nome:"Victor",d:crossX(C.W,C.R)},
+ {id:"W",g:"L",nome:"Whiskey",d:r(0,0,60,40,C.B)+r(8,8,44,24,C.W)+r(16,15,28,10,C.R)},
+ {id:"X",g:"L",nome:"X-ray",d:crossP(C.W,C.B),sig:"Richiamo individuale"},
+ {id:"Y",g:"L",nome:"Yankee",d:r(0,0,60,40,C.Y)+[-40,-28,-16,-4,8,20,32,44,56].map(x=>`<path d="M${x} 40L${x+40} 0" stroke="${C.R}" stroke-width="6"/>`).join(""),sig:"Obbligo di indossare il salvagente"},
+ {id:"Z",g:"L",nome:"Zulu",d:pg("0,0 60,0 30,20",C.Y)+pg("60,0 60,40 30,20",C.R)+pg("0,40 60,40 30,20",C.B)+pg("0,0 30,20 0,40",C.K),sig:"Regola Z (20%)"},
+ // pennelli numerici
+ {id:"n1",g:"N",nome:"Pennello 1",sh:"pen",d:r(0,0,60,40,C.W)+`<circle cx="20" cy="20" r="8" fill="${C.R}"/>`},
+ {id:"n2",g:"N",nome:"Pennello 2",sh:"pen",d:r(0,0,60,40,C.B)+`<circle cx="20" cy="20" r="8" fill="${C.W}"/>`},
+ {id:"n3",g:"N",nome:"Pennello 3",sh:"pen",d:r(0,0,20,40,C.R)+r(20,0,20,40,C.W)+r(40,0,20,40,C.B)},
+ {id:"n4",g:"N",nome:"Pennello 4",sh:"pen",d:crossP(C.R,C.W,15)},
+ {id:"n5",g:"N",nome:"Pennello 5",sh:"pen",d:r(0,0,30,40,C.Y)+r(30,0,30,40,C.B)},
+ {id:"n6",g:"N",nome:"Pennello 6",sh:"pen",d:r(0,0,60,20,C.K)+r(0,20,60,20,C.W)},
+ {id:"n7",g:"N",nome:"Pennello 7",sh:"pen",d:r(0,0,60,20,C.Y)+r(0,20,60,20,C.R)},
+ {id:"n8",g:"N",nome:"Pennello 8",sh:"pen",d:crossP(C.W,C.R,15)},
+ {id:"n9",g:"N",nome:"Pennello 9",sh:"pen",d:q4(C.W,C.K,C.R,C.Y)},
+ {id:"n0",g:"N",nome:"Pennello 0",sh:"pen",d:r(0,0,20,40,C.Y)+r(20,0,20,40,C.R)+r(40,0,20,40,C.Y)},
+ // ripetitori e intelligenza
+ {id:"AP",g:"S",nome:"Intelligenza",sh:"pen",d:vs([C.R,C.W,C.R,C.W,C.R]),sig:"Prove non partite differite"},
+ {id:"s1",g:"S",nome:"1° ripetitore",sh:"sub",d:r(0,0,60,40,C.B)+pg("0,9 38,20 0,31",C.Y),sig:"Richiamo generale"},
+ {id:"s2",g:"S",nome:"2° ripetitore",sh:"sub",d:r(0,0,22,40,C.B)+r(22,0,38,40,C.W)},
+ {id:"s3",g:"S",nome:"3° ripetitore",sh:"sub",d:r(0,0,60,40,C.W)+r(16,0,16,40,C.K)},
+ // regata
+ {id:"NERA",g:"R",nome:"Nera",d:r(0,0,60,40,C.K),sig:"Regola della bandiera nera"},
+ {id:"ARAN",g:"R",nome:"Arancione",d:r(0,0,60,40,C.O),sig:"Estremità della linea di partenza"},
+ {id:"BLU",g:"R",nome:"Blu",d:r(0,0,60,40,C.B),sig:"Battello arrivi in posizione"},
+ {id:"VERDE",g:"R",nome:"Verde",d:r(0,0,60,40,"#2E8B3A")},
+ {id:"GIALLA",g:"R",nome:"Gialla",d:r(0,0,60,40,C.Y)},
+ {id:"BIANCA",g:"R",nome:"Bianca",d:r(0,0,60,40,C.W)},
+ {id:"ROSSA",g:"R",nome:"Rossa",d:r(0,0,60,40,C.R)}
+];
+const GROUPS = [["L","Lettere"],["S","Intelligenza e ripetitori"],["N","Pennelli numerici"],["R","Regata e colori"],["C","Bandiere di classe"]];
+const FMAP = Object.fromEntries(FLAGS.map(f=>[f.id,f]));
+const CLASS_COLS = [["#1D4E9E","Blu"],["#C8102E","Rossa"],["#F5C400","Gialla"],["#2E8B3A","Verde"],["#7B3FA0","Viola"],["#F07A12","Arancione"],["#FFFFFF","Bianca"],["#1A1A1A","Nera"]];
+let uid = 0;
+function flagSVG(id,w){
+  let f = FMAP[id];
+  if (!f && id.startsWith("cl-")){
+    const c = (S.config.classi||[]).find(x=>x.id===id);
+    if (!c) return "";
+    const light = ["#FFFFFF","#F5C400","#F07A12"].includes(c.col);
+    const txt = esc((c.nome||"?").slice(0,4).toUpperCase());
+    f = {sh:"flag",d:r(0,0,60,40,c.col)+`<text x="30" y="26" text-anchor="middle" font-family="Barlow Condensed,Arial Narrow,sans-serif" font-weight="700" font-size="${txt.length>3?15:18}" fill="${light?"#1A1A1A":"#fff"}">${txt}</text>`};
+  }
+  if (!f) return "";
+  const sh = SHAPE[f.sh||"flag"], k = "k"+(++uid);
+  return `<svg class="fl" width="${w}" height="${Math.round(w*2/3)}" viewBox="-1 -1 62 42" aria-hidden="true"><clipPath id="${k}"><polygon points="${sh}"/></clipPath><g clip-path="url(#${k})">${f.d}</g><polygon points="${sh}" fill="none" stroke="rgba(0,0,0,.28)" stroke-width="1"/></svg>`;
+}
+const BOATCOL = {rc:"#1D4E9E",cs:"#0E8A8A",ar:"#7B3FA0",gp:"#C8102E",ga:"#F07A12"};
+const RIB = t => t==="gp"||t==="ga";
+const BOATFLAG = {rc:"#F07A12",cs:"#F07A12",ar:"#1D4E9E"};
+function boatSVG(tipo,w=26){
+  const c = BOATCOL[tipo]||"#555", h = Math.round(w*42/26);
+  if (RIB(tipo)) return `<svg width="${w}" height="${h}" viewBox="0 0 26 42" aria-hidden="true"><path d="M13 1C20 6 24 14 24 24V36Q24 39 21 39H5Q2 39 2 36V24C2 14 6 6 13 1Z" fill="${c}"/><path d="M13 7C18 11 19.5 17 19.5 24V34H6.5V24C6.5 17 8 11 13 7Z" fill="#EEF2F6"/><rect x="9" y="21" width="8" height="6" rx="1" fill="#4A5563"/><rect x="10" y="38" width="6" height="4" rx="1" fill="#222"/></svg>`;
+  const fc = BOATFLAG[tipo];
+  return `<svg width="${Math.round(w*34/26)}" height="${h}" viewBox="0 0 34 42" aria-hidden="true"><path d="M13 1C21 8 24 16 24 26L23 39H3L2 26C2 16 5 8 13 1Z" fill="#fff" stroke="${c}" stroke-width="2.5"/><rect x="7" y="17" width="12" height="11" rx="2" fill="${c}"/>${fc?`<line x1="24" y1="27" x2="24" y2="4" stroke="#333" stroke-width="1.4"/><rect x="24" y="4" width="9.5" height="7" fill="${fc}" stroke="#333" stroke-width=".7"/>`:""}</svg>`;
+}
+function sigla(m){
+  if (m.sigla) return m.sigla;
+  const s = ((m.nome||"").match(/\b([GA]\d+)\b/)||[])[1];
+  return s || ({rc:t("CdR"),cs:LANG==="en"?"PIN":"CS",ar:t("Arrivi"),gp:"G",ga:"A"}[m.tipo]||"");
+}
+function flagName(id){ if (FMAP[id]) return t(FMAP[id].nome); const c=(S.config.classi||[]).find(x=>x.id===id); return c ? `${t("Classe")} ${c.nome||""}` : id; }
+
+/* ---------- modello dati ---------- */
+const CAMPI = [["c1","A","Alfa"],["c2","B","Bravo"],["c3","C","Charlie"],["c4","D","Delta"],["c5","E","Echo"],["c6","F","Foxtrot"]];
+const TIPI_IT = {rc:"Battello comitato",cs:"Controstarter",ar:"Battello arrivi",gp:"Gommone posaboe",ga:"Gommone assistenza",terra:"Segnali a terra"};
+const TIPI = {};
+function buildI18n(){ for (const k in TIPI_IT) TIPI[k]=t(TIPI_IT[k]); GROUPS.forEach(g=>{ if (g[2]==null) g[2]=g[1]; g[1]=t(g[2]); }); document.documentElement.lang = LANG; }
+const DOT = {
+  rc:["Drizze o pali","Asta per 1° ripetitore","Cime per ancoraggio","VHF + scorta, GPS","Trombe e ricariche","Tabellone gradi bussola e percorso","Lavagna per UFD/BFD","Pennarelli non indelebili","Bandi, istruzioni, elenco iscritti","Registratore","Binocolo","Bussola","Anemometro"],
+  cs:["VHF","Asta per bandiera","Ormeggio e cime","Trombe e fischietto","Carta, penna, registratore"],
+  ar:["VHF","Asta per bandiera","Boa arrivo","2 ormeggi e cime","Trombe e fischietto","Carta e penna, registratore","Moduli di arrivo","Elenco iscritti"],
+  gp:["VHF, GPS","Bussola, anemometro","Filo di lana","Boa","1 ormeggio e cime","Trombe e fischietto","Carta e penna, registratore","Moduli di arrivo","Elenco iscritti"],
+  ga:["VHF"],
+  terra:["Identificativo del campo","Pennelli numerici","Trombetta"]
+};
+const FLDEF = {
+  rc:["AP","A","H","N","X","s1","P","I","U","Z","NERA","S","C","M","L","Y","ARAN"],
+  cs:["ARAN"], ar:["BLU","AP","A","H"], gp:["N","M","S"], ga:[], terra:["AP","D","L","A"]
+};
+const P = () => ({n:"",t:""});
+const rid = () => Math.random().toString(36).slice(2,8);
+function newMezzo(tipo,nome){
+  const fl = {}; (FLDEF[tipo]||[]).forEach(id=>fl[id]=false);
+  return {id:rid(),tipo,nome:nome||TIPI[tipo],barca:"",resp:P(),ass:P(),dot:(DOT[tipo]||[]).map(x=>({t:t(x),ok:false})),fl};
+}
+function defCampo(){
+  const g3 = newMezzo("gp",t("Posaboe G3 + assistenza partenza")); ["s1","AP"].forEach(id=>g3.fl[id]=false);
+  return {classi:"",vhf:"",resp:P(),cdr:{pres:P(),comp:[P(),P(),P()]},sicurezza:P(),delegato:P(),beach:P(),
+    mezzi:[newMezzo("rc"),newMezzo("cs"),newMezzo("ar"),newMezzo("gp",t("Posaboe G1")),newMezzo("gp",t("Posaboe G2")),g3,newMezzo("ga",t("Assistenza A1")),newMezzo("ga",t("Assistenza A2")),newMezzo("terra")],
+    boe:[{l:"1",c:"",q:1,robo:false},{l:"2",c:"",q:1,robo:false},{l:"3s, 3p",c:"",q:2,robo:false},{l:"4s, 4p",c:"",q:2,robo:false},{l:t("Partenza"),c:"",q:1,robo:false},{l:t("Arrivo"),c:"",q:1,robo:false}],note:""};
+}
+const defConfig = () => ({nome:"",n:1,victor:"",segreteria:P(),medico:P(),classifiche:[P()],classi:[]});
+
+const LKEY = "racecourse-v1";
+let S = {config:defConfig()};
+CAMPI.forEach(([k])=>S[k]=null);
+try { const c = JSON.parse(localStorage.getItem(LKEY)||"null"); if (c && c.config) S = Object.assign(S,c); } catch(e){}
+const campo = k => S[k] || (S[k] = defCampo());
+const clone = o => JSON.parse(JSON.stringify(o));
+
+/* ---------- salvataggio sul dispositivo ---------- */
+let mode = "local", readOnly = false, editingDoc = null, storageFull = false;
+function cacheLocal(){ try{ localStorage.setItem(LKEY, JSON.stringify(S)); if (storageFull){ storageFull=false; render(); } }catch(e){ if (!storageFull){ storageFull=true; render(); } } }
+function touch(){ cacheLocal(); }
+function applyQueued(){}
+try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch(e){}
+let alertMsg = "";
+let uploading = null, upMsg = "";
+const IMGS = {};
+CAMPI.forEach(([k])=>{ try{ const v=localStorage.getItem("racecourse-img-"+k); if(v) IMGS[k]=v; }catch(e){} });
+const imgSrc = (k,f) => f.img ? IMGS[k]||"" : "";
+
+/* file: condividi su telefono, altrimenti scarica */
+async function saveFile(blob, name){
+  try{
+    const file = new File([blob], name, {type: blob.type});
+    if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent) && navigator.canShare && navigator.canShare({files:[file]})){
+      try { await navigator.share({files:[file], title:name}); return "ok"; }
+      catch(e){ if (e && e.name==="AbortError") return "cancel"; }
+    }
+  }catch(e){}
+  const u = URL.createObjectURL(blob), a = document.createElement("a");
+  a.href = u; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(u), 5000);
+  return "ok";
+}
+
+/* backup */
+let bkMsg = "", pendingImport = null;
+async function exportBackup(){
+  const data = {app:"racecourse", v:1, date:new Date().toISOString(), data:S, imgs:IMGS};
+  const slug = (S.config.nome||"evento").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"") || "evento";
+  const r = await saveFile(new Blob([JSON.stringify(data)],{type:"application/json"}), `racecourse-${slug}-${new Date().toISOString().slice(0,10)}.json`);
+  bkMsg = r==="ok" ? t("Backup salvato.") : ""; render();
+}
+function readBackup(file){
+  const fr = new FileReader();
+  fr.onload = () => {
+    try{ const d = JSON.parse(fr.result); if (d.app!=="racecourse" || !d.data || !d.data.config) throw 0; pendingImport = d; bkMsg = ""; }
+    catch(e){ pendingImport = null; bkMsg = t("Questo file non è un backup di Racecourse."); }
+    render();
+  };
+  fr.readAsText(file);
+}
+function applyBackup(){
+  const d = pendingImport; if (!d) return;
+  CAMPI.forEach(([k])=>{ delete IMGS[k]; try{ localStorage.removeItem("racecourse-img-"+k); }catch(e){} });
+  S = {config:Object.assign(defConfig(), d.data.config)}; CAMPI.forEach(([k])=>S[k]=d.data[k]||null);
+  for (const k in (d.imgs||{})){ if (!S.hasOwnProperty(k)) continue; IMGS[k]=d.imgs[k]; try{ localStorage.setItem("racecourse-img-"+k,d.imgs[k]); }catch(e){ storageFull=true; } }
+  cacheLocal(); pendingImport = null; bkMsg = t("Backup importato."); location.hash = ""; render();
+}
+
+/* ---------- utilità ---------- */
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const telOk = t => (t||"").replace(/[^\d+]/g,"").length >= 6;
+const telHref = t => "tel:"+(t||"").replace(/[^\d+]/g,"");
+function getP(o,p){ return p.split(".").reduce((a,k)=>a==null?a:a[k],o); }
+function setP(o,p,v){ const ks=p.split("."); let a=o; ks.slice(0,-1).forEach(k=>{ if(a[k]==null) a[k]={}; a=a[k]; }); a[ks[ks.length-1]]=v; }
+const docOf = d => d==="config" ? S.config : campo(d);
+const ro = () => readOnly ? "readonly" : "";
+function inp(d,p,ph,extra=""){ return `<input class="inp" data-d="${d}" data-p="${p}" value="${esc(getP(docOf(d),p))}" placeholder="${esc(ph)}" ${ro()} ${extra}>`; }
+function person(d,p,label,rm){
+  const o = getP(docOf(d),p)||P();
+  return `<div class="sec pp"><div class="mzh"><div class="r">${label}</div>${rm||""}</div><div class="pr">
+    <div class="nm">${inp(d,p+".n",t("Nome e cognome"),'autocomplete="off"')}</div>
+    <div class="tl">${inp(d,p+".t",t("Telefono"),'type="tel" inputmode="tel" autocomplete="off"')}<a class="call" href="${telHref(o.t)}" ${telOk(o.t)?"":"hidden"}>${t("Chiama")}</a></div>
+  </div></div>`;
+}
+const xbtn = (act,args,label=t("Elimina")) => readOnly ? "" : `<button class="x" data-act="${act}" ${args} data-confirm>${label}</button>`;
+function statusLine(){
+  if (storageFull) return `<div class="status ro"><i></i>${t("Spazio esaurito su questo dispositivo: rimuovi qualche immagine per continuare a salvare.")}</div>`;
+  return `<div class="status sh"><i></i><span>${t("Dati salvati su questo dispositivo.")} <a href="#evento">${t("Fai un backup")}</a> ${t("per spostarli su un altro telefono o conservarli.")}</span></div>`;
+}
+
+/* ---------- viste ---------- */
+let tab = "squadra", selM = null;
+function render(){
+  if (!hasAccess()) return showGate();
+  if (drag || drawing) return;
+  const y = window.scrollY;
+  const h = location.hash.slice(1);
+  if (CAMPI.slice(0,S.config.n).some(c=>c[0]===h)) viewCampo(h);
+  else if (h==="rubrica") viewRubrica();
+  else if (h==="mezzi") viewMezzi();
+  else if (h==="bandiere") viewArchivio();
+  else if (h==="evento") viewEvento();
+  else viewHome();
+  window.scrollTo(0,y);
+  layoutArrows();
+  if (sheetOpen) drawSheet();
+}
+const bar = title => `<div class="bar"><div class="in"><a class="back" href="#">${t("‹ Campi")}</a><span class="t">${title}</span></div></div>`;
+
+function viewHome(){
+  const c = S.config, n = c.n;
+  document.title = c.nome ? c.nome+" | Racecourse" : "Racecourse";
+  const standalone = matchMedia("(display-mode: standalone)").matches || navigator.standalone;
+  $("#app").innerHTML = `<div class="wrap">
+    <div class="brand"><img src="icons/icon-192.png" alt=""><b>Racecourse</b><div class="lang" role="group" aria-label="${t("Lingua")}"><button data-act="lang" data-v="it" aria-pressed="${LANG==="it"}">IT</button><button data-act="lang" data-v="en" aria-pressed="${LANG==="en"}">EN</button></div></div>
+    <div class="top"><input class="evname" data-d="config" data-p="nome" value="${esc(c.nome)}" placeholder="${t("Nome della manifestazione")}" ${ro()} aria-label="${t("Nome della manifestazione")}"></div>
+    <div class="stepper"><div class="lbl">${t("Campi da gestire")}<span>${t("Da 1 a 6")}</span></div>
+      <div class="ctl"><button data-act="n" data-v="-1" ${n<=1||readOnly?"disabled":""} aria-label="${t("Un campo in meno")}">−</button><b>${n}</b><button data-act="n" data-v="1" ${n>=6||readOnly?"disabled":""} aria-label="${t("Un campo in più")}">+</button></div></div>
+    ${alertMsg?`<p style="color:var(--red)">${esc(alertMsg)}</p>`:""}
+    <ul class="fields">${CAMPI.slice(0,n).map(([k,L,nome])=>{const f=S[k]||{};return `<li><a href="#${k}">${flagSVG(L,54)}
+      <div><div class="nm">${nome}</div><div class="cl">${f.classi?esc(f.classi):t("Classi da inserire")}</div></div>
+      <div class="ch"><b>${f.vhf?esc(f.vhf):"–"}</b><span>${t("VHF campo")}</span></div></a></li>`}).join("")}</ul>
+    <div class="links">
+      <a href="#evento">${t("Dati evento")}<span>${t("Segreteria, medico, classifiche, Victor")}</span></a>
+      <a href="#bandiere">${t("Archivio bandiere")}<span>${t("Codice internazionale e classi")}</span></a>
+      <a href="#rubrica">${t("Rubrica")}<span>${t("Cerca persone e barche")}</span></a>
+      <a href="#mezzi">${t("Riepilogo mezzi")}<span>${t("Battelli e gommoni per campo")}</span></a>
+    </div>
+    ${pdfBtn("all",t("Esporta PDF per i circoli"))}
+    ${standalone?"":`<div class="install"><b>${t("Installa l’app")}</b>${t("Su iPhone: Condividi, poi «Aggiungi alla schermata Home». Su Android: menu ⋮, poi «Installa app». Così funziona anche offline e i dati restano al sicuro.")}</div>`}
+    ${statusLine()}
+    <p class="foot">Racecourse by <a href="https://regattabearing.com" rel="noopener">Regatta Bearing</a></p>
+  </div>`;
+}
+
+function viewEvento(){
+  const c = S.config;
+  $("#app").innerHTML = bar(t("Dati evento")) + `<div class="wrap">
+    <h2>${t("Canale comune")}</h2><div class="blk"><div class="sec"><div class="r">VHF Victor</div>${inp("config","victor",t("Es. 71"),'inputmode="numeric"')}</div></div>
+    <h2>${t("A terra")}</h2><div class="blk">${person("config","segreteria",t("Segreteria"))}${person("config","medico",t("Medico"))}</div>
+    <h2>${t("Classifiche")}</h2><div class="blk">${c.classifiche.map((_,i)=>person("config",`classifiche.${i}`,t("Responsabile classifiche"),xbtn("rmCl",`data-i="${i}"`))).join("")||`<div class="empty">${t("Nessun responsabile.")}</div>`}</div>
+    ${readOnly?"":`<button class="add" data-act="addCl">${t("Aggiungi responsabile classifiche")}</button>`}
+    <h2>${t("Backup dei dati")}</h2>
+    <p class="muted">${t("Salva tutti i dati dell’evento, immagini comprese, in un file. Lo puoi riaprire su un altro telefono o tenere come copia di sicurezza.")}</p>
+    <div class="btnrow"><button class="btn pri" data-act="bkExport">${t("Esporta backup")}</button><label class="btn">${t("Importa backup")}<input type="file" accept="application/json,.json" data-imp></label></div>
+    ${pendingImport?`<div class="selbar"><span class="n">${t("Sostituire i dati attuali con il backup del")} ${new Date(pendingImport.date).toLocaleDateString(LANG==="en"?"en-GB":"it-IT")}?</span><button class="btn pri" data-act="bkApply">${t("Sostituisci")}</button><button class="btn" data-act="bkCancel">${t("Annulla")}</button></div>`:""}
+    ${bkMsg?`<p class="hint">${esc(bkMsg)}</p>`:""}
+    <h2>${t("Nuova manifestazione")}</h2>
+    <p class="muted">${t("Svuota nomi, numeri, boe e spunte di tutti i campi. Le bandiere di classe dell’archivio restano.")}</p>
+    ${readOnly?"":`<button class="x" data-act="reset" data-confirm style="padding:10px 0">${t("Svuota tutti i dati")}</button>`}
+    ${statusLine()}
+  </div>`;
+}
+
+function viewCampo(k){
+  const [,L,nome] = CAMPI.find(c=>c[0]===k), f = campo(k);
+  document.title = `${t("Campo")} ${nome}`;
+  $("#app").innerHTML = bar(`${t("Campo")} ${nome}`) + `<div class="wrap">
+    <div class="hero">${flagSVG(L,72)}<div><h1>${nome}</h1><div class="muted">${f.classi?esc(f.classi):t("Classi da inserire")}</div></div></div>
+    ${pdfBtn(k,t("Esporta PDF di questo campo"))}
+    <div class="tabs" role="tablist">${[["squadra",t("Squadra")],["boe",t("Boe")],["dotazioni",t("Dotazioni")],["bandiere",t("Bandiere")],["percorso",t("Percorso")]].map(([t,l])=>`<button role="tab" data-tab="${t}" aria-selected="${tab===t}">${l}</button>`).join("")}</div>
+    <div id="pane">${({squadra:paneSquadra,boe:paneBoe,dotazioni:paneDot,bandiere:paneBand,percorso:panePerc})[tab](k,f)}</div>
+    ${statusLine()}
+  </div>`;
+}
+
+function paneSquadra(k,f){
+  let h = `<h2>${t("Campo")}</h2><div class="blk"><div class="sec"><div class="kv2">
+      <div><div class="r">${t("Classi")}</div>${inp(k,"classi",t("Es. ILCA 7, ILCA 6"))}</div>
+      <div><div class="r">${t("Canale VHF")}</div>${inp(k,"vhf",t("Es. 72"),'inputmode="numeric"')}</div></div></div>
+    ${person(k,"resp",t("Responsabile campo"))}</div>
+    <h2>${t("Comitato di regata")}</h2><div class="blk">${person(k,"cdr.pres",t("Presidente"))}
+    ${f.cdr.comp.map((_,i)=>person(k,`cdr.comp.${i}`,t("Componente"),xbtn("rmComp",`data-i="${i}"`))).join("")}</div>
+    ${readOnly?"":`<button class="add" data-act="addComp">${t("Aggiungi componente")}</button>`}
+    <h2>${t("Mezzi in acqua")}</h2>`;
+  f.mezzi.forEach((m,i)=>{ if (m.tipo==="terra") return;
+    h += `<div class="blk" id="mz-${m.id}"><div class="sec"><div class="mzh">${boatSVG(m.tipo,18)}${inp(k,`mezzi.${i}.nome`,TIPI[m.tipo])}<span class="tag">${TIPI[m.tipo]}</span>${xbtn("rmMz",`data-i="${i}"`)}</div>
+      <div class="kv2" style="margin-top:6px"><div><div class="r">${t("Imbarcazione")}</div>${inp(k,`mezzi.${i}.barca`,t("Nome o modello della barca"))}</div><div><div class="r">${t("Sigla")}</div>${inp(k,`mezzi.${i}.sigla`,sigla(m))}</div></div></div>
+      ${person(k,`mezzi.${i}.resp`,t("Responsabile"))}${person(k,`mezzi.${i}.ass`,m.tipo==="rc"?t("Aiuto"):t("Assistente"))}</div>`;
+  });
+  if (!readOnly) h += `<div class="addrow"><select id="nt" aria-label="${t("Tipo di mezzo")}">${Object.entries(TIPI).filter(([t])=>t!=="terra"||!f.mezzi.some(m=>m.tipo==="terra")).map(([t,l])=>`<option value="${t}">${l}</option>`).join("")}</select><button data-act="addMz">${t("Aggiungi mezzo")}</button></div>`;
+  h += `<h2>${t("A terra e sicurezza")}</h2><div class="blk">${person(k,"beach",t("Beach master"))}${person(k,t("sicurezza"),t("Responsabile sicurezza campo"))}${person(k,"delegato",t("Delegato di classe"))}</div>
+    <h2>${t("Note")}</h2><div class="blk"><div class="sec"><textarea class="inp" data-d="${k}" data-p="note" placeholder="${t("Annotazioni per questo campo")}" ${ro()}>${esc(f.note)}</textarea></div></div>`;
+  return h;
+}
+
+const BCOL = [["","Colore…"],["arancione","#F07A12"],["gialla","#F5C400"],["rossa","#D7263D"],["blu","#1D4E9E"],["verde","#2E8B3A"],["viola","#7B3FA0"],["bianca","#FFFFFF"],["nera","#1A1A1A"],["rosa","#E85A9B"]];
+const bhex = c => c ? (BCOL.find(x=>x[0]===c)||[,"transparent"])[1] : "transparent";
+function paneBoe(k,f){
+  const tot = f.boe.reduce((a,b)=>a+(parseInt(b.q)||0),0);
+  return `<h2>${t("Colori boe")}</h2><div class="blk">${f.boe.map((b,i)=>`<div class="brow">
+      <span class="dot${b.robo?" robo":""}" style="background:${bhex(b.c)}"></span>
+      <input class="inp lb" data-d="${k}" data-p="boe.${i}.l" value="${esc(b.l)}" placeholder="${t("Boa")}" ${ro()} aria-label="${t("Nome boa")}">
+      <select data-d="${k}" data-p="boe.${i}.c" ${readOnly?"disabled":""} aria-label="${t("Colore")}">${BCOL.map(([c])=>`<option value="${c}" ${b.c===c?"selected":""}>${c?t(c):t("Colore…")}</option>`).join("")}</select>
+      <input class="inp qt" data-d="${k}" data-p="boe.${i}.q" value="${esc(b.q)}" inputmode="numeric" ${ro()} aria-label="${t("Quantità")}">
+      <label><input type="checkbox" data-d="${k}" data-p="boe.${i}.robo" ${b.robo?"checked":""} ${readOnly?"disabled":""}> ${t("robotica")}</label>
+      ${xbtn("rmBoa",`data-i="${i}"`,"✕")}</div>`).join("")||`<div class="empty">${t("Nessuna boa.")}</div>`}</div>
+    ${readOnly?"":`<button class="add" data-act="addBoa">${t("Aggiungi boa")}</button>`}
+    <p>${t("Totale boe:")} <span class="tot">${tot}</span></p>`;
+}
+
+function mezzoPicker(f){
+  if (!selM || !f.mezzi.find(m=>m.id===selM)) selM = f.mezzi[0] && f.mezzi[0].id;
+  return `<div class="pick" role="group" aria-label="${t("Scegli il mezzo")}">${f.mezzi.map(m=>`<button data-sel="${m.id}" aria-pressed="${m.id===selM}">${esc((m.nome||TIPI[m.tipo]).replace(" + assistenza partenza","").replace(" + start support",""))}</button>`).join("")}</div>`;
+}
+const prog = (a,b) => `<div class="prog"><div class="track"><div class="fill" style="width:${b?100*a/b:0}%"></div></div><span class="muted">${a} ${t("di")} ${b}</span></div>`;
+
+function paneDot(k,f){
+  if (!f.mezzi.length) return `<div class="empty">${t("Aggiungi un mezzo nella scheda Squadra.")}</div>`;
+  const pick = mezzoPicker(f), i = f.mezzi.findIndex(m=>m.id===selM), m = f.mezzi[i];
+  const done = m.dot.filter(x=>x.ok).length;
+  return pick + prog(done,m.dot.length) + `<div class="blk">${m.dot.map((x,j)=>`<div class="chk${x.ok?" done":""}">
+      <input type="checkbox" data-d="${k}" data-p="mezzi.${i}.dot.${j}.ok" ${x.ok?"checked":""} ${readOnly?"disabled":""} aria-label="${t("Caricato")}">
+      <input class="inp" data-d="${k}" data-p="mezzi.${i}.dot.${j}.t" value="${esc(x.t)}" ${ro()} aria-label="${t("Dotazione")}">
+      ${xbtn("rmDot",`data-i="${i}" data-j="${j}"`,"✕")}</div>`).join("")||`<div class="empty">${t("Nessuna dotazione per questo mezzo.")}</div>`}</div>
+    ${readOnly?"":`<div class="addrow"><input class="inp" id="nd" placeholder="${t("Nuova dotazione")}" style="flex:1"><button data-act="addDot" data-i="${i}">${t("Aggiungi")}</button></div>
+    ${done?`<button class="lnk" data-act="clrDot" data-i="${i}">${t("Azzera le spunte")}</button>`:""}`}`;
+}
+
+function paneBand(k,f){
+  if (!f.mezzi.length) return `<div class="empty">${t("Aggiungi un mezzo nella scheda Squadra.")}</div>`;
+  const pick = mezzoPicker(f), i = f.mezzi.findIndex(m=>m.id===selM), m = f.mezzi[i];
+  const ids = Object.keys(m.fl).filter(id=>FMAP[id]||(S.config.classi||[]).some(c=>c.id===id));
+  const done = ids.filter(id=>m.fl[id]).length;
+  return pick + (ids.length?prog(done,ids.length):"") + `<div class="blk">${ids.map(id=>`<label class="chk${m.fl[id]?" done":""}">
+      <input type="checkbox" data-d="${k}" data-p="mezzi.${i}.fl.${id}" ${m.fl[id]?"checked":""} ${readOnly?"disabled":""}>
+      ${flagSVG(id,42)}<span class="fn">${esc(flagName(id))}${FMAP[id]&&FMAP[id].sig?`<small>${esc(t(FMAP[id].sig))}</small>`:""}</span></label>`).join("")||`<div class="empty">${t("Nessuna bandiera assegnata a questo mezzo.")}</div>`}</div>
+    ${readOnly?"":`<button class="add" data-act="openSheet" data-i="${i}">${t("Scegli bandiere dall’archivio")}</button>
+    ${done?`<button class="lnk" data-act="clrFl" data-i="${i}">${t("Azzera le spunte")}</button>`:""}`}`;
+}
+
+function addOpts(sel){ return Object.entries(TIPI).filter(([t])=>t!=="terra").map(([t,l])=>`<option value="${t}" ${t===sel?"selected":""}>${l}</option>`).join(""); }
+let mapMode = "move", mapSel = null, drawing = null;
+const splitL = l => String(l||"").split(/[,;/]+/).map(s=>s.trim()).filter(Boolean);
+function boaInfo(f,l,fb){ const b = (f.boe||[]).find(b=>splitL(b.l).includes(l)); return b ? {c:b.c,robo:b.robo} : (fb||{c:"",robo:false}); }
+const pct = v => (v*100).toFixed(2)+"%";
+const ctrl = a => a.cx!=null ? [a.cx,a.cy] : [(a.x1+a.x2)/2,(a.y1+a.y2)/2];
+const midA = a => { const [cx,cy]=ctrl(a); return [(a.x1+2*cx+a.x2)/4,(a.y1+2*cy+a.y2)/4]; };
+function layoutArrows(){
+  const map = document.getElementById("map"); if (!map) return;
+  const svg = map.querySelector("svg.arw"), g = svg && svg.querySelector("#arws"); if (!g) return;
+  const w = map.clientWidth, h = map.clientHeight; if (!w || !h) return;
+  svg.setAttribute("viewBox",`0 0 ${w} ${h}`);
+  const k = map.dataset.k, f = campo(k), sel = mapSel && mapSel.k===k && mapSel.type==="ar" ? mapSel.id : null;
+  g.innerHTML = (f.arrows||[]).map(a=>{ const [cx,cy]=ctrl(a), s=a.id===sel;
+    const d = `M${(a.x1*w).toFixed(1)} ${(a.y1*h).toFixed(1)}Q${(cx*w).toFixed(1)} ${(cy*h).toFixed(1)} ${(a.x2*w).toFixed(1)} ${(a.y2*h).toFixed(1)}`;
+    return `<g data-ar="${a.id}"><path class="hit" d="${d}" fill="none" stroke="transparent" stroke-width="26"/><path d="${d}" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/><path d="${d}" fill="none" stroke="${s?"#1D4E9E":"#13294B"}" stroke-width="3" stroke-linecap="round" marker-end="url(#${s?"ahs":"ah"})"/></g>`; }).join("");
+  map.querySelectorAll(".hd").forEach(hd=>{ const a=(f.arrows||[]).find(x=>x.id===hd.dataset.ar); if (!a) return;
+    const p = hd.dataset.end==="m" ? midA(a) : [a["x"+hd.dataset.end], a["y"+hd.dataset.end]]; hd.style.left=pct(p[0]); hd.style.top=pct(p[1]); });
+}
+window.addEventListener("resize", ()=>layoutArrows());
+function panePerc(k,f){
+  const pos = f.pos||{}, src = imgSrc(k,f), marks = f.marks||[], arrows = f.arrows||[];
+  const sel = mapSel && mapSel.k===k ? mapSel : null;
+  const mz = f.mezzi.filter(m=>m.tipo!=="terra");
+  const placed = mz.filter(m=>pos[m.id]), free = mz.filter(m=>!pos[m.id]);
+  const used = new Set(marks.map(m=>m.l));
+  const freeB = []; (f.boe||[]).forEach(b=>splitL(b.l).forEach(l=>{ if(!used.has(l)) freeB.push({l,c:b.c,robo:b.robo}); }));
+  const drawMode = mapMode==="arrow" && !readOnly;
+  const bcol = c => bhex(c)==="transparent" ? "#BBB" : bhex(c);
+  let h = readOnly ? "" : `<div class="seg" role="group" aria-label="${t("Modalità")}"><button data-act="mode" data-v="move" aria-pressed="${!drawMode}">${t("Sposta e seleziona")}</button><button data-act="mode" data-v="arrow" aria-pressed="${drawMode}">${t("Disegna frecce")}</button></div>`;
+  // barra dell'oggetto selezionato, sopra la mappa
+  if (sel && !readOnly){
+    if (sel.type==="ar" && arrows.some(a=>a.id===sel.id)){ const a = arrows.find(x=>x.id===sel.id);
+      h += `<div class="selbar"><span class="n">${t("Freccia")}</span><button class="btn" data-act="flipAr">${t("Inverti verso")}</button>${a.cx!=null?`<button class="btn" data-act="straight">${t("Raddrizza")}</button>`:""}<button class="btn del" data-act="rmSel">${t("Togli dal grafico")}</button></div>`; }
+    else if (sel.type==="boa" && marks.some(m=>m.id===sel.id)){ const m = marks.find(x=>x.id===sel.id);
+      h += `<div class="selbar"><span class="n">${t("Boa")} ${esc(m.l)}</span><button class="btn del" data-act="rmSel">${t("Togli dal grafico")}</button></div>`; }
+    else if (sel.type==="boat" && pos[sel.id]){ const m = f.mezzi.find(x=>x.id===sel.id);
+      if (m) h += `<div class="selbar"><span class="n">${esc(m.nome||TIPI[m.tipo])}</span><button class="btn" data-act="openMz" data-id="${m.id}">${t("Apri scheda")}</button><button class="btn del" data-act="rmSel">${t("Togli dal grafico")}</button></div>`; }
+  }
+  h += `<div class="map${src?"":" blank"}${drawMode?" drawing":""}" id="map" data-k="${k}">${src?`<img src="${src}" alt="Percorso del campo" onload="layoutArrows()">`:`<div class="mapempty">${uploading===k?t("Caricamento dell’immagine…"):t("Carica l’immagine del percorso, oppure lavora sulla griglia")}</div>`}
+    <svg class="arw" aria-hidden="true"><defs>
+      <marker id="ah" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#13294B" stroke="#fff" stroke-width="1"/></marker>
+      <marker id="ahs" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#1D4E9E" stroke="#fff" stroke-width="1"/></marker></defs>
+      <g id="arws"></g>
+      <path id="prev" d="M0 0" fill="none" stroke="#1D4E9E" stroke-width="3" stroke-dasharray="6 4" stroke-linecap="round" visibility="hidden"/>
+    </svg>
+    ${marks.map(m=>{const b=boaInfo(f,m.l,m); return `<div class="mk boa${sel&&sel.type==="boa"&&sel.id===m.id?" sel":""}" data-bk="${m.id}" style="left:${pct(m.x)};top:${pct(m.y)}" role="button" aria-label="${t("Boa")} ${esc(m.l)}"><span class="bd${b.robo?" robo":""}" style="background:${bcol(b.c)}"></span><b>${esc(m.l)}</b></div>`;}).join("")}
+    ${placed.map(m=>`<div class="mk${sel&&sel.type==="boat"&&sel.id===m.id?" sel":""}" data-mk="${m.id}" style="left:${pct(pos[m.id].x)};top:${pct(pos[m.id].y)}" role="button" aria-label="${esc(m.nome)}">${boatSVG(m.tipo)}<b>${esc(sigla(m))}</b></div>`).join("")}
+    ${sel&&sel.type==="ar"&&!readOnly&&arrows.some(a=>a.id===sel.id)?["1","m","2"].map(e=>`<div class="hd${e==="m"?" mid":""}" data-ar="${sel.id}" data-end="${e}"></div>`).join(""):""}
+  </div>`;
+  h += `<p class="hint">${readOnly?t("Tocca un mezzo per vederne la scheda."):drawMode?t("Disegna col dito il percorso, dritto o curvo, partendo dall’inizio verso la direzione di percorrenza."):sel&&sel.type==="ar"?t("Trascina i cerchi alle estremità per spostare la freccia e quello centrale per curvarla."):t("Trascina gli oggetti per spostarli. Toccane uno per selezionarlo e toglierlo dal grafico.")}</p>`;
+  if (!readOnly){
+    h += `<div class="btnrow"><label class="btn${src?"":" pri"}">${uploading===k?t("Caricamento…"):src?t("Sostituisci immagine"):t("Carica immagine percorso")}<input type="file" accept="image/*" data-up="${k}"></label>${src?xbtn("rmImg","",t("Rimuovi immagine")):""}${arrows.length?xbtn("rmAllAr","",t("Cancella tutte le frecce")):""}</div>
+      ${upMsg?`<p style="color:var(--red)">${esc(upMsg)}</p>`:""}
+      <h2>${t("Boe")}</h2>
+      ${freeB.length?`<div class="pick" style="flex-wrap:wrap">${freeB.map(b=>`<button data-act="placeBoa" data-l="${esc(b.l)}"><span class="bd${b.robo?" robo":""}" style="display:inline-block;vertical-align:-5px;margin-right:6px;width:18px;height:18px;background:${bcol(b.c)}"></span>${esc(b.l)}</button>`).join("")}</div><p class="hint">${t("Tocca una boa per metterla sul percorso. Nomi e colori si cambiano nella scheda Boe.")}</p>`
+        :`<p class="hint">${(f.boe||[]).length?t("Tutte le boe sono sul percorso."):t("Aggiungi le boe nella scheda Boe.")}</p>`}
+      <h2>${t("Aggiungi un mezzo")}</h2>
+      <div class="qadd">${["rc","cs","ar","gp","ga"].map(t=>`<button class="btn" data-act="addMk" data-t="${t}">${boatSVG(t,15)}<span>${TIPI[t]}</span></button>`).join("")}</div>
+      <p class="hint">${t("Il mezzo compare sull’immagine e si apre la sua scheda da compilare.")}</p>`;
+    if (free.length) h += `<h2>${t("Mezzi da posizionare")}</h2><div class="pick" style="flex-wrap:wrap">${free.map(m=>`<button data-act="place" data-id="${m.id}">${esc(m.nome)}</button>`).join("")}</div>`;
+  }
+  return h;
+}
+
+/* fogli: bandiere e scheda mezzo */
+let sheetOpen = null;
+function drawSheet(){
+  if (!sheetOpen) { $("#sheet").innerHTML = ""; return; }
+  if (sheetOpen.kind==="mz") return drawScheda();
+  const {k,i} = sheetOpen, f = campo(k), m = f.mezzi[i];
+  if (!m) { sheetOpen = null; $("#sheet").innerHTML=""; return; }
+  const sc = $(".sheet .pane") ? $(".sheet .pane").scrollTop : 0;
+  const all = FLAGS.concat((S.config.classi||[]).map(c=>({id:c.id,g:"C",nome:`${t("Classe")} ${c.nome}`})));
+  $("#sheet").innerHTML = `<div class="sheet" data-act="closeSheet"><div class="pane" role="dialog" aria-label="${t("Archivio bandiere")}">
+    <div class="head"><div><h3 style="margin:0">${esc(m.nome)}</h3><div class="r">${t("Tocca per aggiungere o togliere")}</div></div><button data-act="closeSheet">${t("Fatto")}</button></div>
+    ${GROUPS.map(([g,l])=>{const items=all.filter(x=>x.g===g); if(!items.length) return g==="C"?`<h3>${l}</h3><p class="muted">${t("Aggiungile da Archivio bandiere nella pagina principale.")}</p>`:""; return `<h3>${l}</h3><div class="grid">${items.map(x=>`<button class="tile" data-tog="${x.id}" aria-pressed="${x.id in m.fl}">${flagSVG(x.id,52)}<span>${esc(t(x.nome))}</span></button>`).join("")}</div>`;}).join("")}
+  </div></div>`;
+  $(".sheet .pane").scrollTop = sc;
+}
+
+function drawScheda(){
+  const {k,id} = sheetOpen, f = campo(k), i = f.mezzi.findIndex(m=>m.id===id), m = f.mezzi[i];
+  if (!m) { sheetOpen=null; $("#sheet").innerHTML=""; return; }
+  const sc = $(".sheet .pane") ? $(".sheet .pane").scrollTop : 0;
+  const onMap = f.pos && f.pos[id];
+  $("#sheet").innerHTML = `<div class="sheet" data-act="closeSheet"><div class="pane" role="dialog" aria-label="${t("Scheda mezzo")}">
+    <div class="head"><div class="mzh">${boatSVG(m.tipo,22)}<div><h3 style="margin:0">${esc(m.nome||TIPI[m.tipo])}</h3><div class="r">${TIPI[m.tipo]}</div></div></div><button data-act="closeSheet">${t("Fatto")}</button></div>
+    <div class="blk"><div class="sec"><div class="kv2"><div><div class="r">${t("Nome")}</div>${inp(k,`mezzi.${i}.nome`,TIPI[m.tipo])}</div><div><div class="r">${t("Sigla sulla mappa")}</div>${inp(k,`mezzi.${i}.sigla`,sigla(m))}</div></div>
+      <div style="margin-top:8px"><div class="r">${t("Imbarcazione")}</div>${inp(k,`mezzi.${i}.barca`,t("Nome o modello della barca"))}</div></div>
+      ${person(k,`mezzi.${i}.resp`,t("Responsabile"))}${person(k,`mezzi.${i}.ass`,m.tipo==="rc"?t("Aiuto"):t("Assistente"))}</div>
+    <p class="hint">${t("Dotazioni e bandiere di questo mezzo sono nelle schede Dotazioni e Bandiere del campo.")}</p>
+    ${readOnly?"":`<div class="btnrow">${onMap?`<button class="btn" data-act="unplace" data-id="${id}">${t("Togli dal percorso")}</button>`:`<button class="btn" data-act="place" data-id="${id}">${t("Metti sul percorso")}</button>`}${xbtn("rmMzId",`data-id="${id}"`,t("Elimina mezzo"))}</div>`}
+  </div></div>`;
+  $(".sheet .pane").scrollTop = sc;
+}
+
+/* immagini */
+function loadImg(file){ return new Promise((ok,ko)=>{ const u=URL.createObjectURL(file), im=new Image(); im.onload=()=>{ok(im);}; im.onerror=ko; im.src=u; }); }
+function toCanvas(im,max){ const s=Math.min(1,max/Math.max(im.naturalWidth,im.naturalHeight)); const c=document.createElement("canvas"); c.width=Math.round(im.naturalWidth*s); c.height=Math.round(im.naturalHeight*s); const x=c.getContext("2d"); x.fillStyle="#fff"; x.fillRect(0,0,c.width,c.height); x.drawImage(im,0,0,c.width,c.height); return c; }
+function shrinkToData(im){
+  let url = "";
+  for (const [mx,q] of [[1400,.72],[1100,.66],[900,.6],[700,.55]]){ url = toCanvas(im,mx).toDataURL("image/jpeg",q); if (url.length<240000) return url; }
+  return "";
+}
+async function uploadImg(k,file){
+  uploading=k; upMsg=""; render();
+  try{
+    const im = await loadImg(file), f = campo(k), url = shrinkToData(im);
+    if (!url) throw new Error("big");
+    IMGS[k]=url; f.img={doc:true};
+    try{ localStorage.setItem("racecourse-img-"+k,url); }catch(e){ upMsg="Immagine troppo grande per essere salvata su questo dispositivo."; }
+    touch(k);
+  }catch(e){ upMsg = t("Questo file non è un’immagine leggibile. Prova con un JPG o un PNG."); }
+  uploading=null; render();
+}
+function clearImg(k){
+  delete IMGS[k]; try{ localStorage.removeItem("racecourse-img-"+k); }catch(e){}
+}
+
+/* mappa: trascinamento, selezione, frecce */
+let drag = null;
+function mapXY(e,R){ return [Math.min(.99,Math.max(.01,(e.clientX-R.left)/R.width)), Math.min(.99,Math.max(.01,(e.clientY-R.top)/R.height))]; }
+const r4 = v => +(+v).toFixed(4);
+document.addEventListener("pointerdown", e=>{
+  const map = e.target.closest("#map"); if (!map) return;
+  const k = map.dataset.k, R = map.getBoundingClientRect();
+  const mk = e.target.closest(".mk, .hd");
+  if (mk){
+    e.preventDefault();
+    drag = {el:mk, k, sx:e.clientX, sy:e.clientY, moved:false, rect:R,
+      type: mk.dataset.mk ? "boat" : mk.dataset.bk ? "boa" : "hd",
+      id: mk.dataset.mk || mk.dataset.bk || mk.dataset.ar, end: mk.dataset.end};
+    editingDoc = k; try{ mk.setPointerCapture(e.pointerId); }catch(_){}
+    return;
+  }
+  if (mapMode==="arrow" && !readOnly){
+    e.preventDefault();
+    drawing = {k, rect:R, pts:[mapXY(e,R)], sx:e.clientX, sy:e.clientY};
+    editingDoc = k; try{ map.setPointerCapture(e.pointerId); }catch(_){}
+    return;
+  }
+  const ar = e.target.closest("[data-ar]");
+  if (ar){ mapSel = {k, type:"ar", id:ar.dataset.ar}; render(); }
+  else if (mapSel){ mapSel = null; render(); }
+});
+document.addEventListener("pointermove", e=>{
+  if (drawing){
+    const R = drawing.rect; drawing.pts.push(mapXY(e,R));
+    const l = document.getElementById("prev");
+    if (l){ l.setAttribute("d","M"+drawing.pts.map(p=>(p[0]*R.width).toFixed(1)+" "+(p[1]*R.height).toFixed(1)).join("L")); l.setAttribute("visibility","visible"); }
+    return;
+  }
+  if (!drag) return;
+  if (!drag.moved && Math.hypot(e.clientX-drag.sx,e.clientY-drag.sy) < 6) return;
+  if (readOnly) return;
+  drag.moved = true; drag.el.classList.add("drag");
+  [drag.x, drag.y] = mapXY(e,drag.rect);
+  if (drag.type==="hd"){
+    const a = (campo(drag.k).arrows||[]).find(x=>x.id===drag.id); if (!a) return;
+    if (drag.end==="m"){ a.cx = 2*drag.x-(a.x1+a.x2)/2; a.cy = 2*drag.y-(a.y1+a.y2)/2; }
+    else { a["x"+drag.end]=drag.x; a["y"+drag.end]=drag.y; }
+    layoutArrows();
+  } else { drag.el.style.left = pct(drag.x); drag.el.style.top = pct(drag.y); }
+});
+function endDrag(e){
+  if (drawing){
+    const d = drawing; drawing = null; editingDoc = null;
+    const P = d.pts, W = d.rect.width, H = d.rect.height;
+    if (e && e.type==="pointerup" && P.length>1){
+      const p1 = P[0], p2 = P[P.length-1];
+      if (Math.hypot((p2[0]-p1[0])*W,(p2[1]-p1[1])*H) > 24){
+        const a = {id:rid(), x1:r4(p1[0]), y1:r4(p1[1]), x2:r4(p2[0]), y2:r4(p2[1])};
+        // punto più lontano dalla corda: se la linea è curva diventa il punto medio della curva
+        const ax=p1[0]*W, ay=p1[1]*H, bx=p2[0]*W, by=p2[1]*H, L=Math.hypot(bx-ax,by-ay);
+        let best=null, bd=0;
+        P.forEach(p=>{ const px=p[0]*W, py=p[1]*H, dd=Math.abs((bx-ax)*(ay-py)-(ax-px)*(by-ay))/L; if (dd>bd){ bd=dd; best=p; } });
+        if (best && bd > 16){ a.cx = r4(2*best[0]-(p1[0]+p2[0])/2); a.cy = r4(2*best[1]-(p1[1]+p2[1])/2); }
+        const f = campo(d.k); f.arrows = f.arrows||[]; f.arrows.push(a); touch(d.k);
+      }
+    }
+    render(); applyQueued(d.k); return;
+  }
+  if (!drag) return; const d = drag; drag = null; d.el.classList.remove("drag");
+  const f = campo(d.k);
+  if (d.moved && !readOnly){
+    if (d.type==="boat"){ f.pos = f.pos||{}; f.pos[d.id] = {x:r4(d.x),y:r4(d.y)}; }
+    else if (d.type==="boa"){ const m = (f.marks||[]).find(x=>x.id===d.id); if (m){ m.x=r4(d.x); m.y=r4(d.y); } }
+    else { const a = (f.arrows||[]).find(x=>x.id===d.id); if (a) ["x1","y1","x2","y2","cx","cy"].forEach(q=>{ if (a[q]!=null) a[q]=r4(a[q]); }); }
+    touch(d.k);
+  }
+  editingDoc = null;
+  if (!d.moved && d.type!=="hd"){ mapSel = {k:d.k, type:d.type, id:d.id}; }
+  render();
+  applyQueued(d.k);
+}
+document.addEventListener("pointerup", endDrag);
+document.addEventListener("pointercancel", endDrag);
+
+function viewArchivio(){
+  const cl = S.config.classi||[];
+  $("#app").innerHTML = bar(t("Archivio bandiere")) + `<div class="wrap">
+    ${GROUPS.slice(0,4).map(([g,l])=>`<h2>${l}</h2><div class="blk">${FLAGS.filter(f=>f.g===g).map(f=>`<div class="arow">${flagSVG(f.id,48)}<div><div class="n">${t(f.nome)}</div>${f.sig?`<div class="r">${t(f.sig)}</div>`:""}</div></div>`).join("")}</div>`).join("")}
+    <h2>${t("Bandiere di classe")}</h2>
+    <div class="blk">${cl.map((c,i)=>`<div class="brow">${flagSVG(c.id,48)}
+      <input class="inp" style="flex:1 1 100px" data-d="config" data-p="classi.${i}.nome" value="${esc(c.nome)}" placeholder="${t("Nome classe")}" ${ro()}>
+      <select style="flex:0 1 110px" data-d="config" data-p="classi.${i}.col" ${readOnly?"disabled":""} aria-label="${t("Colore")}">${CLASS_COLS.map(([h,n])=>`<option value="${h}" ${c.col===h?"selected":""}>${t(n)}</option>`).join("")}</select>
+      ${xbtn("rmClasse",`data-i="${i}"`,"✕")}</div>`).join("")||`<div class="empty">${t("Nessuna bandiera di classe. Aggiungi quelle delle classi in regata.")}</div>`}</div>
+    ${readOnly?"":`<button class="add" data-act="addClasse">${t("Aggiungi bandiera di classe")}</button>`}
+    <p class="muted" style="margin-top:20px">${t("I significati sono indicativi: fanno fede il Regolamento di Regata e le Istruzioni di Regata della manifestazione.")}</p>
+  </div>`;
+}
+
+function people(){
+  const out = [], add = (p,ruolo,L,nome,barca) => { if (p && (p.n||"").trim()) out.push({n:p.n,t:p.t,ruolo,L,campo:nome,barca}); };
+  add(S.config.segreteria,t("Segreteria")); add(S.config.medico,t("Medico"));
+  (S.config.classifiche||[]).forEach(p=>add(p,t("Classifiche")));
+  CAMPI.slice(0,S.config.n).forEach(([k,L,nome])=>{ const f=S[k]; if(!f) return;
+    add(f.resp,t("responsabile campo"),L,nome); add(f.cdr.pres,t("presidente comitato"),L,nome);
+    f.cdr.comp.forEach(p=>add(p,t("componente comitato"),L,nome));
+    add(f.beach,t("beach master"),L,nome); add(f.sicurezza,t("sicurezza"),L,nome); add(f.delegato,t("delegato di classe"),L,nome);
+    f.mezzi.forEach(m=>{ add(m.resp,`${m.nome}, ${t("responsabile")}`,L,nome,m.barca); add(m.ass,`${m.nome}, ${m.tipo==="rc"?t("aiuto"):t("assistente")}`,L,nome,m.barca); });
+  });
+  return out;
+}
+function viewRubrica(){
+  $("#app").innerHTML = bar(t("Rubrica")) + `<div class="wrap"><input class="search" id="q" type="search" placeholder="${t("Nome, barca o ruolo")}" autocomplete="off"><div class="blk" id="res"></div></div>`;
+  const all = people();
+  const draw = q => { q=q.trim().toLowerCase();
+    const r = all.filter(p=>!q||[p.n,p.ruolo,p.barca||"",p.campo||""].join(" ").toLowerCase().includes(q));
+    $("#res").innerHTML = r.length ? r.map(p=>`<div class="row">${p.L?flagSVG(p.L,30):""}<div style="min-width:0"><div class="n">${esc(p.n)}</div><div class="r">${p.campo?`${t("Campo")} ${p.campo}, `:""}${esc(p.ruolo)}${p.barca?` (${esc(p.barca)})`:""}</div></div>${telOk(p.t)?`<a class="call" style="margin-left:auto" href="${telHref(p.t)}">${t("Chiama")}</a>`:""}</div>`).join("")
+      : `<div class="empty">${all.length?`${t("Nessun risultato per")} “${esc(q)}”.`:t("La rubrica si riempie man mano che inserisci i nomi nei campi.")}</div>`; };
+  $("#q").oninput = e=>draw(e.target.value); draw("");
+}
+function viewMezzi(){
+  const act = CAMPI.slice(0,S.config.n), tipi = Object.keys(TIPI).filter(t=>t!=="terra");
+  const cnt = (k,t) => (S[k]?S[k].mezzi:defCampo().mezzi).filter(m=>m.tipo===t).length;
+  const colTot = act.map(([k])=>tipi.reduce((a,t)=>a+cnt(k,t),0));
+  $("#app").innerHTML = bar(t("Riepilogo mezzi")) + `<div class="wrap"><h2>${t("Mezzi per campo")}</h2><div class="tw"><table>
+    <thead><tr><th></th>${act.map(([k,L,n])=>`<th><a href="#${k}" aria-label="${t("Campo")} ${n}" style="display:inline-block">${flagSVG(L,26)}</a></th>`).join("")}<th>Tot.</th></tr></thead>
+    <tbody>${tipi.map(t=>{const v=act.map(([k])=>cnt(k,t));return `<tr><th scope="row">${TIPI[t]}</th>${v.map(x=>`<td>${x||"–"}</td>`).join("")}<td class="tot">${v.reduce((a,b)=>a+b,0)}</td></tr>`}).join("")}</tbody>
+    <tfoot><tr><th scope="row">${t("Totale")}</th>${colTot.map(x=>`<td class="tot">${x}</td>`).join("")}<td class="tot">${colTot.reduce((a,b)=>a+b,0)}</td></tr></tfoot></table></div>
+    <p class="muted">${t("Il conteggio segue i mezzi inseriti nella scheda Squadra di ogni campo.")}</p></div>`;
+}
+
+/* ---------- esportazione PDF ---------- */
+let pdfBusy = null, pdfMsg = "";
+function pdfBtn(k,label){
+  return `<div class="btnrow" style="margin-top:16px"><button class="btn pri" data-act="pdf" data-k="${k}" ${pdfBusy?"disabled":""}>${pdfBusy===k?t("Preparo il PDF…"):label}</button></div>${pdfMsg&&pdfBusy===null?`<p class="hint">${esc(pdfMsg)}</p>`:""}`;
+}
+function loadJsPDF(){
+  if (window.jspdf) return Promise.resolve();
+  return new Promise((ok,ko)=>{ const s=document.createElement("script"); s.src="vendor/jspdf.umd.min.js"; s.onload=ok; s.onerror=ko; document.head.appendChild(s); });
+}
+const svgImg = (svg) => new Promise((ok,ko)=>{ const i=new Image(); i.onload=()=>ok(i); i.onerror=ko; i.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svg.replace("<svg ",'<svg xmlns="http://www.w3.org/2000/svg" ')); });
+const PNGC = {};
+async function svgPNG(key, svg, w, h){
+  if (PNGC[key]) return PNGC[key];
+  const im = await svgImg(svg); const c=document.createElement("canvas"); c.width=w; c.height=h;
+  c.getContext("2d").drawImage(im,0,0,w,h); return PNGC[key]=c.toDataURL("image/png");
+}
+const flagPNG = id => svgPNG("f:"+id+":"+(id.startsWith("cl-")?JSON.stringify((S.config.classi||[]).find(c=>c.id===id)||{}):""), flagSVG(id,120), 124, 84);
+async function mapImage(k,f){
+  const src = imgSrc(k,f), marks=f.marks||[], arrows=f.arrows||[], pos=f.pos||{};
+  const placed = f.mezzi.filter(m=>m.tipo!=="terra"&&pos[m.id]);
+  if (!src && !marks.length && !arrows.length && !placed.length) return null;
+  let W=900,H=1200,im=null;
+  if (src){ try{ im = await new Promise((ok,ko)=>{ const i=new Image(); i.onload=()=>ok(i); i.onerror=ko; i.src=src; }); const s=Math.min(1,1600/im.naturalWidth); W=Math.round(im.naturalWidth*s); H=Math.round(im.naturalHeight*s); }catch(e){ im=null; } }
+  const c=document.createElement("canvas"); c.width=W; c.height=H; const x=c.getContext("2d");
+  x.fillStyle="#fff"; x.fillRect(0,0,W,H);
+  if (im) x.drawImage(im,0,0,W,H);
+  else { x.fillStyle="#D7E8F4"; x.fillRect(0,0,W,H); x.strokeStyle="rgba(29,78,158,.12)"; x.lineWidth=1; for(let i=0;i<W;i+=40){x.beginPath();x.moveTo(i,0);x.lineTo(i,H);x.stroke();} for(let j=0;j<H;j+=40){x.beginPath();x.moveTo(0,j);x.lineTo(W,j);x.stroke();} }
+  const s = W/360;
+  const label = (txt,cx,top) => { x.font=`bold ${Math.round(13*s)}px Arial, sans-serif`; const tw=x.measureText(txt).width; x.fillStyle="#fff"; x.fillRect(cx-tw/2-3*s,top,tw+6*s,16*s); x.strokeStyle="rgba(0,0,0,.35)"; x.lineWidth=1*s; x.strokeRect(cx-tw/2-3*s,top,tw+6*s,16*s); x.fillStyle="#0F2740"; x.textAlign="center"; x.textBaseline="middle"; x.fillText(txt,cx,top+8.5*s); };
+  arrows.forEach(a=>{
+    const [qx,qy]=ctrl(a), x1=a.x1*W,y1=a.y1*H,x2=a.x2*W,y2=a.y2*H, cx=qx*W, cy=qy*H;
+    const an=Math.atan2(y2-cy,x2-cx), hl=16*s;
+    const ex=x2-Math.cos(an)*hl*.7, ey=y2-Math.sin(an)*hl*.7;
+    const stroke = () => { x.beginPath(); x.moveTo(x1,y1); x.quadraticCurveTo(cx,cy,ex,ey); x.stroke(); };
+    x.lineCap="round"; x.strokeStyle="#fff"; x.lineWidth=6*s; stroke();
+    x.strokeStyle="#13294B"; x.lineWidth=3*s; stroke();
+    x.beginPath(); x.moveTo(x2,y2); x.lineTo(x2-Math.cos(an-.45)*hl,y2-Math.sin(an-.45)*hl); x.lineTo(x2-Math.cos(an+.45)*hl,y2-Math.sin(an+.45)*hl); x.closePath();
+    x.fillStyle="#13294B"; x.fill(); x.strokeStyle="#fff"; x.lineWidth=1.2*s; x.stroke();
+  });
+  marks.forEach(m=>{ const b=boaInfo(f,m.l,m), cx=m.x*W, cy=m.y*H, rr=11*s, col=bhex(b.c)==="transparent"?"#BBB":bhex(b.c);
+    x.fillStyle=col; x.strokeStyle="#fff"; x.lineWidth=2*s; x.beginPath();
+    if (b.robo){ x.rect(cx-rr,cy-rr,rr*2,rr*2); } else x.arc(cx,cy,rr,0,Math.PI*2);
+    x.fill(); x.stroke(); label(m.l,cx,cy+rr+1*s); });
+  for (const m of placed){ const p=pos[m.id], bw=(RIB(m.tipo)?26:34)*s, bh=42*s, cx=p.x*W, cy=p.y*H;
+    const bi = await svgImg(boatSVG(m.tipo,26)); x.drawImage(bi,cx-bw/2,cy-bh/2-6*s,bw,bh); label(sigla(m),cx,cy+bh/2-5*s); }
+  return {url:c.toDataURL("image/jpeg",.88), W, H};
+}
+const BNAME = c => c || "-";
+async function exportPDF(which){
+  pdfBusy = which; pdfMsg = ""; render();
+  try{
+    await loadJsPDF();
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({unit:"mm", format:"a4"});
+    const PW=210, PH=297, M=14, CW=PW-2*M; let y=M;
+    const T = v => String(v ?? "").replace(/[’‘]/g,"'").replace(/[“”«»]/g,'"').replace(/[–—]/g,"-").replace(/…/g,"...").replace(/[^\x00-\xFF]/g,"").trim();
+    const D = v => T(v) || "-";
+    const need = h => { if (y+h > PH-M-6){ doc.addPage(); y=M; return true; } return false; };
+    const ev = T(S.config.nome) || t("Manifestazione");
+    const h2 = s => { need(14); y+=3; doc.setFont("helvetica","bold"); doc.setFontSize(13); doc.setTextColor(15,39,64); doc.text(T(s),M,y+4); y+=8; };
+    const para = (s,size=10) => { doc.setFont("helvetica","normal"); doc.setFontSize(size); doc.setTextColor(30,40,55); const ls=doc.splitTextToSize(T(s),CW); ls.forEach(l=>{ need(5); doc.text(l,M,y+3.6); y+=4.8; }); };
+    function table(cols, rows){
+      const tot = cols.reduce((a,c)=>a+c.w,0), ws = cols.map(c=>c.w/tot*CW);
+      const head = () => { doc.setFillColor(230,238,246); doc.rect(M,y,CW,7,"F"); doc.setFont("helvetica","bold"); doc.setFontSize(8.5); doc.setTextColor(15,39,64);
+        let xx=M; cols.forEach((c,i)=>{ doc.text(T(c.t),xx+1.8,y+4.8); xx+=ws[i]; }); y+=7; };
+      need(14); head();
+      doc.setFont("helvetica","normal"); doc.setFontSize(9);
+      rows.forEach((r,ri)=>{
+        const cells = r.map((v,i)=>doc.splitTextToSize(D(v),ws[i]-3.6));
+        const h = Math.max(...cells.map(c=>c.length))*4.1+2.8;
+        if (need(h)) { head(); doc.setFont("helvetica","normal"); doc.setFontSize(9); }
+        if (ri%2) { doc.setFillColor(247,249,251); doc.rect(M,y,CW,h,"F"); }
+        doc.setTextColor(30,40,55);
+        let xx=M; cells.forEach((c,i)=>{ doc.text(c,xx+1.8,y+4.3); xx+=ws[i]; });
+        doc.setDrawColor(213,222,232); doc.setLineWidth(.2); doc.line(M,y+h,M+CW,y+h); y+=h;
+      });
+      y+=2;
+    }
+    const n = S.config.n, act = CAMPI.slice(0,n);
+    const keys = which==="all" ? act.map(c=>c[0]) : [which];
+    const tipi = Object.keys(TIPI).filter(t=>t!=="terra");
+
+    if (which==="all"){
+      doc.setFont("helvetica","bold"); doc.setFontSize(24); doc.setTextColor(15,39,64);
+      doc.splitTextToSize(ev,CW).forEach(l=>{ doc.text(l,M,y+9); y+=10; });
+      doc.setFont("helvetica","normal"); doc.setFontSize(11); doc.setTextColor(90,107,126);
+      doc.text(T(`${t("Organizzazione dei campi di regata")} - ${new Date().toLocaleDateString(LANG==="en"?"en-GB":"it-IT")}`),M,y+5); y+=12;
+      h2(t("Contatti e canali"));
+      const c = S.config, rows = [["VHF Victor", T(c.victor)?t("Canale")+" "+T(c.victor):"-", ""],[t("Segreteria"),c.segreteria.n,c.segreteria.t],[t("Medico"),c.medico.n,c.medico.t]];
+      (c.classifiche||[]).forEach(p=>rows.push([t("Classifiche"),p.n,p.t]));
+      table([{t:t("Ruolo"),w:3},{t:t("Nome"),w:5},{t:t("Telefono"),w:3}], rows);
+      h2(t("Campi"));
+      table([{t:t("Campo"),w:2},{t:t("Classi"),w:4},{t:"VHF",w:1.2},{t:t("Responsabile"),w:3.5},{t:t("Telefono"),w:2.6}],
+        act.map(([k,,nome])=>{ const f=S[k]||defCampo(); return [nome,f.classi,f.vhf,f.resp.n,f.resp.t]; }));
+      h2(t("Riepilogo mezzi"));
+      const cnt=(k,t)=>(S[k]||defCampo()).mezzi.filter(m=>m.tipo===t).length;
+      const rws = tipi.map(t=>{ const v=act.map(([k])=>cnt(k,t)); return [TIPI[t],...v.map(String),String(v.reduce((a,b)=>a+b,0))]; });
+      const col = act.map(([k])=>tipi.reduce((a,t)=>a+cnt(k,t),0));
+      rws.push([t("Totale"),...col.map(String),String(col.reduce((a,b)=>a+b,0))]);
+      table([{t:t("Mezzo"),w:4},...act.map(c=>({t:c[2],w:1.6})),{t:t("Totale"),w:1.6}], rws);
+    }
+
+    for (const k of keys){
+      const [,L,nome] = CAMPI.find(c=>c[0]===k), f = campo(k);
+      if (which==="all" || k!==keys[0]) { doc.addPage(); y=M; }
+      doc.addImage(await flagPNG(L),"PNG",M,y,21,14);
+      doc.setFont("helvetica","bold"); doc.setFontSize(22); doc.setTextColor(15,39,64); doc.text(`${t("Campo")} ${nome}`,M+26,y+7);
+      doc.setFont("helvetica","normal"); doc.setFontSize(10.5); doc.setTextColor(90,107,126);
+      doc.text(T([f.classi, f.vhf?`${t("VHF campo")} ${f.vhf}`:"", S.config.victor?`Victor ${S.config.victor}`:""].filter(Boolean).join("   |   ")) || ev, M+26, y+13);
+      y += 20;
+      if (which!=="all"){ doc.setFontSize(9); doc.text(ev,PW-M,M+3,{align:"right"}); }
+      h2(t("Comitato di regata e responsabili"));
+      const rr = [[t("Responsabile campo"),f.resp.n,f.resp.t],[t("Presidente comitato"),f.cdr.pres.n,f.cdr.pres.t]];
+      f.cdr.comp.filter(p=>T(p.n)||T(p.t)).forEach(p=>rr.push([t("Componente"),p.n,p.t]));
+      rr.push([t("Beach master"),f.beach.n,f.beach.t],[t("Sicurezza campo"),f.sicurezza.n,f.sicurezza.t],[t("Delegato di classe"),f.delegato.n,f.delegato.t]);
+      table([{t:t("Ruolo"),w:3},{t:t("Nome"),w:5},{t:t("Telefono"),w:3}], rr);
+      const mz = f.mezzi.filter(m=>m.tipo!=="terra");
+      h2(t("Mezzi in acqua"));
+      table([{t:t("Mezzo"),w:3.2},{t:t("Sigla"),w:1.2},{t:t("Imbarcazione"),w:2.6},{t:t("Responsabile"),w:3},{t:t("Telefono"),w:2.4},{t:t("Assistente"),w:3},{t:t("Telefono"),w:2.4}],
+        mz.map(m=>[m.nome||TIPI[m.tipo],sigla(m),m.barca,m.resp.n,m.resp.t,m.ass.n,m.ass.t]));
+      if ((f.boe||[]).length){
+        h2(t("Boe"));
+        table([{t:t("Boa"),w:3},{t:t("Colore"),w:3},{t:t("Quantita'"),w:1.6},{t:t("Tipo"),w:2.4}], f.boe.map(b=>[b.l,BNAME(b.c?t(b.c):""),String(b.q||""),b.robo?t("Robotica"):t("Ancorata")]));
+        para(`${t("Totale boe:")} ${f.boe.reduce((a,b)=>a+(parseInt(b.q)||0),0)}`);
+      }
+      const map = await mapImage(k,f);
+      if (map){
+        let w = CW, h = map.H/map.W*w; const maxH = PH-2*M-20; if (h>maxH){ h=maxH; w=map.W/map.H*h; }
+        need(h+14); h2(t("Percorso"));
+        doc.addImage(map.url,"JPEG",M+(CW-w)/2,y,w,h); y+=h+4;
+      }
+      h2(t("Dotazioni e bandiere per mezzo"));
+      for (const m of f.mezzi){
+        const fl = Object.keys(m.fl||{}).filter(id=>FMAP[id]||(S.config.classi||[]).some(c=>c.id===id));
+        const dots = (m.dot||[]).map(d=>T(d.t)).filter(Boolean);
+        if (!fl.length && !dots.length) continue;
+        need(12); doc.setFont("helvetica","bold"); doc.setFontSize(10.5); doc.setTextColor(15,39,64);
+        doc.text(T(`${m.nome||TIPI[m.tipo]}${m.tipo!=="terra"&&sigla(m)?" ("+sigla(m)+")":""}`),M,y+4); y+=6.5;
+        if (dots.length) para(t("Dotazioni")+": "+dots.join(", "),9.5);
+        if (fl.length){
+          const per = 9, cw = CW/per;
+          for (let i=0;i<fl.length;i+=per){
+            need(16);
+            for (let j=0;j<per && i+j<fl.length;j++){
+              const id = fl[i+j], xx = M + j*cw;
+              doc.addImage(await flagPNG(id),"PNG",xx+(cw-12)/2,y,12,8.1);
+              doc.setFont("helvetica","normal"); doc.setFontSize(6.8); doc.setTextColor(60,72,88);
+              doc.text(doc.splitTextToSize(T(flagName(id)),cw-1).slice(0,2),xx+cw/2,y+11,{align:"center"});
+            }
+            y+=16;
+          }
+        }
+        y+=2;
+      }
+      if (T(f.note)){ h2(t("Note")); para(f.note); }
+    }
+    const np = doc.getNumberOfPages();
+    for (let i=1;i<=np;i++){ doc.setPage(i); doc.setFont("helvetica","normal"); doc.setFontSize(8); doc.setTextColor(120,130,145);
+      doc.text(T(ev),M,PH-7); doc.text(`${t("Pagina")} ${i} ${t("di")} ${np}`,PW-M,PH-7,{align:"right"}); }
+    const slug = (ev+(which==="all"?"":"-"+t("Campo").toLowerCase()+"-"+CAMPI.find(c=>c[0]===which)[2])).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"") || "campi-regata";
+    const blob = doc.output("blob");
+    const r = await saveFile(blob, slug+".pdf");
+    pdfMsg = r==="ok" ? t("PDF pronto.") : "";
+  }catch(e){ console.error(e); pdfMsg = t("Non sono riuscito a creare il PDF. Riprova."); }
+  pdfBusy = null; render();
+}
+
+/* ---------- eventi ---------- */
+document.addEventListener("focusin", e=>{ const d=e.target.dataset&&e.target.dataset.d; if(d) editingDoc=d; });
+document.addEventListener("focusout", e=>{ const d=e.target.dataset&&e.target.dataset.d; if(!d) return; setTimeout(()=>{ if(editingDoc===d && !(document.activeElement&&document.activeElement.dataset&&document.activeElement.dataset.d===d)){ editingDoc=null; applyQueued(d);} },50); });
+
+document.addEventListener("input", e=>{
+  const t = e.target, d = t.dataset.d; if (!d || readOnly || t.type==="checkbox" || t.tagName==="SELECT") return;
+  setP(docOf(d), t.dataset.p, t.value); touch(d);
+  if (d==="config" && /^classi\.\d+\.nome$/.test(t.dataset.p)){ const c=getP(S.config,t.dataset.p.replace(/\.nome$/,"")); const s=t.previousElementSibling; if(s&&c) s.outerHTML=flagSVG(c.id,48); }
+  const mm = t.dataset.p.match(/^mezzi\.(\d+)\.(sigla|nome)$/);
+  if (mm){ const m = campo(d).mezzi[+mm[1]]; const el = m && document.querySelector(`.mk[data-mk="${m.id}"] b`); if (el) el.textContent = sigla(m); }
+  if (/\.t$/.test(t.dataset.p)){ const a = t.parentNode.querySelector(".call"); if (a){ a.href=telHref(t.value); a.hidden=!telOk(t.value); } }
+});
+document.addEventListener("change", e=>{
+  if (e.target.dataset && e.target.dataset.imp!=null && e.target.files && e.target.files[0]){ readBackup(e.target.files[0]); e.target.value=""; return; }
+  if (e.target.dataset && e.target.dataset.up){ const f=e.target.files&&e.target.files[0]; if (f) uploadImg(e.target.dataset.up,f); return; }
+  const t = e.target, d = t.dataset.d; if (!d || readOnly) return;
+  if (t.type==="checkbox") setP(docOf(d), t.dataset.p, t.checked);
+  else if (t.tagName==="SELECT") setP(docOf(d), t.dataset.p, t.value);
+  else return;
+  touch(d); render();
+});
+
+document.addEventListener("click", e=>{
+  const tb = e.target.closest("[data-tab]"); if (tb){ tab=tb.dataset.tab; render(); return; }
+  const sl = e.target.closest("[data-sel]"); if (sl){ selM=sl.dataset.sel; render(); return; }
+  const tg = e.target.closest("[data-tog]");
+  if (tg && sheetOpen && sheetOpen.kind!=="mz"){ const m = campo(sheetOpen.k).mezzi[sheetOpen.i], id = tg.dataset.tog;
+    if (id in m.fl) delete m.fl[id]; else m.fl[id]=false; touch(sheetOpen.k); render(); return; }
+  const b = e.target.closest("[data-act]"); if (!b) return;
+  if (b.dataset.act==="closeSheet" && e.target!==b && b.classList.contains("sheet")) return;
+  if (b.hasAttribute("data-confirm") && !b.classList.contains("armed")){
+    b.classList.add("armed"); const old=b.textContent; b.textContent = b.dataset.act==="reset"?t("Tocca di nuovo per svuotare tutto"):t("Conferma");
+    setTimeout(()=>{ if(b.isConnected){ b.classList.remove("armed"); b.textContent=old; } },3000); return;
+  }
+  act(b.dataset.act, b.dataset);
+});
+
+function addMezzo(f,tp){
+  const n = f.mezzi.filter(m=>m.tipo===tp).length+1;
+  const nm = tp==="gp"?`${t("Posaboe")} G${n}`:tp==="ga"?`${t("Assistenza")} A${n}`:TIPI[tp];
+  const m = newMezzo(tp,nm); if (tp==="gp") m.sigla=`G${n}`; if (tp==="ga") m.sigla=`A${n}`;
+  const ti = f.mezzi.findIndex(x=>x.tipo==="terra");
+  if (ti>=0 && tp!=="terra") f.mezzi.splice(ti,0,m); else f.mezzi.push(m);
+  return m;
+}
+function place(f){ const n = Object.keys(f.pos||{}).length; return {x:.5+((n%5)-2)*.08, y:.5+(Math.floor(n/5)%3-1)*.1}; }
+function act(a, ds){
+  const h = location.hash.slice(1), i = +ds.i;
+  const F = () => campo(h);
+  switch(a){
+    case "n": S.config.n = Math.min(6,Math.max(1,S.config.n + +ds.v)); touch("config"); break;
+    case "addCl": S.config.classifiche.push(P()); touch("config"); break;
+    case "rmCl": S.config.classifiche.splice(i,1); touch("config"); break;
+    case "addClasse": (S.config.classi=S.config.classi||[]).push({id:"cl-"+rid(),nome:"",col:"#1D4E9E"}); touch("config"); break;
+    case "rmClasse": S.config.classi.splice(i,1); touch("config"); break;
+    case "addComp": F().cdr.comp.push(P()); touch(h); break;
+    case "rmComp": F().cdr.comp.splice(i,1); touch(h); break;
+    case "addMz": { const m = addMezzo(F(), $("#nt").value); touch(h); render();
+      const el = document.getElementById("mz-"+m.id); if (el){ el.scrollIntoView({block:"center"}); const q=el.querySelector('[data-p$=".resp.n"]'); if(q) q.focus({preventScroll:true}); } return; }
+    case "rmMz": { const f=F(), m=f.mezzi[i]; if (f.pos&&m) delete f.pos[m.id]; f.mezzi.splice(i,1); touch(h); break; }
+    case "rmMzId": { const f=F(), j=f.mezzi.findIndex(m=>m.id===ds.id); if (j>=0) f.mezzi.splice(j,1); if (f.pos) delete f.pos[ds.id]; sheetOpen=null; drawSheet(); touch(h); break; }
+    case "addMk": { const f=F(), m=addMezzo(f, ds.t); f.pos=f.pos||{}; f.pos[m.id]=place(f); touch(h); sheetOpen={kind:"mz",k:h,id:m.id}; break; }
+    case "place": { const f=F(); f.pos=f.pos||{}; f.pos[ds.id]=place(f); touch(h); if (sheetOpen&&sheetOpen.kind==="mz") { sheetOpen=null; drawSheet(); } break; }
+    case "unplace": { const f=F(); if (f.pos) delete f.pos[ds.id]; mapSel=null; touch(h); break; }
+    case "openMz": sheetOpen={kind:"mz",k:h,id:ds.id}; drawSheet(); return;
+    case "straight": { const a=(F().arrows||[]).find(x=>mapSel&&x.id===mapSel.id); if (a){ delete a.cx; delete a.cy; touch(h); } break; }
+    case "rmSel": { const f=F(); if (!mapSel) break;
+      if (mapSel.type==="ar") f.arrows=(f.arrows||[]).filter(a=>a.id!==mapSel.id);
+      else if (mapSel.type==="boa") f.marks=(f.marks||[]).filter(m=>m.id!==mapSel.id);
+      else if (mapSel.type==="boat" && f.pos) delete f.pos[mapSel.id];
+      mapSel=null; touch(h); break; }
+    case "lang": LANG = ds.v; try{ localStorage.setItem("racecourse-lang",LANG); }catch(e){} buildI18n(); break;
+    case "bkExport": exportBackup(); return;
+    case "bkApply": applyBackup(); return;
+    case "bkCancel": pendingImport=null; break;
+    case "pdf": exportPDF(ds.k); return;
+    case "mode": mapMode = ds.v; mapSel = null; break;
+    case "placeBoa": { const f=F(); f.marks=f.marks||[]; const b=boaInfo(f,ds.l); const n=f.marks.length;
+      f.marks.push({id:rid(),l:ds.l,c:b.c,robo:b.robo,x:r4(.3+(n%6)*.08),y:r4(.25+(Math.floor(n/6)%4)*.1)}); touch(h); break; }
+    case "rmMark": { const f=F(); f.marks=(f.marks||[]).filter(m=>!(mapSel&&m.id===mapSel.id)); mapSel=null; touch(h); break; }
+    case "flipAr": { const a=(F().arrows||[]).find(x=>mapSel&&x.id===mapSel.id); if (a){ [a.x1,a.x2]=[a.x2,a.x1]; [a.y1,a.y2]=[a.y2,a.y1]; touch(h); } break; }
+    case "rmAr": { const f=F(); f.arrows=(f.arrows||[]).filter(a=>!(mapSel&&a.id===mapSel.id)); mapSel=null; touch(h); break; }
+    case "rmAllAr": { F().arrows=[]; mapSel=null; touch(h); break; }
+    case "rmImg": { const f=F(); f.img=null; clearImg(h); touch(h); break; }
+    case "addBoa": F().boe.push({l:"",c:"",q:1,robo:false}); touch(h); break;
+    case "rmBoa": F().boe.splice(i,1); touch(h); break;
+    case "addDot": { const v=$("#nd").value.trim(); if(!v) { $("#nd").focus(); return; } F().mezzi[i].dot.push({t:v,ok:false}); touch(h); break; }
+    case "rmDot": F().mezzi[i].dot.splice(+ds.j,1); touch(h); break;
+    case "clrDot": F().mezzi[i].dot.forEach(x=>x.ok=false); touch(h); break;
+    case "clrFl": { const fl=F().mezzi[i].fl; Object.keys(fl).forEach(id=>fl[id]=false); touch(h); break; }
+    case "openSheet": sheetOpen={kind:"fl",k:h,i}; drawSheet(); return;
+    case "closeSheet": sheetOpen=null; drawSheet(); return;
+    case "reset": { CAMPI.forEach(([k])=>clearImg(k)); const keep = S.config.classi||[]; S.config = defConfig(); S.config.classi = keep; touch("config");
+      CAMPI.forEach(([k])=>{ if (S[k]) { S[k]=defCampo(); touch(k); } }); location.hash=""; break; }
+  }
+  render();
+}
+
+const ACCESS = "936493c4d3ee570bc38139bb850d803962d4e6092a31ea152892635c6443cdfb";
+const AKEY = "racecourse-access";
+async function hashCode(c){ const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode("racecourse:"+c)); return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join(""); }
+function hasAccess(){ try{ return localStorage.getItem(AKEY)===ACCESS; }catch(e){ return false; } }
+function showGate(msg){
+  document.title = "Racecourse";
+  $("#app").innerHTML = `<form class="gate" id="gate"><div class="box"><img src="icons/icon-192.png" alt=""><h1>Racecourse</h1>
+    <p>${t("Inserisci il codice che ti ha dato l’organizzazione.")}</p>
+    <input class="inp" id="code" type="password" autocomplete="current-password" autocapitalize="characters" spellcheck="false" placeholder="${t("Codice di accesso")}" aria-label="${t("Codice di accesso")}">
+    <button class="btn pri" type="submit">${t("Entra")}</button>
+    <div class="err" role="alert">${msg||""}</div>
+    <div class="gl"><button type="button" data-glang="it" aria-pressed="${LANG==="it"}">IT</button><button type="button" data-glang="en" aria-pressed="${LANG==="en"}">EN</button></div>
+  </div></form>`;
+  const f = $("#gate"), c = $("#code"); c.focus();
+  f.onsubmit = async ev => { ev.preventDefault();
+    const h = await hashCode(c.value.trim().toUpperCase());
+    if (h===ACCESS){ try{ localStorage.setItem(AKEY,h); }catch(e){} render(); }
+    else showGate(t("Codice non corretto."));
+  };
+  f.querySelectorAll("[data-glang]").forEach(b=>b.onclick=()=>{ LANG=b.dataset.glang; try{ localStorage.setItem("racecourse-lang",LANG); }catch(e){} buildI18n(); showGate(); });
+}
+buildI18n();
+if ("serviceWorker" in navigator && location.protocol==="https:") navigator.serviceWorker.register("sw.js").catch(()=>{});
+window.addEventListener("hashchange", ()=>{ sheetOpen=null; mapSel=null; mapMode="move"; drawSheet(); selM=null; tab="squadra"; render(); window.scrollTo(0,0); });
+render();
+</script>
+</body>
+</html>
