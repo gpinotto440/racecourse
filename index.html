@@ -1187,7 +1187,27 @@ async function svgPNG(key, svg, w, h){
   const im = await svgImg(svg); const c=document.createElement("canvas"); c.width=w; c.height=h;
   c.getContext("2d").drawImage(im,0,0,w,h); return PNGC[key]=c.toDataURL("image/png");
 }
-const flagPNG = id => svgPNG("f:"+id+":"+(id.startsWith("cl-")?JSON.stringify(allClasses().find(c=>c.id===id)||{}):""), flagSVG(id,120), 124, 84);
+const loadDataImg = src => new Promise((ok,ko)=>{ const i=new Image(); i.onload=()=>ok(i); i.onerror=ko; i.src=src; });
+async function flagPNG(id){
+  const c = id.startsWith("cl-") ? allClasses().find(x=>x.id===id) : null;
+  const key = "f:"+id+":"+(c?JSON.stringify(c):"");
+  if (PNGC[key]) return PNGC[key];
+  if (c && normClassFlag(c).style==="logo" && c.logo==="img" && c.logoImg){
+    const W = 124, H = 84, k = W/62;
+    const bare = Object.assign({}, c, {logo:null});
+    const svg = `<svg width="${W}" height="${H}" viewBox="-1 -1 62 42"><g>${classFlagBody(bare)}</g><rect x="0" y="0" width="60" height="40" fill="none" stroke="rgba(0,0,0,.28)" stroke-width="1"/></svg>`;
+    const cv = document.createElement("canvas"); cv.width = W; cv.height = H; const x = cv.getContext("2d");
+    x.drawImage(await svgImg(svg), 0, 0, W, H);
+    try{
+      const lg = await loadDataImg(c.logoImg);
+      const bx = (4.8+1)*k, by = (4.8+1)*k, bw = 50.4*k, bh = 30.4*k;
+      const sc = Math.min(bw/lg.naturalWidth, bh/lg.naturalHeight), dw = lg.naturalWidth*sc, dh = lg.naturalHeight*sc;
+      x.drawImage(lg, bx+(bw-dw)/2, by+(bh-dh)/2, dw, dh);
+    }catch(e){}
+    return PNGC[key] = cv.toDataURL("image/png");
+  }
+  return svgPNG(key, flagSVG(id,120), 124, 84);
+}
 async function mapImage(k,f){
   const src = imgSrc(k,f), marks=f.marks||[], arrows=f.arrows||[], pos=f.pos||{};
   const placed = f.mezzi.filter(m=>m.tipo!=="terra"&&pos[m.id]);
