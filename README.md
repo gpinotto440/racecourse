@@ -43,3 +43,17 @@ Chi aveva il vecchio codice dovrà inserire quello nuovo.
 
 Nota: è un blocco per tenere lontani i curiosi, non una protezione forte. I dati inseriti
 non sono comunque mai online: restano sul dispositivo di chi li usa.
+
+## Libreria condivisa delle bandiere di classe
+Le bandiere di classe del file `libreria.json` compaiono a tutti gli utenti nella sezione
+"Libreria condivisa" dell'Archivio bandiere.
+
+Per crearla o aggiornarla:
+1. Nell'app crea o modifica le bandiere di classe (Archivio bandiere → Bandiere di classe).
+2. Premi "Esporta libreria condivisa": viene creato il file `libreria.json`.
+3. Caricalo nel repository (Add file → Upload files → Commit changes), sostituendo quello vecchio.
+   Il nome deve essere esattamente `libreria.json` (se il computer lo rinomina in
+   `libreria (1).json`, correggilo prima di caricarlo).
+
+Gli utenti ricevono la libreria aggiornata alla prima apertura dell'app con la rete.
+Non serve cambiare la versione in `sw.js` per aggiornare solo la libreria.
