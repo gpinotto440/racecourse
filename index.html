@@ -228,6 +228,31 @@ tfoot th,tfoot td{font-weight:700}
 .gate .gl{display:inline-flex;margin-top:18px;gap:2px;background:var(--tap);padding:3px;border-radius:9px}
 .gate .gl button{border:0;background:transparent;padding:5px 12px;border-radius:7px;font-weight:600;cursor:pointer}
 .gate .gl button[aria-pressed="true"]{background:var(--card)}
+.cprev{display:flex;justify-content:center;padding:18px 0 8px}
+.cprev svg{filter:drop-shadow(0 2px 6px rgba(0,0,0,.18))}
+.layouts{display:flex;gap:8px;flex-wrap:wrap}
+.layouts button{border:2px solid transparent;background:var(--card);border-radius:10px;padding:6px;cursor:pointer;box-shadow:0 0 0 1px var(--line)}
+.layouts button[aria-pressed="true"]{border-color:var(--blue)}
+.layouts svg{display:block}
+.crow{display:flex;align-items:center;gap:10px;width:100%;padding:12px 14px;border:0;border-top:1px solid var(--line);background:transparent;text-align:left;cursor:pointer;font-size:16px;color:var(--ink)}
+.blk .crow:first-child{border-top:0}
+label.crow{border:1px solid var(--line);border-radius:12px;background:var(--card);margin-top:8px}
+.crow .l{margin-right:auto;font-weight:600}
+.sw{display:inline-block;width:28px;height:28px;border-radius:6px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.25);flex:none}
+.swgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:6px;margin-top:8px}
+.swb{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px;border:1.5px solid var(--line);border-radius:10px;background:var(--card);cursor:pointer;font-size:12px;color:var(--ink)}
+.swb[aria-pressed="true"]{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}
+.swb .sw{width:40px;height:26px}
+.cropbox{position:relative;width:280px;height:280px;margin:14px auto 0;overflow:hidden;border:2px solid var(--blue);touch-action:none;cursor:grab}
+.cropbox img{position:absolute;left:50%;top:50%;max-width:none;user-select:none;-webkit-user-drag:none;pointer-events:none;transform-origin:center}
+.zoom{display:flex;align-items:center;gap:10px;margin:12px 0 4px;font-weight:600}
+.zoom input{flex:1}
+.crow input[type=color]{width:46px;height:32px;border:0;background:none;padding:0}
+.crow input[type=checkbox]{width:22px;height:22px;accent-color:var(--blue)}
+.clink{text-decoration:none;align-items:center;color:inherit}
+.clink .chev{margin-left:auto;font-size:26px;color:var(--muted)}
+.lg{border-radius:6px;box-shadow:0 0 0 1px var(--line)}
+.sgrid{grid-template-columns:repeat(auto-fill,minmax(64px,1fr))}
 </style>
 </head>
 <body>
@@ -235,7 +260,7 @@ tfoot th,tfoot td{font-weight:700}
 <div id="sheet"></div>
 <script>
 /* ---------- lingua ---------- */
-const EN = {"Racecourse": "Racecourse", "Codice di accesso": "Access code", "Inserisci il codice che ti ha dato l’organizzazione.": "Enter the code you received from the organisers.", "Entra": "Enter", "Codice non corretto.": "Wrong code.", "Nome della manifestazione": "Event name", "Campi da gestire": "Course areas", "Da 1 a 6": "From 1 to 6", "Un campo in meno": "One area less", "Un campo in più": "One area more", "Classi da inserire": "Classes to be added", "VHF campo": "Area VHF", "Dati evento": "Event details", "Segreteria, medico, classifiche, Victor": "Race office, doctor, scoring, Victor", "Archivio bandiere": "Flag library", "Codice internazionale e classi": "International code and classes", "Rubrica": "Contacts", "Cerca persone e barche": "Search people and boats", "Riepilogo mezzi": "Boats summary", "Battelli e gommoni per campo": "Boats and RIBs per area", "Esporta PDF per i circoli": "Export PDF for the clubs", "‹ Campi": "‹ Areas", "Campo": "Area", "Canale comune": "Common channel", "Es. 71": "e.g. 71", "A terra": "Ashore", "Segreteria": "Race office", "Medico": "Doctor", "Classifiche": "Scoring", "Responsabile classifiche": "Scoring manager", "Nessun responsabile.": "No one added.", "Aggiungi responsabile classifiche": "Add scoring manager", "Nuova manifestazione": "New event", "Svuota nomi, numeri, boe e spunte di tutti i campi. Le bandiere di classe dell’archivio restano.": "Clears names, numbers, marks and ticks in every area. Class flags in the library are kept.", "Svuota tutti i dati": "Clear all data", "Tocca di nuovo per svuotare tutto": "Tap again to clear everything", "Conferma": "Confirm", "Elimina": "Delete", "Esporta PDF di questo campo": "Export PDF of this area", "Squadra": "Team", "Boe": "Marks", "Dotazioni": "Equipment", "Bandiere": "Flags", "Percorso": "Course", "Classi": "Classes", "Es. ILCA 7, ILCA 6": "e.g. ILCA 7, ILCA 6", "Canale VHF": "VHF channel", "Es. 72": "e.g. 72", "Responsabile campo": "Area manager", "Comitato di regata": "Race committee", "Presidente": "Principal race officer", "Componente": "Member", "Aggiungi componente": "Add member", "Mezzi in acqua": "Boats on the water", "Imbarcazione": "Boat", "Nome o modello della barca": "Boat name or model", "Sigla": "Code", "Responsabile": "Skipper", "Aiuto": "Helper", "Assistente": "Crew", "Tipo di mezzo": "Boat type", "Aggiungi mezzo": "Add boat", "A terra e sicurezza": "Shore and safety", "Beach master": "Beach master", "Responsabile sicurezza campo": "Area safety officer", "Delegato di classe": "Class representative", "Note": "Notes", "Annotazioni per questo campo": "Notes for this area", "Nome e cognome": "Full name", "Telefono": "Phone", "Chiama": "Call", "Colori boe": "Mark colours", "Boa": "Mark", "Nome boa": "Mark name", "Colore": "Colour", "Colore…": "Colour…", "Quantità": "Quantity", "robotica": "robotic", "Nessuna boa.": "No marks.", "Aggiungi boa": "Add mark", "Totale boe:": "Total marks:", "Partenza": "Start", "Arrivo": "Finish", "Scegli il mezzo": "Choose the boat", "di": "of", "Aggiungi un mezzo nella scheda Squadra.": "Add a boat in the Team tab.", "Caricato": "Loaded", "Dotazione": "Item", "Nessuna dotazione per questo mezzo.": "No equipment for this boat.", "Nuova dotazione": "New item", "Aggiungi": "Add", "Azzera le spunte": "Clear ticks", "Nessuna bandiera assegnata a questo mezzo.": "No flags assigned to this boat.", "Scegli bandiere dall’archivio": "Choose flags from the library", "Modalità": "Mode", "Sposta e seleziona": "Move and select", "Disegna frecce": "Draw arrows", "Freccia": "Arrow", "Inverti verso": "Reverse direction", "Raddrizza": "Straighten", "Togli dal grafico": "Remove from drawing", "Apri scheda": "Open card", "Percorso del campo": "Course of the area", "Caricamento dell’immagine…": "Loading image…", "Carica l’immagine del percorso, oppure lavora sulla griglia": "Upload the course image, or work on the grid", "Tocca un mezzo per vederne la scheda.": "Tap a boat to see its card.", "Disegna col dito il percorso, dritto o curvo, partendo dall’inizio verso la direzione di percorrenza.": "Draw the course with your finger, straight or curved, starting from the beginning towards the sailing direction.", "Trascina i cerchi alle estremità per spostare la freccia e quello centrale per curvarla.": "Drag the end circles to move the arrow and the middle one to bend it.", "Trascina gli oggetti per spostarli. Toccane uno per selezionarlo e toglierlo dal grafico.": "Drag items to move them. Tap one to select it and remove it from the drawing.", "Caricamento…": "Loading…", "Sostituisci immagine": "Replace image", "Carica immagine percorso": "Upload course image", "Rimuovi immagine": "Remove image", "Cancella tutte le frecce": "Delete all arrows", "Tocca una boa per metterla sul percorso. Nomi e colori si cambiano nella scheda Boe.": "Tap a mark to place it on the course. Names and colours are changed in the Marks tab.", "Tutte le boe sono sul percorso.": "All marks are on the course.", "Aggiungi le boe nella scheda Boe.": "Add the marks in the Marks tab.", "Aggiungi un mezzo": "Add a boat", "Il mezzo compare sull’immagine e si apre la sua scheda da compilare.": "The boat appears on the image and its card opens, ready to fill in.", "Mezzi da posizionare": "Boats to place", "Tocca per aggiungere o togliere": "Tap to add or remove", "Fatto": "Done", "Aggiungile da Archivio bandiere nella pagina principale.": "Add them from the Flag library on the main page.", "Scheda mezzo": "Boat card", "Nome": "Name", "Sigla sulla mappa": "Code on the map", "Dotazioni e bandiere di questo mezzo sono nelle schede Dotazioni e Bandiere del campo.": "This boat’s equipment and flags are in the area’s Equipment and Flags tabs.", "Togli dal percorso": "Remove from course", "Metti sul percorso": "Place on course", "Elimina mezzo": "Delete boat", "Immagine troppo grande per essere salvata su questo dispositivo.": "Image too large to be saved on this device.", "Questo file non è un’immagine leggibile. Prova con un JPG o un PNG.": "This file is not a readable image. Try a JPG or PNG.", "Bandiere di classe": "Class flags", "Nome classe": "Class name", "Nessuna bandiera di classe. Aggiungi quelle delle classi in regata.": "No class flags. Add those of the classes racing.", "Aggiungi bandiera di classe": "Add class flag", "I significati sono indicativi: fanno fede il Regolamento di Regata e le Istruzioni di Regata della manifestazione.": "Meanings are indicative: the Racing Rules of Sailing and the event’s Sailing Instructions prevail.", "Classe": "Class", "responsabile campo": "area manager", "presidente comitato": "principal race officer", "componente comitato": "committee member", "beach master": "beach master", "sicurezza": "safety", "delegato di classe": "class representative", "responsabile": "skipper", "aiuto": "helper", "assistente": "crew", "Nome, barca o ruolo": "Name, boat or role", "Nessun risultato per": "No results for", "La rubrica si riempie man mano che inserisci i nomi nei campi.": "Contacts fill in as you add names in the areas.", "Mezzi per campo": "Boats per area", "Tot.": "Tot.", "Totale": "Total", "Il conteggio segue i mezzi inseriti nella scheda Squadra di ogni campo.": "The count follows the boats entered in each area’s Team tab.", "Preparo il PDF…": "Preparing the PDF…", "Manifestazione": "Event", "Organizzazione dei campi di regata": "Race course organisation", "Contatti e canali": "Contacts and channels", "Canale": "Channel", "Ruolo": "Role", "Campi": "Course areas", "VHF": "VHF", "Mezzo": "Boat", "Comitato di regata e responsabili": "Race committee and managers", "Presidente comitato": "Principal race officer", "Sicurezza campo": "Area safety", "Quantita'": "Qty", "Tipo": "Type", "Robotica": "Robotic", "Ancorata": "Anchored", "Dotazioni e bandiere per mezzo": "Equipment and flags per boat", "Pagina": "Page", "PDF pronto.": "PDF ready.", "Non sono riuscito a creare il PDF. Riprova.": "Could not create the PDF. Please try again.", "Battello comitato": "Committee boat", "Controstarter": "Pin end boat", "Battello arrivi": "Finish boat", "Gommone posaboe": "Mark-laying RIB", "Gommone assistenza": "Safety RIB", "Segnali a terra": "Shore signals", "Posaboe": "Mark boat", "Assistenza": "Safety", "Posaboe G1": "Mark boat G1", "Posaboe G2": "Mark boat G2", "Posaboe G3 + assistenza partenza": "Mark boat G3 + start support", "Assistenza A1": "Safety A1", "Assistenza A2": "Safety A2", "CdR": "RC", "Arrivi": "FIN", "Drizze": "Halyards", "Pali": "Poles", "Asta per 1° ripetitore": "Pole for 1st substitute", "Cime per ancoraggio": "Anchor lines", "VHF + scorta, GPS": "VHF + spare, GPS", "Trombe e ricariche": "Horns and refills", "Tabellone gradi bussola e percorso": "Bearing and course board", "Lavagna per UFD/BFD": "Board for UFD/BFD", "Pennarelli non indelebili": "Dry-erase markers", "Bandi, istruzioni, elenco iscritti": "NoR, SIs, entry list", "Registratore": "Recorder", "Binocolo": "Binoculars", "Bussola": "Compass", "Anemometro": "Anemometer", "Asta per bandiera": "Flag pole", "Ormeggio e cime": "Mooring and lines", "Trombe e fischietto": "Horns and whistle", "Carta, penna, registratore": "Paper, pen, recorder", "Boa arrivo": "Finish mark", "2 ormeggi e cime": "2 moorings and lines", "Carta e penna, registratore": "Paper and pen, recorder", "Moduli di arrivo": "Finish sheets", "Elenco iscritti": "Entry list", "Bussola, anemometro": "Compass, anemometer", "Filo di lana": "Wind tell-tale", "1 ormeggio e cime": "1 mooring and lines", "Identificativo del campo": "Area flag", "Pennelli numerici": "Numeral pennants", "Trombetta": "Horn", "Lettere": "Letters", "Intelligenza e ripetitori": "Answering pennant and substitutes", "Regata e colori": "Racing and colours", "Intelligenza": "Answering pennant", "1° ripetitore": "1st substitute", "2° ripetitore": "2nd substitute", "3° ripetitore": "3rd substitute", "Nera": "Black", "Arancione": "Orange", "Blu": "Blue", "Verde": "Green", "Gialla": "Yellow", "Bianca": "White", "Rossa": "Red", "Viola": "Purple", "arancione": "orange", "gialla": "yellow", "rossa": "red", "blu": "blue", "verde": "green", "viola": "purple", "bianca": "white", "nera": "black", "rosa": "pink", "Pennello 1": "Pennant 1", "Pennello 2": "Pennant 2", "Pennello 3": "Pennant 3", "Pennello 4": "Pennant 4", "Pennello 5": "Pennant 5", "Pennello 6": "Pennant 6", "Pennello 7": "Pennant 7", "Pennello 8": "Pennant 8", "Pennello 9": "Pennant 9", "Pennello 0": "Pennant 0", "Sotto intelligenza: nessun’altra prova oggi": "Over AP: no more racing today", "Protesta": "Protest", "Cambio di percorso": "Change of course", "A terra: si può uscire (vedi IdR)": "Ashore: boats may leave harbour (see SIs)", "Sotto intelligenza: altri segnali a terra": "Over AP: further signals ashore", "Regola del minuto (RRS 30.1)": "One-minute rule (RRS 30.1)", "A terra: comunicato esposto. In acqua: venite a portata di voce": "Ashore: notice posted. Afloat: come within hail", "Boa sostitutiva": "Mark replaced", "Annullamento": "Abandonment", "Pompaggio consentito (vedi IdR)": "Pumping allowed (see SIs)", "Segnale preparatorio": "Preparatory signal", "Percorso ridotto": "Shortened course", "Regola della bandiera U": "U flag rule", "Richiamo individuale": "Individual recall", "Obbligo di indossare il salvagente": "Life jackets required", "Regola Z (20%)": "Z flag rule (20%)", "Prove non partite differite": "Races not started are postponed", "Richiamo generale": "General recall", "Regola della bandiera nera": "Black flag rule", "Estremità della linea di partenza": "Starting line end", "Battello arrivi in posizione": "Finish boat on station", "Dati salvati su questo dispositivo.": "Data saved on this device.", "Fai un backup": "Make a backup", "per spostarli su un altro telefono o conservarli.": "to move it to another phone or keep it safe.", "Spazio esaurito su questo dispositivo: rimuovi qualche immagine per continuare a salvare.": "Storage full on this device: remove some images to keep saving.", "Backup dei dati": "Data backup", "Salva tutti i dati dell’evento, immagini comprese, in un file. Lo puoi riaprire su un altro telefono o tenere come copia di sicurezza.": "Saves all event data, images included, in a file. You can open it on another phone or keep it as a safety copy.", "Esporta backup": "Export backup", "Importa backup": "Import backup", "Backup salvato.": "Backup saved.", "Questo file non è un backup di Racecourse.": "This file is not a Racecourse backup.", "Sostituire i dati attuali con il backup del": "Replace current data with the backup from", "Sostituisci": "Replace", "Annulla": "Cancel", "Backup importato.": "Backup imported.", "Lingua": "Language", "Installa l’app": "Install the app", "Su iPhone: Condividi, poi «Aggiungi alla schermata Home». Su Android: menu ⋮, poi «Installa app». Così funziona anche offline e i dati restano al sicuro.": "On iPhone: Share, then “Add to Home Screen”. On Android: menu ⋮, then “Install app”. It then works offline and your data stays safe.", "Organizzazione dei campi di regata: squadre, boe, bandiere e percorsi.": "Race course organisation: teams, marks, flags and courses."};
+const EN = {"Racecourse": "Racecourse", "Codice di accesso": "Access code", "Inserisci il codice che ti ha dato l’organizzazione.": "Enter the code you received from the organisers.", "Entra": "Enter", "Codice non corretto.": "Wrong code.", "Nome della manifestazione": "Event name", "Campi da gestire": "Course areas", "Da 1 a 6": "From 1 to 6", "Un campo in meno": "One area less", "Un campo in più": "One area more", "Classi da inserire": "Classes to be added", "VHF campo": "Area VHF", "Dati evento": "Event details", "Segreteria, medico, classifiche, Victor": "Race office, doctor, scoring, Victor", "Archivio bandiere": "Flag library", "Codice internazionale e classi": "International code and classes", "Rubrica": "Contacts", "Cerca persone e barche": "Search people and boats", "Riepilogo mezzi": "Boats summary", "Battelli e gommoni per campo": "Boats and RIBs per area", "Esporta PDF per i circoli": "Export PDF for the clubs", "‹ Campi": "‹ Areas", "Campo": "Area", "Canale comune": "Common channel", "Es. 71": "e.g. 71", "A terra": "Ashore", "Segreteria": "Race office", "Medico": "Doctor", "Classifiche": "Scoring", "Responsabile classifiche": "Scoring manager", "Nessun responsabile.": "No one added.", "Aggiungi responsabile classifiche": "Add scoring manager", "Nuova manifestazione": "New event", "Svuota nomi, numeri, boe e spunte di tutti i campi. Le bandiere di classe dell’archivio restano.": "Clears names, numbers, marks and ticks in every area. Class flags in the library are kept.", "Svuota tutti i dati": "Clear all data", "Tocca di nuovo per svuotare tutto": "Tap again to clear everything", "Conferma": "Confirm", "Elimina": "Delete", "Esporta PDF di questo campo": "Export PDF of this area", "Squadra": "Team", "Boe": "Marks", "Dotazioni": "Equipment", "Bandiere": "Flags", "Percorso": "Course", "Classi": "Classes", "Es. ILCA 7, ILCA 6": "e.g. ILCA 7, ILCA 6", "Canale VHF": "VHF channel", "Es. 72": "e.g. 72", "Responsabile campo": "Area manager", "Comitato di regata": "Race committee", "Presidente": "Principal race officer", "Componente": "Member", "Aggiungi componente": "Add member", "Mezzi in acqua": "Boats on the water", "Imbarcazione": "Boat", "Nome o modello della barca": "Boat name or model", "Sigla": "Code", "Responsabile": "Skipper", "Aiuto": "Helper", "Assistente": "Crew", "Tipo di mezzo": "Boat type", "Aggiungi mezzo": "Add boat", "A terra e sicurezza": "Shore and safety", "Beach master": "Beach master", "Responsabile sicurezza campo": "Area safety officer", "Delegato di classe": "Class representative", "Note": "Notes", "Annotazioni per questo campo": "Notes for this area", "Nome e cognome": "Full name", "Telefono": "Phone", "Chiama": "Call", "Colori boe": "Mark colours", "Boa": "Mark", "Nome boa": "Mark name", "Colore": "Colour", "Colore…": "Colour…", "Quantità": "Quantity", "robotica": "robotic", "Nessuna boa.": "No marks.", "Aggiungi boa": "Add mark", "Totale boe:": "Total marks:", "Partenza": "Start", "Arrivo": "Finish", "Scegli il mezzo": "Choose the boat", "di": "of", "Aggiungi un mezzo nella scheda Squadra.": "Add a boat in the Team tab.", "Caricato": "Loaded", "Dotazione": "Item", "Nessuna dotazione per questo mezzo.": "No equipment for this boat.", "Nuova dotazione": "New item", "Aggiungi": "Add", "Azzera le spunte": "Clear ticks", "Nessuna bandiera assegnata a questo mezzo.": "No flags assigned to this boat.", "Scegli bandiere dall’archivio": "Choose flags from the library", "Modalità": "Mode", "Sposta e seleziona": "Move and select", "Disegna frecce": "Draw arrows", "Freccia": "Arrow", "Inverti verso": "Reverse direction", "Raddrizza": "Straighten", "Togli dal grafico": "Remove from drawing", "Apri scheda": "Open card", "Percorso del campo": "Course of the area", "Caricamento dell’immagine…": "Loading image…", "Carica l’immagine del percorso, oppure lavora sulla griglia": "Upload the course image, or work on the grid", "Tocca un mezzo per vederne la scheda.": "Tap a boat to see its card.", "Disegna col dito il percorso, dritto o curvo, partendo dall’inizio verso la direzione di percorrenza.": "Draw the course with your finger, straight or curved, starting from the beginning towards the sailing direction.", "Trascina i cerchi alle estremità per spostare la freccia e quello centrale per curvarla.": "Drag the end circles to move the arrow and the middle one to bend it.", "Trascina gli oggetti per spostarli. Toccane uno per selezionarlo e toglierlo dal grafico.": "Drag items to move them. Tap one to select it and remove it from the drawing.", "Caricamento…": "Loading…", "Sostituisci immagine": "Replace image", "Carica immagine percorso": "Upload course image", "Rimuovi immagine": "Remove image", "Cancella tutte le frecce": "Delete all arrows", "Tocca una boa per metterla sul percorso. Nomi e colori si cambiano nella scheda Boe.": "Tap a mark to place it on the course. Names and colours are changed in the Marks tab.", "Tutte le boe sono sul percorso.": "All marks are on the course.", "Aggiungi le boe nella scheda Boe.": "Add the marks in the Marks tab.", "Aggiungi un mezzo": "Add a boat", "Il mezzo compare sull’immagine e si apre la sua scheda da compilare.": "The boat appears on the image and its card opens, ready to fill in.", "Mezzi da posizionare": "Boats to place", "Tocca per aggiungere o togliere": "Tap to add or remove", "Fatto": "Done", "Aggiungile da Archivio bandiere nella pagina principale.": "Add them from the Flag library on the main page.", "Scheda mezzo": "Boat card", "Nome": "Name", "Sigla sulla mappa": "Code on the map", "Dotazioni e bandiere di questo mezzo sono nelle schede Dotazioni e Bandiere del campo.": "This boat’s equipment and flags are in the area’s Equipment and Flags tabs.", "Togli dal percorso": "Remove from course", "Metti sul percorso": "Place on course", "Elimina mezzo": "Delete boat", "Immagine troppo grande per essere salvata su questo dispositivo.": "Image too large to be saved on this device.", "Questo file non è un’immagine leggibile. Prova con un JPG o un PNG.": "This file is not a readable image. Try a JPG or PNG.", "Bandiere di classe": "Class flags", "Nome classe": "Class name", "Nessuna bandiera di classe. Aggiungi quelle delle classi in regata.": "No class flags. Add those of the classes racing.", "Aggiungi bandiera di classe": "Add class flag", "I significati sono indicativi: fanno fede il Regolamento di Regata e le Istruzioni di Regata della manifestazione.": "Meanings are indicative: the Racing Rules of Sailing and the event’s Sailing Instructions prevail.", "Classe": "Class", "Carica immagine": "Upload image", "Cambia immagine": "Change image", "Togli immagine": "Remove image", "Per ogni classe puoi caricare la foto o il logo della sua bandiera; senza immagine la miniatura usa colore e nome.": "For each class you can upload a photo or logo of its flag; without an image the thumbnail uses colour and name.", "responsabile campo": "area manager", "presidente comitato": "principal race officer", "componente comitato": "committee member", "beach master": "beach master", "sicurezza": "safety", "delegato di classe": "class representative", "responsabile": "skipper", "aiuto": "helper", "assistente": "crew", "Nome, barca o ruolo": "Name, boat or role", "Nessun risultato per": "No results for", "La rubrica si riempie man mano che inserisci i nomi nei campi.": "Contacts fill in as you add names in the areas.", "Mezzi per campo": "Boats per area", "Tot.": "Tot.", "Totale": "Total", "Il conteggio segue i mezzi inseriti nella scheda Squadra di ogni campo.": "The count follows the boats entered in each area’s Team tab.", "Preparo il PDF…": "Preparing the PDF…", "Manifestazione": "Event", "Organizzazione dei campi di regata": "Race course organisation", "Contatti e canali": "Contacts and channels", "Canale": "Channel", "Ruolo": "Role", "Campi": "Course areas", "VHF": "VHF", "Mezzo": "Boat", "Comitato di regata e responsabili": "Race committee and managers", "Presidente comitato": "Principal race officer", "Sicurezza campo": "Area safety", "Quantita'": "Qty", "Tipo": "Type", "Robotica": "Robotic", "Ancorata": "Anchored", "Dotazioni e bandiere per mezzo": "Equipment and flags per boat", "Pagina": "Page", "PDF pronto.": "PDF ready.", "Non sono riuscito a creare il PDF. Riprova.": "Could not create the PDF. Please try again.", "Battello comitato": "Committee boat", "Controstarter": "Pin end boat", "Battello arrivi": "Finish boat", "Gommone posaboe": "Mark-laying RIB", "Gommone assistenza": "Safety RIB", "Segnali a terra": "Shore signals", "Posaboe": "Mark boat", "Assistenza": "Safety", "Posaboe G1": "Mark boat G1", "Posaboe G2": "Mark boat G2", "Posaboe G3 + assistenza partenza": "Mark boat G3 + start support", "Assistenza A1": "Safety A1", "Assistenza A2": "Safety A2", "CdR": "RC", "Arrivi": "FIN", "Drizze": "Halyards", "Pali": "Poles", "Asta per 1° ripetitore": "Pole for 1st substitute", "Cime per ancoraggio": "Anchor lines", "VHF + scorta, GPS": "VHF + spare, GPS", "Trombe e ricariche": "Horns and refills", "Tabellone gradi bussola e percorso": "Bearing and course board", "Lavagna per UFD/BFD": "Board for UFD/BFD", "Pennarelli non indelebili": "Dry-erase markers", "Bandi, istruzioni, elenco iscritti": "NoR, SIs, entry list", "Registratore": "Recorder", "Binocolo": "Binoculars", "Bussola": "Compass", "Anemometro": "Anemometer", "Asta per bandiera": "Flag pole", "Ormeggio e cime": "Mooring and lines", "Trombe e fischietto": "Horns and whistle", "Carta, penna, registratore": "Paper, pen, recorder", "Boa arrivo": "Finish mark", "2 ormeggi e cime": "2 moorings and lines", "Carta e penna, registratore": "Paper and pen, recorder", "Moduli di arrivo": "Finish sheets", "Elenco iscritti": "Entry list", "Bussola, anemometro": "Compass, anemometer", "Filo di lana": "Wind tell-tale", "1 ormeggio e cime": "1 mooring and lines", "Identificativo del campo": "Area flag", "Pennelli numerici": "Numeral pennants", "Trombetta": "Horn", "Lettere": "Letters", "Intelligenza e ripetitori": "Answering pennant and substitutes", "Regata e colori": "Racing and colours", "Intelligenza": "Answering pennant", "1° ripetitore": "1st substitute", "2° ripetitore": "2nd substitute", "3° ripetitore": "3rd substitute", "Nera": "Black", "Arancione": "Orange", "Blu": "Blue", "Verde": "Green", "Gialla": "Yellow", "Bianca": "White", "Rossa": "Red", "Viola": "Purple", "arancione": "orange", "gialla": "yellow", "rossa": "red", "blu": "blue", "verde": "green", "viola": "purple", "bianca": "white", "nera": "black", "rosa": "pink", "Pennello 1": "Pennant 1", "Pennello 2": "Pennant 2", "Pennello 3": "Pennant 3", "Pennello 4": "Pennant 4", "Pennello 5": "Pennant 5", "Pennello 6": "Pennant 6", "Pennello 7": "Pennant 7", "Pennello 8": "Pennant 8", "Pennello 9": "Pennant 9", "Pennello 0": "Pennant 0", "Sotto intelligenza: nessun’altra prova oggi": "Over AP: no more racing today", "Protesta": "Protest", "Cambio di percorso": "Change of course", "A terra: si può uscire (vedi IdR)": "Ashore: boats may leave harbour (see SIs)", "Sotto intelligenza: altri segnali a terra": "Over AP: further signals ashore", "Regola del minuto (RRS 30.1)": "One-minute rule (RRS 30.1)", "A terra: comunicato esposto. In acqua: venite a portata di voce": "Ashore: notice posted. Afloat: come within hail", "Boa sostitutiva": "Mark replaced", "Annullamento": "Abandonment", "Pompaggio consentito (vedi IdR)": "Pumping allowed (see SIs)", "Segnale preparatorio": "Preparatory signal", "Percorso ridotto": "Shortened course", "Regola della bandiera U": "U flag rule", "Richiamo individuale": "Individual recall", "Obbligo di indossare il salvagente": "Life jackets required", "Regola Z (20%)": "Z flag rule (20%)", "Prove non partite differite": "Races not started are postponed", "Richiamo generale": "General recall", "Regola della bandiera nera": "Black flag rule", "Estremità della linea di partenza": "Starting line end", "Battello arrivi in posizione": "Finish boat on station", "Tinta unita": "Solid", "Metà sotto": "Bottom half", "Metà destra": "Right half", "Diagonale in salita": "Diagonal up", "Diagonale in discesa": "Diagonal down", "Originale": "Original", "Personalizzato": "Custom", "Archivio": "Library", "Bandiera di classe": "Class flag", "Es. ILCA 6": "e.g. ILCA 6", "Logo": "Logo", "Testo": "Text", "Bandiera internazionale": "International flag", "Bandiera": "Flag", "Sfondo": "Background", "Colore bandiera": "Flag colour", "Secondo colore": "Second colour", "Es. ILCA": "e.g. ILCA", "Colore testo": "Text colour", "Nessuno": "None", "Colore logo": "Logo colour", "Salva": "Save", "Elimina bandiera": "Delete flag", "Comuni": "Common", "Altri colori": "Named", "Scegli un colore": "Pick a colour", "Importa e ritaglia un’immagine…": "Import and crop an image…", "Per il logo ufficiale di una classe importa la sua immagine: gli emblemi qui sotto sono tipografici, non i loghi originali.": "For a class’s official logo import its image: the emblems below are typographic, not the original logos.", "Cerca classe": "Search class", "Simboli": "Symbols", "Ritaglia": "Crop", "Rimuovi lo sfondo bianco": "Remove white background", "Trascina e ingrandisci per inquadrare solo il logo. Con lo sfondo rimosso, l’anteprima usa il colore della bandiera.": "Drag and zoom to frame only the logo. With the background removed, the preview uses the flag colour.", "Elaborazione…": "Processing…", "Usa": "Use", "Senza nome": "Unnamed", "Dati salvati su questo dispositivo.": "Data saved on this device.", "Fai un backup": "Make a backup", "per spostarli su un altro telefono o conservarli.": "to move it to another phone or keep it safe.", "Spazio esaurito su questo dispositivo: rimuovi qualche immagine per continuare a salvare.": "Storage full on this device: remove some images to keep saving.", "Backup dei dati": "Data backup", "Salva tutti i dati dell’evento, immagini comprese, in un file. Lo puoi riaprire su un altro telefono o tenere come copia di sicurezza.": "Saves all event data, images included, in a file. You can open it on another phone or keep it as a safety copy.", "Esporta backup": "Export backup", "Importa backup": "Import backup", "Backup salvato.": "Backup saved.", "Questo file non è un backup di Racecourse.": "This file is not a Racecourse backup.", "Sostituire i dati attuali con il backup del": "Replace current data with the backup from", "Sostituisci": "Replace", "Annulla": "Cancel", "Backup importato.": "Backup imported.", "Lingua": "Language", "Installa l’app": "Install the app", "Su iPhone: Condividi, poi «Aggiungi alla schermata Home». Su Android: menu ⋮, poi «Installa app». Così funziona anche offline e i dati restano al sicuro.": "On iPhone: Share, then “Add to Home Screen”. On Android: menu ⋮, then “Install app”. It then works offline and your data stays safe.", "Organizzazione dei campi di regata: squadre, boe, bandiere e percorsi.": "Race course organisation: teams, marks, flags and courses."};
 let LANG = (()=>{ try{ const s=localStorage.getItem("racecourse-lang"); if (s==="it"||s==="en") return s; }catch(e){} return /^it\b/i.test(navigator.language||"") ? "it" : "en"; })();
 function t(s){ return LANG==="en" && EN[s]!=null ? EN[s] : s; }
 document.documentElement.lang = LANG;
@@ -317,9 +342,9 @@ function flagSVG(id,w){
   if (!f && id.startsWith("cl-")){
     const c = (S.config.classi||[]).find(x=>x.id===id);
     if (!c) return "";
-    const light = ["#FFFFFF","#F5C400","#F07A12"].includes(c.col);
-    const txt = esc((c.nome||"?").slice(0,4).toUpperCase());
-    f = {sh:"flag",d:r(0,0,60,40,c.col)+`<text x="30" y="26" text-anchor="middle" font-family="Barlow Condensed,Arial Narrow,sans-serif" font-weight="700" font-size="${txt.length>3?15:18}" fill="${light?"#1A1A1A":"#fff"}">${txt}</text>`};
+    normClassFlag(c);
+    if (c.style==="intl" && c.intl && FMAP[c.intl]) return flagSVG(c.intl,w);
+    f = {sh:"flag", d:classFlagBody(c)};
   }
   if (!f) return "";
   const sh = SHAPE[f.sh||"flag"], k = "k"+(++uid);
@@ -379,6 +404,7 @@ try { const c = JSON.parse(localStorage.getItem(LKEY)||"null"); if (c && c.confi
 const campo = k => S[k] || (S[k] = defCampo());
 const clone = o => JSON.parse(JSON.stringify(o));
 function migrate(){
+  (S.config.classi||[]).forEach(c=>normClassFlag(c));
   const old = {"Drizze o pali":[t("Drizze"),t("Pali")], "Halyards or poles":["Halyards","Poles"]};
   CAMPI.forEach(([k])=>{ const f=S[k]; if (!f||!f.mezzi) return;
     f.mezzi.forEach(m=>{ const d=m.dot||[]; for (let i=d.length-1;i>=0;i--){ const n=old[(d[i].t||"").trim()]; if (n) d.splice(i,1,{t:n[0],ok:d[i].ok},{t:n[1],ok:d[i].ok}); } });
@@ -472,6 +498,7 @@ function render(){
   else if (h==="rubrica") viewRubrica();
   else if (h==="mezzi") viewMezzi();
   else if (h==="bandiere") viewArchivio();
+  else if (h.startsWith("ed-")) viewEditor();
   else if (h==="evento") viewEvento();
   else viewHome();
   window.scrollTo(0,y);
@@ -672,6 +699,9 @@ let sheetOpen = null;
 function drawSheet(){
   if (!sheetOpen) { $("#sheet").innerHTML = ""; return; }
   if (sheetOpen.kind==="mz") return drawScheda();
+  if (sheetOpen.kind==="color") return drawColorSheet();
+  if (sheetOpen.kind==="logo") return drawLogoSheet();
+  if (sheetOpen.kind==="crop") return drawCropSheet();
   const {k,i} = sheetOpen, f = campo(k), m = f.mezzi[i];
   if (!m) { sheetOpen = null; $("#sheet").innerHTML=""; return; }
   const sc = $(".sheet .pane") ? $(".sheet .pane").scrollTop : 0;
@@ -717,6 +747,10 @@ async function uploadImg(k,file){
     touch(k);
   }catch(e){ upMsg = t("Questo file non è un’immagine leggibile. Prova con un JPG o un PNG."); }
   uploading=null; render();
+}
+async function classImg(i,file){
+  try{ const im = await loadImg(file), c = S.config.classi[i]; if (!c) return;
+    c.img = toCanvas(im,300).toDataURL("image/jpeg",.85); touch("config"); render(); }catch(e){}
 }
 function clearImg(k){
   delete IMGS[k]; try{ localStorage.removeItem("racecourse-img-"+k); }catch(e){}
@@ -806,10 +840,7 @@ function viewArchivio(){
   $("#app").innerHTML = bar(t("Archivio bandiere")) + `<div class="wrap">
     ${GROUPS.slice(0,4).map(([g,l])=>`<h2>${l}</h2><div class="blk">${FLAGS.filter(f=>f.g===g).map(f=>`<div class="arow">${flagSVG(f.id,48)}<div><div class="n">${t(f.nome)}</div>${f.sig?`<div class="r">${t(f.sig)}</div>`:""}</div></div>`).join("")}</div>`).join("")}
     <h2>${t("Bandiere di classe")}</h2>
-    <div class="blk">${cl.map((c,i)=>`<div class="brow">${flagSVG(c.id,48)}
-      <input class="inp" style="flex:1 1 100px" data-d="config" data-p="classi.${i}.nome" value="${esc(c.nome)}" placeholder="${t("Nome classe")}" ${ro()}>
-      <select style="flex:0 1 110px" data-d="config" data-p="classi.${i}.col" ${readOnly?"disabled":""} aria-label="${t("Colore")}">${CLASS_COLS.map(([h,n])=>`<option value="${h}" ${c.col===h?"selected":""}>${t(n)}</option>`).join("")}</select>
-      ${xbtn("rmClasse",`data-i="${i}"`,"✕")}</div>`).join("")||`<div class="empty">${t("Nessuna bandiera di classe. Aggiungi quelle delle classi in regata.")}</div>`}</div>
+    <div class="blk">${cl.map(c=>`<a class="arow clink" href="#ed-${c.id}">${flagSVG(c.id,48)}<div><div class="n">${c.nome?esc(c.nome):t("Senza nome")}</div><div class="r">${t(SNAME[normClassFlag(c).style])}</div></div><span class="chev" aria-hidden="true">›</span></a>`).join("")||`<div class="empty">${t("Nessuna bandiera di classe. Aggiungi quelle delle classi in regata.")}</div>`}</div>
     ${readOnly?"":`<button class="add" data-act="addClasse">${t("Aggiungi bandiera di classe")}</button>`}
     <p class="muted" style="margin-top:20px">${t("I significati sono indicativi: fanno fede il Regolamento di Regata e le Istruzioni di Regata della manifestazione.")}</p>
   </div>`;
@@ -846,6 +877,269 @@ function viewMezzi(){
     <tfoot><tr><th scope="row">${t("Totale")}</th>${colTot.map(x=>`<td class="tot">${x}</td>`).join("")}<td class="tot">${colTot.reduce((a,b)=>a+b,0)}</td></tr></tfoot></table></div>
     <p class="muted">${t("Il conteggio segue i mezzi inseriti nella scheda Squadra di ogni campo.")}</p></div>`;
 }
+
+const SNAME = {text:t("Testo"),logo:t("Logo"),intl:t("Bandiera internazionale")};
+/* ---------- editor bandiere di classe (stessa logica di RaceStartTimer) ---------- */
+const NAMED_COLORS = {"common": [["Black", "3C3C3C"], ["Brown", "963230"], ["Gray", "C0C0C0"], ["White", "F5F5F5"], ["Red", "E83422"], ["Dark Orange", "F09436"], ["Yellow", "FFFF55"], ["Green", "73FF4D"], ["Cyan", "73FFFF"], ["Blue", "0000FF"], ["Purple", "9429E8"], ["Magenta", "E831F7"]], "named": [["Dim Gray", "696969"], ["Dark Gray", "A9A9A9"], ["Light Gray", "D3D3D3"], ["Gainsboro", "DCDCDC"], ["Maroon", "800000"], ["Dark Red", "8B0000"], ["Crimson", "DC143C"], ["Tomato", "FF6347"], ["Coral", "FF7F50"], ["Salmon", "FA8072"], ["Orange", "FFA500"], ["Gold", "FFD700"], ["Khaki", "F0E68C"], ["Olive", "808000"], ["Lime", "00FF00"], ["Forest Green", "228B22"], ["Dark Green", "006400"], ["Sea Green", "2E8B57"], ["Teal", "008080"], ["Turquoise", "40E0D0"], ["Sky Blue", "87CEEB"], ["Royal Blue", "4169E1"], ["Navy", "000080"], ["Dark Blue", "00008B"], ["Indigo", "4B0082"], ["Violet", "EE82EE"], ["Pink", "FFC0CB"], ["Hot Pink", "FF69B4"], ["Deep Pink", "FF1493"], ["Sienna", "A0522D"], ["Chocolate", "D2691E"], ["Tan", "D2B48C"], ["Beige", "F5F5DC"], ["Ivory", "FFFFF0"]]};
+const CLASS_LOGOS = [["Centerboard", ["29er", "3.7", "420", "470", "49er", "49er FX", "Albacore", "B14", "C Scow", "Cadet", "Cherub", "Conger", "Cyclone 13", "Division II", "Dragon", "Europe", "Finn", "Firebug", "Flying 11", "Flying Ant", "GP14", "Hornet", "ILCA", "ILCA 4", "ILCA 6", "ILCA 7", "ILCA Starburst", "International 14", "Ixylon", "J14", "Jollyboat", "Laser", "Laser 4.7", "Laser Pico", "Lightning", "Luch", "Luch 2", "Luch Mini", "Luch Radial", "Luch-1", "Merlin Rocket", "Mirror", "Moth", "Musto Skiff", "National 18", "National E", "NS14", "OK", "Open Skiff", "Optimist", "Pirate", "RS Aero", "RS Aero 5", "RS Aero 6", "RS Aero 7", "RS Aero 9", "RS Aero Z", "RS Feva", "RS Quest", "Scow Moth", "Snipe", "Solo", "Spiral", "Splash", "Splash Old", "Starling", "Sunburst", "Sunfish", "Tasar", "Topper", "Vaurien", "VB-Jolle", "VX One", "WASZP", "Wayfarer", "Zephyr", "Zoom 8"]], ["Multihull", ["A-Cat", "Dart 18", "Formula 18", "Hobie", "Nacra", "Nacra 15", "Nacra 17", "Paper Tiger", "Tornado", "Weta", "Weta+"]], ["Keelboat", ["10mR", "12mR", "15mR", "2.4mR", "5.5mR", "6mR", "7mR", "8mR", "Albin Vega", "Dragon (keel)", "Elliott 5.9", "Elliott 7", "Etchells", "Farr 1020", "Flying Fifteen", "Freedom", "H-Boat", "Hansa", "Hansa-Jolle", "Hartley TS16", "IF-Boat", "International 806", "IOD", "J/105", "J/22", "J/24", "J/70", "J/80", "Javelin", "Kielzugvogel", "Knarr", "Leisure 17", "Marauder", "Melges 24", "Monarch", "Neptun 22", "Noelex", "Noelex 25", "Platu 25", "Reactor", "Rhodes 19", "Schwertzugvogel", "SKUD 18", "Soling", "Sonar", "Spaekhugger", "Squib", "Stewart 34", "Townson", "Townson 32", "TP 52", "Trias", "Viper", "X-79", "X-99", "Yngling", "Young 88"]], ["Windsurf & Foil", ["Formula Kite", "Formula Kite+", "Formula Windsurfing", "IKA", "IKA+", "iQFoil", "iQFoil Men", "iQFoil Women", "iQFoil+", "RS:X", "T293", "T293+", "Windsurfer", "Wing Foil", "Wing Foil NZ"]]];
+const LAYOUTS = ["plain","bottom","right","diagUp","diagDown"];
+const LNAME = {plain:"Tinta unita",bottom:"Metà sotto",right:"Metà destra",diagUp:"Diagonale in salita",diagDown:"Diagonale in discesa"};
+const SYMBOLS = {
+  star:"M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7-6.3-3.9-6.3 3.9 1.7-7L2 9.5l7.1-.6z",
+  heart:"M12 21s-7.5-4.6-10-9.3C.4 8.4 2.3 4 6.3 4c2.2 0 3.7 1.3 4.7 2.8C12 5.3 13.5 4 15.7 4c4 0 5.9 4.4 4.3 7.7C19.5 16.4 12 21 12 21z",
+  circle:"M12 2a10 10 0 1 0 0 20a10 10 0 1 0 0-20z",
+  triangle:"M12 3l10 18H2z",
+  diamond:"M12 2l10 10-10 10L2 12z",
+  square:"M3 3h18v18H3z",
+  hexagon:"M12 2l8.7 5v10L12 22l-8.7-5V7z",
+  bolt:"M13 2L4 14h7l-1 8 9-12h-7z",
+  drop:"M12 2s7 7.6 7 12.5A7 7 0 0 1 5 14.5C5 9.6 12 2 12 2z",
+  moon:"M15 2a10 10 0 1 0 7 15.5A8 8 0 0 1 15 2z",
+  flag:"M5 2h2v20H5zM8 3h11l-3 4.5 3 4.5H8z",
+  shield:"M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5z",
+  crown:"M3 7l4.5 4L12 4l4.5 7L21 7l-2 12H5z"
+};
+const hexN = h => (h||"").replace("#","").toUpperCase();
+function colorName(hex){
+  if (!hex) return t("Originale");
+  const all = NAMED_COLORS.common.concat(NAMED_COLORS.named);
+  const f = all.find(([n,h])=>h===hexN(hex));
+  return f ? f[0] : t("Personalizzato");
+}
+function contrastOn(hex){
+  const h = hexN(hex); if (h.length!==6) return "#FFFFFF";
+  const r=parseInt(h.slice(0,2),16), g=parseInt(h.slice(2,4),16), b=parseInt(h.slice(4,6),16);
+  return (r*299+g*587+b*114)/1000 > 150 ? "#1A1A1A" : "#FFFFFF";
+}
+function newClassFlag(){
+  return {id:"cl-"+rid(), nome:"", style:"text", layout:"plain", col:"#4169E1", col2:"#F5F5F5", text:"", textCol:"#F5F5F5", logo:null, logoCol:null, intl:null};
+}
+/* bandiere create con la versione precedente (colore + nome, o immagine) */
+function normClassFlag(c){
+  if (c.style) return c;
+  c.layout = "plain"; c.col2 = "#F5F5F5"; c.col = c.col || "#1D4E9E"; c.logoCol = null; c.intl = null;
+  if (c.img){ c.style = "logo"; c.logo = "img"; c.logoImg = c.img; delete c.img; }
+  else { c.style = "text"; c.text = (c.nome||"").slice(0,4).toUpperCase(); c.textCol = contrastOn(c.col); }
+  return c;
+}
+function bgSVG(l,c1,c2){
+  let s = r(0,0,60,40,c1);
+  if (l==="bottom") s += r(0,20,60,20,c2);
+  else if (l==="right") s += r(30,0,30,40,c2);
+  else if (l==="diagUp") s += pg("60,0 60,40 0,40",c2);
+  else if (l==="diagDown") s += pg("0,0 0,40 60,40",c2);
+  return s;
+}
+function fitText(txt, maxW, maxSize, k=0.6){ return Math.max(3, Math.min(maxSize, maxW/Math.max(1,txt.length*k))); }
+function emblemSVG(name,col,x,y,w,h){
+  const s=Math.min(w,h), cx=x+w/2, cy=y+h/2, c=col||"#000000";
+  const m = /^RS Aero (\w+)$/.exec(name);
+  if (m) return `<circle cx="${cx}" cy="${cy}" r="${s/2}" fill="${col||"#E8359E"}"/><circle cx="${cx}" cy="${cy}" r="${s/2*0.74}" fill="#fff"/><text x="${cx}" y="${cy}" dominant-baseline="central" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="${s*0.46}" fill="#000">${esc(m[1])}</text>`;
+  if (name==="Optimist") return `<circle cx="${cx}" cy="${cy-s*0.08}" r="${s*0.31}" fill="none" stroke="${c}" stroke-width="${s*0.09}"/><rect x="${cx-s*0.045}" y="${cy+s*0.06-s*0.33}" width="${s*0.09}" height="${s*0.66}" fill="${c}"/><rect x="${cx-s*0.11}" y="${cy+s*0.37-s*0.03}" width="${s*0.22}" height="${s*0.06}" fill="${c}"/>`;
+  let lines = [name];
+  if (name.length>9 && name.includes(" ")){ const mid=name.length/2; let best=-1; for(let i=0;i<name.length;i++) if(name[i]===" " && (best<0||Math.abs(i-mid)<Math.abs(best-mid))) best=i; lines=[name.slice(0,best),name.slice(best+1)]; }
+  const ml = Math.max(...lines.map(l=>l.length));
+  const fs = Math.min(s*0.34*(lines.length>1?0.85:1), (w*0.94)/(ml*0.62), (h*0.9)/(lines.length*1.1));
+  return lines.map((l,i)=>`<text x="${cx}" y="${cy+(i-(lines.length-1)/2)*fs*1.05}" dominant-baseline="central" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-style="italic" font-size="${fs.toFixed(2)}" fill="${c}">${esc(l)}</text>`).join("");
+}
+function logoSVG(c,x,y,w,h){
+  const L = c.logo; if (!L) return "";
+  if (L==="img") return c.logoImg ? `<image href="${c.logoImg}" x="${x}" y="${y}" width="${w}" height="${h}" preserveAspectRatio="xMidYMid meet"/>` : "";
+  if (L.startsWith("cls:")) return emblemSVG(L.slice(4), c.logoCol, x,y,w,h);
+  const col = c.logoCol || "#000000", s = Math.min(w,h), cx=x+w/2, cy=y+h/2;
+  if (L.startsWith("num:")) return `<circle cx="${cx}" cy="${cy}" r="${s*0.46}" fill="${col}"/><text x="${cx}" y="${cy}" dominant-baseline="central" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="${s*0.58}" fill="${contrastOn(col)}">${esc(L.slice(4))}</text>`;
+  if (L.startsWith("sym:") && SYMBOLS[L.slice(4)]){ const k = s*0.92/24; return `<path d="${SYMBOLS[L.slice(4)]}" fill="${col}" transform="translate(${(cx-12*k).toFixed(2)} ${(cy-12*k).toFixed(2)}) scale(${k.toFixed(4)})"/>`; }
+  return "";
+}
+function classFlagBody(c){
+  normClassFlag(c);
+  let s = bgSVG(c.layout, c.col, c.col2);
+  if (c.style==="text"){
+    const txt = c.text || "";
+    if (txt) s += `<text x="30" y="20.5" dominant-baseline="central" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-style="italic" font-size="${fitText(txt,55,15.2).toFixed(2)}" fill="${c.textCol||"#FFFFFF"}">${esc(txt)}</text>`;
+  } else if (c.style==="logo") s += logoSVG(c, 4.8, 4.8, 50.4, 30.4);
+  return s;
+}
+
+/* --- pagina editor --- */
+function classIdx(){ const id = location.hash.slice(4); return (S.config.classi||[]).findIndex(x=>x.id===id); }
+function colorRow(key,label,hex){
+  return `<button class="crow" data-act="ce" data-k="openColor" data-v="${key}"><span class="l">${label}</span><span class="muted">${esc(colorName(hex))}</span><i class="sw" style="background:${hex||"transparent"}"></i></button>`;
+}
+function refreshPreview(){
+  const i = classIdx(), el = document.getElementById("cprev");
+  if (i>=0 && el) el.innerHTML = flagSVG(S.config.classi[i].id, 240);
+}
+function viewEditor(){
+  const i = classIdx(); if (i<0){ location.hash = "bandiere"; return; }
+  const c = normClassFlag(S.config.classi[i]);
+  document.title = (c.nome||t("Bandiera di classe")) + " | Racecourse";
+  const intlIds = FLAGS.map(f=>f.id);
+  let h = `<div class="bar"><div class="in"><a class="back" href="#bandiere">‹ ${t("Archivio")}</a><span class="t">${t("Bandiera di classe")}</span></div></div>
+  <div class="wrap">
+    <div class="cprev" id="cprev">${flagSVG(c.id,240)}</div>
+    <div class="blk"><div class="sec"><div class="r">${t("Nome")}</div><input class="inp" data-d="config" data-p="classi.${i}.nome" value="${esc(c.nome)}" placeholder="${t("Es. ILCA 6")}" autocomplete="off"></div></div>
+    <div class="seg" role="group" aria-label="${t("Tipo")}">${[["logo","Logo"],["text","Testo"],["intl","Bandiera internazionale"]].map(([v,l])=>`<button data-act="ce" data-k="style" data-v="${v}" aria-pressed="${c.style===v}">${t(l)}</button>`).join("")}</div>`;
+  if (c.style==="intl"){
+    h += `<h2>${t("Bandiera")}</h2><div class="grid">${intlIds.map(id=>`<button class="tile" data-act="ce" data-k="intl" data-v="${id}" aria-pressed="${c.intl===id}">${flagSVG(id,52)}<span>${esc(flagName(id))}</span></button>`).join("")}</div>`;
+  } else {
+    h += `<h2>${t("Sfondo")}</h2>
+    <div class="layouts">${LAYOUTS.map(l=>`<button data-act="ce" data-k="layout" data-v="${l}" aria-pressed="${c.layout===l}" aria-label="${t(LNAME[l])}"><svg viewBox="0 0 60 40" width="54" height="36">${bgSVG(l,"#9AA8B8","#FFFFFF")}<rect x=".5" y=".5" width="59" height="39" fill="none" stroke="rgba(0,0,0,.25)"/></svg></button>`).join("")}</div>
+    <div class="blk" style="margin-top:12px">${colorRow("col",t("Colore bandiera"),c.col)}${c.layout!=="plain"?colorRow("col2",t("Secondo colore"),c.col2):""}`;
+    if (c.style==="text"){
+      h += `<div class="sec"><div class="r">${t("Testo")}</div><input class="inp" data-d="config" data-p="classi.${i}.text" value="${esc(c.text)}" placeholder="${t("Es. ILCA")}" autocomplete="off"></div>${colorRow("textCol",t("Colore testo"),c.textCol)}`;
+    } else {
+      h += `<button class="crow" data-act="ce" data-k="openLogo"><span class="l">${t("Logo")}</span>${c.logo?`<svg viewBox="0 0 60 60" width="40" height="40" class="lg"><rect width="60" height="60" fill="#fff"/>${logoSVG(c,4,4,52,52)}</svg>`:`<span class="muted">${t("Nessuno")}</span>`}</button>${colorRow("logoCol",t("Colore logo"),c.logoCol)}`;
+    }
+    h += `</div>`;
+  }
+  h += `<div class="btnrow" style="margin-top:22px"><a class="btn pri" href="#bandiere">${t("Salva")}</a>${xbtn("ce",`data-k="del"`,t("Elimina bandiera"))}</div>
+    ${statusLine()}</div>`;
+  $("#app").innerHTML = h;
+}
+
+/* --- fogli: colori, loghi, ritaglio --- */
+function curClass(){ const i = classIdx(); return i>=0 ? S.config.classi[i] : null; }
+function sheetWrap(title, body, done=true){
+  return `<div class="sheet" data-act="closeSheet"><div class="pane" role="dialog" aria-label="${title}"><div class="head"><h3 style="margin:0">${title}</h3>${done?`<button data-act="closeSheet">${t("Fatto")}</button>`:""}</div>${body}</div></div>`;
+}
+const CTITLE = {col:"Colore bandiera",col2:"Secondo colore",textCol:"Colore testo",logoCol:"Colore logo"};
+function drawColorSheet(){
+  const c = curClass(); if (!c){ sheetOpen=null; $("#sheet").innerHTML=""; return; }
+  const key = sheetOpen.key, cur = c[key];
+  const sw = ([n,hx]) => `<button class="swb" data-act="ce" data-k="setColor" data-v="#${hx}" aria-pressed="${hexN(cur)===hx}"><i class="sw" style="background:#${hx}"></i><span>${n}</span></button>`;
+  $("#sheet").innerHTML = sheetWrap(t(CTITLE[key]), `
+    ${key==="logoCol"?`<div class="swgrid" style="margin-top:12px"><button class="swb" data-act="ce" data-k="setColor" data-v="orig" aria-pressed="${!cur}"><i class="sw" style="background:transparent"></i><span>${t("Originale")}</span></button></div>`:""}
+    <h3>${t("Comuni")}</h3><div class="swgrid">${NAMED_COLORS.common.map(sw).join("")}</div>
+    <h3>${t("Altri colori")}</h3><div class="swgrid">${NAMED_COLORS.named.map(sw).join("")}</div>
+    <h3>${t("Personalizzato")}</h3><label class="crow"><span class="l">${t("Scegli un colore")}</span><input type="color" data-ccol value="${cur||"#FFFFFF"}"></label>`);
+}
+function drawLogoSheet(){
+  const c = curClass(); if (!c){ sheetOpen=null; $("#sheet").innerHTML=""; return; }
+  const sc = $(".sheet .pane") ? $(".sheet .pane").scrollTop : 0;
+  const tile = (v,inner,label) => `<button class="tile" data-act="ce" data-k="setLogo" data-v="${esc(v)}" data-name="${esc((label||"").toLowerCase())}" aria-pressed="${c.logo===v}">${inner}${label?`<span>${esc(label)}</span>`:""}</button>`;
+  $("#sheet").innerHTML = sheetWrap(t("Logo"), `
+    <div class="btnrow" style="margin-top:12px"><label class="btn pri">${t("Importa e ritaglia un’immagine…")}<input type="file" accept="image/*" data-logoimg></label></div>
+    <p class="hint">${t("Per il logo ufficiale di una classe importa la sua immagine: gli emblemi qui sotto sono tipografici, non i loghi originali.")}</p>
+    <input class="search" id="lsearch" type="search" placeholder="${t("Cerca classe")}" autocomplete="off">
+    ${CLASS_LOGOS.map(([cat,names])=>`<h3 data-cat>${esc(cat)}</h3><div class="grid lgrid">${names.map(n=>tile("cls:"+n,`<svg viewBox="0 0 60 60" width="56" height="56"><rect width="60" height="60" fill="#fff"/>${emblemSVG(n,null,3,3,54,54)}</svg>`,n)).join("")}</div>`).join("")}
+    <h3 data-sym>${t("Simboli")}</h3><div class="grid sgrid" data-sym>${Object.keys(SYMBOLS).map(k=>tile("sym:"+k,`<svg viewBox="0 0 60 60" width="44" height="44">${logoSVG({logo:"sym:"+k,logoCol:"#0F2740"},6,6,48,48)}</svg>`,"")).join("")}${"0123456789".split("").map(d=>tile("num:"+d,`<svg viewBox="0 0 60 60" width="44" height="44">${logoSVG({logo:"num:"+d,logoCol:"#0F2740"},6,6,48,48)}</svg>`,"")).join("")}</div>`);
+  $(".sheet .pane").scrollTop = sc;
+  const q = $("#lsearch");
+  q.oninput = () => { const v = q.value.trim().toLowerCase();
+    document.querySelectorAll(".lgrid").forEach(g=>{ let any=false; g.querySelectorAll(".tile").forEach(b=>{ const ok=!v||b.dataset.name.includes(v); b.style.display=ok?"":"none"; if(ok) any=true; }); g.style.display=any?"":"none"; g.previousElementSibling.style.display=any?"":"none"; });
+    document.querySelectorAll("[data-sym]").forEach(e=>e.style.display=v?"none":""); };
+}
+
+/* ritaglio quadrato con zoom, spostamento e rimozione del bianco */
+const CBOX = 280;
+function removeWhite(img){
+  const max = 1000, k = Math.min(1, max/Math.max(img.naturalWidth,img.naturalHeight));
+  const w = Math.max(1,Math.round(img.naturalWidth*k)), h = Math.max(1,Math.round(img.naturalHeight*k));
+  const cv = document.createElement("canvas"); cv.width=w; cv.height=h; const x = cv.getContext("2d");
+  x.drawImage(img,0,0,w,h);
+  const d = x.getImageData(0,0,w,h), p = d.data;
+  for (let i=0;i<p.length;i+=4){
+    const a0 = p[i+3]/255; if (a0<=0) continue;
+    const rr=p[i]/255, gg=p[i+1]/255, bb=p[i+2]/255, m=Math.min(rr,gg,bb);
+    const alpha = Math.min(1,Math.max(0,(1-m-0.06)/0.94))*a0;
+    if (alpha<0.02){ p[i]=p[i+1]=p[i+2]=p[i+3]=0; continue; }
+    const dd = Math.max(0.0001,1-m);
+    p[i]=Math.round(Math.min(1,Math.max(0,(rr-m)/dd))*255); p[i+1]=Math.round(Math.min(1,Math.max(0,(gg-m)/dd))*255);
+    p[i+2]=Math.round(Math.min(1,Math.max(0,(bb-m)/dd))*255); p[i+3]=Math.round(alpha*255);
+  }
+  x.putImageData(d,0,0); return cv.toDataURL("image/png");
+}
+function cropFitted(o){ const ar = o.nw/Math.max(1,o.nh); return ar>1 ? [CBOX, CBOX/ar] : [CBOX*ar, CBOX]; }
+function cropApply(){
+  const o = sheetOpen, im = document.getElementById("cimg"); if (!o || !im) return;
+  const [fw,fh] = cropFitted(o);
+  im.style.width = fw+"px"; im.style.height = fh+"px";
+  im.style.transform = `translate(-50%,-50%) translate(${o.ox}px,${o.oy}px) scale(${o.scale})`;
+  const sl = document.getElementById("cscale"); if (sl && +sl.value!==o.scale) sl.value = o.scale;
+}
+function drawCropSheet(){
+  const o = sheetOpen, c = curClass(); if (!c){ sheetOpen=null; $("#sheet").innerHTML=""; return; }
+  const src = o.remove && o.processed ? o.processed : o.src;
+  $("#sheet").innerHTML = sheetWrap(t("Ritaglia"), `
+    <div class="cropbox" id="cbox" style="background:${o.remove?c.col:"#FFFFFF"}"><img id="cimg" src="${src}" alt="" draggable="false"></div>
+    <div class="zoom"><span aria-hidden="true">−</span><input type="range" id="cscale" min="0.3" max="8" step="0.01" value="${o.scale}" aria-label="Zoom"><span aria-hidden="true">+</span></div>
+    <label class="crow"><span class="l">${t("Rimuovi lo sfondo bianco")}</span><input type="checkbox" id="crem" ${o.remove?"checked":""}></label>
+    <p class="hint">${t("Trascina e ingrandisci per inquadrare solo il logo. Con lo sfondo rimosso, l’anteprima usa il colore della bandiera.")}${o.remove&&!o.processed?" "+t("Elaborazione…"):""}</p>
+    <div class="btnrow"><button class="btn pri" data-act="ce" data-k="cropUse">${t("Usa")}</button><button class="btn" data-act="ce" data-k="cropCancel">${t("Annulla")}</button></div>`, false);
+  cropApply();
+  $("#cscale").oninput = e => { o.scale = +e.target.value; cropApply(); };
+  $("#crem").onchange = e => { o.remove = e.target.checked; drawCropSheet(); };
+}
+function cropOpen(file){
+  const fr = new FileReader();
+  fr.onload = () => {
+    const im = new Image();
+    im.onload = () => {
+      const c = curClass(); if (!c) return;
+      sheetOpen = {kind:"crop", id:c.id, src:fr.result, nw:im.naturalWidth, nh:im.naturalHeight, scale:1, ox:0, oy:0, remove:true, processed:null, img:im};
+      drawSheet();
+      setTimeout(()=>{ try{ const p = removeWhite(im); if (sheetOpen && sheetOpen.kind==="crop"){ sheetOpen.processed = p; const pim = new Image(); pim.onload=()=>{ if (sheetOpen&&sheetOpen.kind==="crop"){ sheetOpen.pimg=pim; drawSheet(); } }; pim.src = p; } }catch(e){} }, 30);
+    };
+    im.src = fr.result;
+  };
+  fr.readAsDataURL(file);
+}
+function cropUse(){
+  const o = sheetOpen, c = curClass(); if (!o || !c) return;
+  const out = 320, k = out/CBOX, [fw,fh] = cropFitted(o);
+  const cv = document.createElement("canvas"); cv.width = out; cv.height = out; const x = cv.getContext("2d");
+  if (!o.remove){ x.fillStyle = "#FFFFFF"; x.fillRect(0,0,out,out); }
+  const cw = fw*o.scale*k, ch = fh*o.scale*k, cx = out/2 + o.ox*k, cy = out/2 + o.oy*k;
+  x.drawImage(o.remove && o.pimg ? o.pimg : o.img, cx-cw/2, cy-ch/2, cw, ch);
+  c.logo = "img"; c.logoImg = cv.toDataURL("image/png");
+  sheetOpen = null; drawSheet(); touch("config"); render();
+}
+/* gesti nel riquadro di ritaglio: trascina, pizzica, rotella */
+const cptr = new Map(); let cpinch = null;
+document.addEventListener("pointerdown", e=>{
+  const box = e.target.closest("#cbox"); if (!box || !sheetOpen || sheetOpen.kind!=="crop") return;
+  e.preventDefault(); try{ box.setPointerCapture(e.pointerId); }catch(_){}
+  cptr.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if (cptr.size===2){ const [a,b] = [...cptr.values()]; cpinch = {d:Math.hypot(a.x-b.x,a.y-b.y), s:sheetOpen.scale}; }
+});
+document.addEventListener("pointermove", e=>{
+  if (!cptr.has(e.pointerId) || !sheetOpen || sheetOpen.kind!=="crop") return;
+  const prev = cptr.get(e.pointerId); cptr.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if (cptr.size>=2 && cpinch){ const [a,b] = [...cptr.values()]; sheetOpen.scale = Math.min(10,Math.max(0.3, cpinch.s*Math.hypot(a.x-b.x,a.y-b.y)/Math.max(1,cpinch.d))); }
+  else { sheetOpen.ox += e.clientX-prev.x; sheetOpen.oy += e.clientY-prev.y; }
+  cropApply();
+});
+const cend = e => { cptr.delete(e.pointerId); if (cptr.size<2) cpinch = null; };
+document.addEventListener("pointerup", cend); document.addEventListener("pointercancel", cend);
+document.addEventListener("wheel", e=>{ if (!e.target.closest("#cbox") || !sheetOpen || sheetOpen.kind!=="crop") return; e.preventDefault(); sheetOpen.scale = Math.min(10,Math.max(0.3, sheetOpen.scale*Math.exp(-e.deltaY*0.0015))); cropApply(); }, {passive:false});
+/* colore personalizzato */
+document.addEventListener("input", e=>{
+  if (e.target.dataset && e.target.dataset.ccol!=null && sheetOpen && sheetOpen.kind==="color"){
+    const c = curClass(); if (!c) return; c[sheetOpen.key] = e.target.value.toUpperCase(); touch("config"); refreshPreview();
+  }
+});
+document.addEventListener("change", e=>{
+  if (e.target.dataset && e.target.dataset.logoimg!=null && e.target.files && e.target.files[0]){ cropOpen(e.target.files[0]); e.target.value=""; }
+  if (e.target.dataset && e.target.dataset.ccol!=null && sheetOpen && sheetOpen.kind==="color"){ sheetOpen=null; drawSheet(); render(); }
+});
+function ceAct(ds){
+  const c = curClass(); if (!c) return;
+  switch(ds.k){
+    case "style": c.style = ds.v; if (c.style==="intl" && !c.intl) c.intl = "A"; break;
+    case "layout": c.layout = ds.v; break;
+    case "intl": c.intl = ds.v; break;
+    case "openColor": sheetOpen = {kind:"color", key:ds.v, id:c.id}; drawSheet(); return;
+    case "setColor": if (sheetOpen) c[sheetOpen.key] = ds.v==="orig" ? null : ds.v; sheetOpen = null; drawSheet(); break;
+    case "openLogo": sheetOpen = {kind:"logo", id:c.id}; drawSheet(); return;
+    case "setLogo": c.logo = ds.v; if (ds.v!=="img") delete c.logoImg; sheetOpen = null; drawSheet(); break;
+    case "cropUse": cropUse(); return;
+    case "cropCancel": sheetOpen = null; drawSheet(); return;
+    case "del": S.config.classi = S.config.classi.filter(x=>x.id!==c.id); touch("config"); location.hash = "bandiere"; return;
+  }
+  touch("config"); render();
+}
+
 
 /* ---------- esportazione PDF ---------- */
 let pdfBusy = null, pdfMsg = "";
@@ -1021,12 +1315,14 @@ document.addEventListener("focusout", e=>{ const d=e.target.dataset&&e.target.da
 document.addEventListener("input", e=>{
   const t = e.target, d = t.dataset.d; if (!d || readOnly || t.type==="checkbox" || t.tagName==="SELECT") return;
   setP(docOf(d), t.dataset.p, t.value); touch(d);
+  if (location.hash.startsWith("#ed-")) refreshPreview();
   if (d==="config" && /^classi\.\d+\.nome$/.test(t.dataset.p)){ const c=getP(S.config,t.dataset.p.replace(/\.nome$/,"")); const s=t.previousElementSibling; if(s&&c) s.outerHTML=flagSVG(c.id,48); }
   const mm = t.dataset.p.match(/^mezzi\.(\d+)\.(sigla|nome)$/);
   if (mm){ const m = campo(d).mezzi[+mm[1]]; const el = m && document.querySelector(`.mk[data-mk="${m.id}"] b`); if (el) el.textContent = sigla(m); }
   if (/\.t$/.test(t.dataset.p)){ const a = t.parentNode.querySelector(".call"); if (a){ a.href=telHref(t.value); a.hidden=!telOk(t.value); } }
 });
 document.addEventListener("change", e=>{
+  if (e.target.dataset && e.target.dataset.climg!=null && e.target.files && e.target.files[0]){ classImg(+e.target.dataset.climg, e.target.files[0]); e.target.value=""; return; }
   if (e.target.dataset && e.target.dataset.imp!=null && e.target.files && e.target.files[0]){ readBackup(e.target.files[0]); e.target.value=""; return; }
   if (e.target.dataset && e.target.dataset.up){ const f=e.target.files&&e.target.files[0]; if (f) uploadImg(e.target.dataset.up,f); return; }
   const t = e.target, d = t.dataset.d; if (!d || readOnly) return;
@@ -1067,8 +1363,10 @@ function act(a, ds){
     case "n": S.config.n = Math.min(6,Math.max(1,S.config.n + +ds.v)); touch("config"); break;
     case "addCl": S.config.classifiche.push(P()); touch("config"); break;
     case "rmCl": S.config.classifiche.splice(i,1); touch("config"); break;
-    case "addClasse": (S.config.classi=S.config.classi||[]).push({id:"cl-"+rid(),nome:"",col:"#1D4E9E"}); touch("config"); break;
+    case "addClasse": { const c = newClassFlag(); (S.config.classi=S.config.classi||[]).push(c); touch("config"); location.hash = "ed-"+c.id; return; }
+    case "ce": ceAct(ds); return;
     case "rmClasse": S.config.classi.splice(i,1); touch("config"); break;
+    case "rmClImg": if (S.config.classi[i]) delete S.config.classi[i].img; touch("config"); break;
     case "addComp": F().cdr.comp.push(P()); touch(h); break;
     case "rmComp": F().cdr.comp.splice(i,1); touch(h); break;
     case "addMz": { const m = addMezzo(F(), $("#nt").value); touch(h); render();

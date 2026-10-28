@@ -1,6 +1,6 @@
 // Racecourse service worker: funzionamento offline.
 // Quando pubblichi una nuova versione, aumenta il numero qui sotto (v1 -> v2).
-const CACHE = "racecourse-v3";
+const CACHE = "racecourse-v5";
 const ASSETS = [
   "./", "./index.html", "./manifest.webmanifest",
   "./vendor/jspdf.umd.min.js",
