@@ -57,3 +57,11 @@ Per crearla o aggiornarla:
 
 Gli utenti ricevono la libreria aggiornata alla prima apertura dell'app con la rete.
 Non serve cambiare la versione in `sw.js` per aggiornare solo la libreria.
+
+## Richiesta al circolo
+Dalla home, "Richiesta al circolo": si spuntano i dati da far completare e si invia un link.
+Il circolo apre il link (senza codice di accesso), compila solo quei dati e rimanda un link
+di risposta. Aprendo quel link (o incollandolo nella stessa pagina, se si usa l'app installata)
+si vedono i dati ricevuti e con "Importa" entrano nei campi. Le boe: il numero lo decide
+il comitato, il circolo indica solo tipo e colore.
+I dati viaggiano dentro il link: non passano da nessun server.
