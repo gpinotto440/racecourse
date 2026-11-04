@@ -217,6 +217,16 @@ tfoot th,tfoot td{font-weight:700}
 .foot a{color:inherit}
 .install{margin-top:16px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--card);font-size:15px}
 .install b{display:block;margin-bottom:2px}
+.evbar{display:flex;align-items:center;gap:10px;margin-top:14px}
+.evbar .btn{margin-left:auto;padding:7px 12px;font-size:14px;text-decoration:none}
+.tbd{color:var(--muted);font-style:italic;font-weight:400}
+.rflags{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.rflags span{display:flex;flex-direction:column;align-items:center;gap:2px;width:58px;text-align:center}
+.rflags small{font-size:11px;line-height:1.15;color:var(--muted)}
+.riep h3{margin-top:16px}
+.riep .map img{width:100%}
+a.btn{text-decoration:none;color:inherit}
+a.btn.pri{color:#fff}
 .clchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
 .chipc{display:inline-flex;align-items:center;gap:2px;background:var(--tap);border-radius:999px;padding:5px 4px 5px 12px;font-weight:600;font-size:15px}
 .chipc button{border:0;background:none;color:var(--muted);cursor:pointer;font-size:13px;padding:2px 6px}
@@ -266,7 +276,7 @@ label.crow{border:1px solid var(--line);border-radius:12px;background:var(--card
 <div id="sheet"></div>
 <script>
 /* ---------- lingua ---------- */
-const EN = {"Racecourse": "Racecourse", "Codice di accesso": "Access code", "Inserisci il codice che ti ha dato l’organizzazione.": "Enter the code you received from the organisers.", "Entra": "Enter", "Codice non corretto.": "Wrong code.", "Nome della manifestazione": "Event name", "Campi da gestire": "Course areas", "Da 1 a 6": "From 1 to 6", "Un campo in meno": "One area less", "Un campo in più": "One area more", "Classi da inserire": "Classes to be added", "VHF campo": "Area VHF", "Dati evento": "Event details", "Segreteria, medico, classifiche, Victor": "Race office, doctor, scoring, Victor", "Archivio bandiere": "Flag library", "Codice internazionale e classi": "International code and classes", "Rubrica": "Contacts", "Cerca persone e barche": "Search people and boats", "Riepilogo mezzi": "Boats summary", "Battelli e gommoni per campo": "Boats and RIBs per area", "Esporta PDF per i circoli": "Export PDF for the clubs", "‹ Campi": "‹ Areas", "Campo": "Area", "Canale comune": "Common channel", "Es. 71": "e.g. 71", "A terra": "Ashore", "Segreteria": "Race office", "Medico": "Doctor", "Classifiche": "Scoring", "Responsabile classifiche": "Scoring manager", "Nessun responsabile.": "No one added.", "Aggiungi responsabile classifiche": "Add scoring manager", "Nuova manifestazione": "New event", "Svuota nomi, numeri, boe e spunte di tutti i campi. Le bandiere di classe dell’archivio restano.": "Clears names, numbers, marks and ticks in every area. Class flags in the library are kept.", "Svuota tutti i dati": "Clear all data", "Tocca di nuovo per svuotare tutto": "Tap again to clear everything", "Conferma": "Confirm", "Elimina": "Delete", "Esporta PDF di questo campo": "Export PDF of this area", "Squadra": "Team", "Boe": "Marks", "Dotazioni": "Equipment", "Bandiere": "Flags", "Percorso": "Course", "Classi": "Classes", "Es. ILCA 7, ILCA 6": "e.g. ILCA 7, ILCA 6", "Canale VHF": "VHF channel", "Es. 72": "e.g. 72", "Responsabile campo": "Area manager", "Comitato di regata": "Race committee", "Presidente": "Principal race officer", "Componente": "Member", "Aggiungi componente": "Add member", "Mezzi in acqua": "Boats on the water", "Imbarcazione": "Boat", "Nome o modello della barca": "Boat name or model", "Sigla": "Code", "Responsabile": "Skipper", "Aiuto": "Helper", "Assistente": "Crew", "Tipo di mezzo": "Boat type", "Aggiungi mezzo": "Add boat", "A terra e sicurezza": "Shore and safety", "Beach master": "Beach master", "Responsabile sicurezza campo": "Area safety officer", "Delegato di classe": "Class representative", "Note": "Notes", "Annotazioni per questo campo": "Notes for this area", "Nome e cognome": "Full name", "Telefono": "Phone", "Chiama": "Call", "Colori boe": "Mark colours", "Boa": "Mark", "Nome boa": "Mark name", "Colore": "Colour", "Colore…": "Colour…", "Quantità": "Quantity", "robotica": "robotic", "Nessuna boa.": "No marks.", "Aggiungi boa": "Add mark", "Totale boe:": "Total marks:", "Partenza": "Start", "Arrivo": "Finish", "Scegli il mezzo": "Choose the boat", "di": "of", "Aggiungi un mezzo nella scheda Squadra.": "Add a boat in the Team tab.", "Caricato": "Loaded", "Dotazione": "Item", "Nessuna dotazione per questo mezzo.": "No equipment for this boat.", "Nuova dotazione": "New item", "Aggiungi": "Add", "Azzera le spunte": "Clear ticks", "Nessuna bandiera assegnata a questo mezzo.": "No flags assigned to this boat.", "Scegli bandiere dall’archivio": "Choose flags from the library", "Modalità": "Mode", "Sposta e seleziona": "Move and select", "Disegna frecce": "Draw arrows", "Freccia": "Arrow", "Inverti verso": "Reverse direction", "Raddrizza": "Straighten", "Togli dal grafico": "Remove from drawing", "Apri scheda": "Open card", "Percorso del campo": "Course of the area", "Caricamento dell’immagine…": "Loading image…", "Carica l’immagine del percorso, oppure lavora sulla griglia": "Upload the course image, or work on the grid", "Tocca un mezzo per vederne la scheda.": "Tap a boat to see its card.", "Disegna col dito il percorso, dritto o curvo, partendo dall’inizio verso la direzione di percorrenza.": "Draw the course with your finger, straight or curved, starting from the beginning towards the sailing direction.", "Trascina i cerchi alle estremità per spostare la freccia e quello centrale per curvarla.": "Drag the end circles to move the arrow and the middle one to bend it.", "Trascina gli oggetti per spostarli. Toccane uno per selezionarlo e toglierlo dal grafico.": "Drag items to move them. Tap one to select it and remove it from the drawing.", "Caricamento…": "Loading…", "Sostituisci immagine": "Replace image", "Carica immagine percorso": "Upload course image", "Rimuovi immagine": "Remove image", "Cancella tutte le frecce": "Delete all arrows", "Tocca una boa per metterla sul percorso. Nomi e colori si cambiano nella scheda Boe.": "Tap a mark to place it on the course. Names and colours are changed in the Marks tab.", "Tutte le boe sono sul percorso.": "All marks are on the course.", "Aggiungi le boe nella scheda Boe.": "Add the marks in the Marks tab.", "Aggiungi un mezzo": "Add a boat", "Il mezzo compare sull’immagine e si apre la sua scheda da compilare.": "The boat appears on the image and its card opens, ready to fill in.", "Mezzi da posizionare": "Boats to place", "Tocca per aggiungere o togliere": "Tap to add or remove", "Fatto": "Done", "Aggiungile da Archivio bandiere nella pagina principale.": "Add them from the Flag library on the main page.", "Scheda mezzo": "Boat card", "Nome": "Name", "Sigla sulla mappa": "Code on the map", "Dotazioni e bandiere di questo mezzo sono nelle schede Dotazioni e Bandiere del campo.": "This boat’s equipment and flags are in the area’s Equipment and Flags tabs.", "Togli dal percorso": "Remove from course", "Metti sul percorso": "Place on course", "Elimina mezzo": "Delete boat", "Immagine troppo grande per essere salvata su questo dispositivo.": "Image too large to be saved on this device.", "Questo file non è un’immagine leggibile. Prova con un JPG o un PNG.": "This file is not a readable image. Try a JPG or PNG.", "Bandiere di classe": "Class flags", "Nome classe": "Class name", "Nessuna bandiera di classe. Aggiungi quelle delle classi in regata.": "No class flags. Add those of the classes racing.", "Aggiungi bandiera di classe": "Add class flag", "I significati sono indicativi: fanno fede il Regolamento di Regata e le Istruzioni di Regata della manifestazione.": "Meanings are indicative: the Racing Rules of Sailing and the event’s Sailing Instructions prevail.", "Classe": "Class", "Carica immagine": "Upload image", "Cambia immagine": "Change image", "Togli immagine": "Remove image", "Per ogni classe puoi caricare la foto o il logo della sua bandiera; senza immagine la miniatura usa colore e nome.": "For each class you can upload a photo or logo of its flag; without an image the thumbnail uses colour and name.", "responsabile campo": "area manager", "presidente comitato": "principal race officer", "componente comitato": "committee member", "beach master": "beach master", "sicurezza": "safety", "delegato di classe": "class representative", "responsabile": "skipper", "aiuto": "helper", "assistente": "crew", "Nome, barca o ruolo": "Name, boat or role", "Nessun risultato per": "No results for", "La rubrica si riempie man mano che inserisci i nomi nei campi.": "Contacts fill in as you add names in the areas.", "Mezzi per campo": "Boats per area", "Tot.": "Tot.", "Totale": "Total", "Il conteggio segue i mezzi inseriti nella scheda Squadra di ogni campo.": "The count follows the boats entered in each area’s Team tab.", "Preparo il PDF…": "Preparing the PDF…", "Manifestazione": "Event", "Organizzazione dei campi di regata": "Race course organisation", "Contatti e canali": "Contacts and channels", "Canale": "Channel", "Ruolo": "Role", "Campi": "Course areas", "VHF": "VHF", "Mezzo": "Boat", "Comitato di regata e responsabili": "Race committee and managers", "Presidente comitato": "Principal race officer", "Sicurezza campo": "Area safety", "Quantita'": "Qty", "Tipo": "Type", "Robotica": "Robotic", "Ancorata": "Anchored", "Dotazioni e bandiere per mezzo": "Equipment and flags per boat", "Pagina": "Page", "PDF pronto.": "PDF ready.", "Non sono riuscito a creare il PDF. Riprova.": "Could not create the PDF. Please try again.", "Battello comitato": "Committee boat", "Controstarter": "Pin end boat", "Battello arrivi": "Finish boat", "Gommone posaboe": "Mark-laying RIB", "Gommone assistenza": "Safety RIB", "Segnali a terra": "Shore signals", "Posaboe": "Mark boat", "Assistenza": "Safety", "Posaboe G1": "Mark boat G1", "Posaboe G2": "Mark boat G2", "Posaboe G3 + assistenza partenza": "Mark boat G3 + start support", "Assistenza A1": "Safety A1", "Assistenza A2": "Safety A2", "CdR": "RC", "Arrivi": "FIN", "Drizze": "Halyards", "Pali": "Poles", "Asta per 1° ripetitore": "Pole for 1st substitute", "Cime per ancoraggio": "Anchor lines", "VHF + scorta, GPS": "VHF + spare, GPS", "Trombe e ricariche": "Horns and refills", "Tabellone gradi bussola e percorso": "Bearing and course board", "Lavagna per UFD/BFD": "Board for UFD/BFD", "Pennarelli non indelebili": "Dry-erase markers", "Bandi, istruzioni, elenco iscritti": "NoR, SIs, entry list", "Registratore": "Recorder", "Binocolo": "Binoculars", "Bussola": "Compass", "Anemometro": "Anemometer", "Asta per bandiera": "Flag pole", "Ormeggio e cime": "Mooring and lines", "Trombe e fischietto": "Horns and whistle", "Carta, penna, registratore": "Paper, pen, recorder", "Boa arrivo": "Finish mark", "2 ormeggi e cime": "2 moorings and lines", "Carta e penna, registratore": "Paper and pen, recorder", "Moduli di arrivo": "Finish sheets", "Elenco iscritti": "Entry list", "Bussola, anemometro": "Compass, anemometer", "Filo di lana": "Wind tell-tale", "1 ormeggio e cime": "1 mooring and lines", "Identificativo del campo": "Area flag", "Pennelli numerici": "Numeral pennants", "Trombetta": "Horn", "Lettere": "Letters", "Intelligenza e ripetitori": "Answering pennant and substitutes", "Regata e colori": "Racing and colours", "Intelligenza": "Answering pennant", "1° ripetitore": "1st substitute", "2° ripetitore": "2nd substitute", "3° ripetitore": "3rd substitute", "Nera": "Black", "Arancione": "Orange", "Blu": "Blue", "Verde": "Green", "Gialla": "Yellow", "Bianca": "White", "Rossa": "Red", "Viola": "Purple", "arancione": "orange", "gialla": "yellow", "rossa": "red", "blu": "blue", "verde": "green", "viola": "purple", "bianca": "white", "nera": "black", "rosa": "pink", "Pennello 1": "Pennant 1", "Pennello 2": "Pennant 2", "Pennello 3": "Pennant 3", "Pennello 4": "Pennant 4", "Pennello 5": "Pennant 5", "Pennello 6": "Pennant 6", "Pennello 7": "Pennant 7", "Pennello 8": "Pennant 8", "Pennello 9": "Pennant 9", "Pennello 0": "Pennant 0", "Sotto intelligenza: nessun’altra prova oggi": "Over AP: no more racing today", "Protesta": "Protest", "Cambio di percorso": "Change of course", "A terra: si può uscire (vedi IdR)": "Ashore: boats may leave harbour (see SIs)", "Sotto intelligenza: altri segnali a terra": "Over AP: further signals ashore", "Regola del minuto (RRS 30.1)": "One-minute rule (RRS 30.1)", "A terra: comunicato esposto. In acqua: venite a portata di voce": "Ashore: notice posted. Afloat: come within hail", "Boa sostitutiva": "Mark replaced", "Annullamento": "Abandonment", "Pompaggio consentito (vedi IdR)": "Pumping allowed (see SIs)", "Segnale preparatorio": "Preparatory signal", "Percorso ridotto": "Shortened course", "Regola della bandiera U": "U flag rule", "Richiamo individuale": "Individual recall", "Obbligo di indossare il salvagente": "Life jackets required", "Regola Z (20%)": "Z flag rule (20%)", "Prove non partite differite": "Races not started are postponed", "Richiamo generale": "General recall", "Regola della bandiera nera": "Black flag rule", "Estremità della linea di partenza": "Starting line end", "Battello arrivi in posizione": "Finish boat on station", "Tinta unita": "Solid", "Metà sotto": "Bottom half", "Metà destra": "Right half", "Diagonale in salita": "Diagonal up", "Diagonale in discesa": "Diagonal down", "Originale": "Original", "Personalizzato": "Custom", "Archivio": "Library", "Bandiera di classe": "Class flag", "Es. ILCA 6": "e.g. ILCA 6", "Logo": "Logo", "Testo": "Text", "Bandiera internazionale": "International flag", "Bandiera": "Flag", "Sfondo": "Background", "Colore bandiera": "Flag colour", "Secondo colore": "Second colour", "Es. ILCA": "e.g. ILCA", "Colore testo": "Text colour", "Nessuno": "None", "Colore logo": "Logo colour", "Salva": "Save", "Elimina bandiera": "Delete flag", "Comuni": "Common", "Altri colori": "Named", "Scegli un colore": "Pick a colour", "Importa e ritaglia un’immagine…": "Import and crop an image…", "Per il logo ufficiale di una classe importa la sua immagine: gli emblemi qui sotto sono tipografici, non i loghi originali.": "For a class’s official logo import its image: the emblems below are typographic, not the original logos.", "Cerca classe": "Search class", "Simboli": "Symbols", "Ritaglia": "Crop", "Rimuovi lo sfondo bianco": "Remove white background", "Trascina e ingrandisci per inquadrare solo il logo. Con lo sfondo rimosso, l’anteprima usa il colore della bandiera.": "Drag and zoom to frame only the logo. With the background removed, the preview uses the flag colour.", "Elaborazione…": "Processing…", "Usa": "Use", "Senza nome": "Unnamed", "Libreria condivisa": "Shared library", "Bandiere caricate dall’organizzazione, disponibili per tutti. Puoi duplicarle per modificarle.": "Flags uploaded by the organisers, available to everyone. You can duplicate them to edit.", "Duplica": "Duplicate", "Condividi con tutti": "Share with everyone", "Esporta le bandiere di classe nel file libreria.json e caricalo nel repository GitHub dell’app: chiunque apra Racecourse le troverà nella Libreria condivisa.": "Export the class flags to a libreria.json file and upload it to the app’s GitHub repository: everyone opening Racecourse will find them in the Shared library.", "Esporta libreria condivisa": "Export shared library", "File libreria.json pronto: caricalo nel repository GitHub con questo nome esatto.": "libreria.json file ready: upload it to the GitHub repository with exactly this name.", "copia": "copy", "imbarcazione, responsabile, assistente": "boat, skipper, crew", "Boe: tipo e colore": "Marks: type and colour", "Richiesta al circolo": "Request to the club", "Fai completare i dati al circolo e importa la risposta": "Have the club fill in data and import the reply", "Spunta i dati che il circolo deve completare. Il circolo riceve un link, compila solo quelli e ti rimanda un link di risposta da importare.": "Tick the data the club must complete. The club receives a link, fills in only those and sends you back a reply link to import.", "Tutto": "All", "Crea e invia la richiesta": "Create and send the request", "Link della richiesta": "Request link", "Importa la risposta": "Import the reply", "Quando il circolo risponde, apri il link ricevuto. Se usi l’app installata, copia il link e incollalo qui.": "When the club replies, open the link you received. If you use the installed app, copy the link and paste it here.", "Incolla qui il link di risposta": "Paste the reply link here", "Apri la risposta": "Open the reply", "la manifestazione": "the event", "Il comitato di regata di": "The race committee of", "ti chiede di completare alcuni dati. Apri il link, compila e premi «Invia la risposta»:": "asks you to complete some data. Open the link, fill it in and tap “Send reply”:", "Richiesta inviata.": "Request sent.", "Link copiato: incollalo in una mail o in WhatsApp per il circolo.": "Link copied: paste it into an email or WhatsApp for the club.", "Copia il link qui sotto e invialo al circolo.": "Copy the link below and send it to the club.", "Questo link non è valido o è incompleto. Chiedi al comitato di inviarlo di nuovo.": "This link is invalid or incomplete. Ask the committee to send it again.", "Il comitato di regata ti chiede di completare questi dati. Correggi quelli già presenti se non sono giusti, poi premi «Invia la risposta» in fondo.": "The race committee asks you to complete this data. Correct any existing entries if wrong, then tap “Send reply” at the bottom.", "Il numero delle boe è deciso dal comitato: indica per ognuna tipo e colore.": "The number of marks is set by the committee: give type and colour for each.", "Tipo…": "Type…", "Invia la risposta": "Send reply", "Link della risposta": "Reply link", "Risposta del circolo per": "Club reply for", "Risposta inviata. Grazie!": "Reply sent. Thank you!", "Link copiato: invialo al comitato via mail o WhatsApp.": "Link copied: send it to the committee by email or WhatsApp.", "Copia il link qui sotto e invialo al comitato.": "Copy the link below and send it to the committee.", "Risposta del circolo": "Club reply", "Questo link di risposta non è valido o è incompleto.": "This reply link is invalid or incomplete.", "Ricevuta il": "Received on", "Controlla i dati e premi «Importa» per inserirli nei campi.": "Check the data and tap “Import” to add it to your areas.", "Importa": "Import", "Risposta importata nei tuoi dati.": "Reply imported into your data.", "Non trovo un link di risposta valido in quello che hai incollato.": "No valid reply link found in what you pasted.", "Cilindrica": "Cylinder", "Conica": "Cone", "Tetraedro": "Tetrahedron", "Siluro": "Spar", "Sferica": "Sphere", "Altro": "Other", "Attenzione: questa risposta non corrisponde a nessuna richiesta inviata da questo dispositivo. Importala solo se è davvero tua (per esempio se hai mandato la richiesta da un altro telefono o dal PC).": "Warning: this reply does not match any request sent from this device. Import it only if it is really yours (for example if you sent the request from another phone or from the PC).", "Importa comunque": "Import anyway", "Togli": "Remove", "Nessuna classe scelta": "No class selected", "Scegli una classe": "Choose a class", "Scegli una classe…": "Choose a class…", "Derive": "Dinghies", "Skiff e multiscafi": "Skiffs and multihulls", "Tavole e kite": "Boards and kites", "Altre classi, scritte a mano": "Other classes, typed in", "Note dalla normativa di classe": "Notes from the class regulations", "bandiera di classe per il segnale di avviso (RRS 26)": "class flag for the warning signal (RRS 26)", "Proponi le bandiere dalle classi": "Suggest flags from the classes", "Scegli prima le classi nella scheda Squadra.": "Choose the classes in the Team tab first.", "Bandiere proposte": "Suggested flags", "già assegnata": "already assigned", "Proposta basata su Regolamento di Regata, Policies World Sailing e normative FIV di classe 2026. Togli o aggiungi le spunte: verranno aggiunte solo le bandiere selezionate, quelle già presenti restano. Puoi sempre modificare tutto a mano dopo.": "Suggestion based on the Racing Rules of Sailing, World Sailing Policies and the 2026 FIV class regulations. Tick or untick: only the selected flags are added and existing ones stay. You can always change everything by hand afterwards.", "Aggiungi le bandiere selezionate": "Add the selected flags", "Le IdR della manifestazione possono prevedere segnali diversi: controllale sempre.": "The event SIs may set different signals: always check them.", "Nessuna bandiera nuova da proporre.": "No new flags to suggest.", "Già assegnate": "Already assigned", "Già nell’elenco del mezzo": "Already in the boat’s list", "Qui sotto c’è l’elenco delle bandiere di ogni mezzo. La spunta serve a segnare quelle già caricate a bordo.": "Below is each boat’s flag list. Tick a flag once it is loaded on board.", "Aggiunta a mano": "Added by hand", "Scegli le bandiere necessarie": "Choose the flags needed", "L’app propone le bandiere in base alle classi del campo; decidi tu quali servono.": "The app suggests flags based on the area’s classes; you decide which are needed.", "Scegli le classi nella scheda Squadra per avere una proposta in base alla normativa.": "Choose the classes in the Team tab to get a suggestion based on the regulations.", "Qui sotto c’è l’elenco delle bandiere necessarie per ogni mezzo. La spunta serve a segnare quelle già caricate a bordo.": "Below is the list of flags each boat needs. Tick a flag once it is loaded on board.", "Già nell’elenco, non proposte": "Already in the list, not suggested", "Nessuna bandiera per questo mezzo. Puoi aggiungerle dall’archivio.": "No flags for this boat. You can add them from the library.", "Bandiere necessarie": "Flags needed", "Spunta solo le bandiere che servono a ogni mezzo: diventeranno il suo elenco. Proposta basata su Regolamento di Regata, Policies World Sailing e normative FIV di classe 2026; le spunte di “a bordo” già messe restano.": "Tick only the flags each boat needs: they become its list. Suggestion based on the Racing Rules of Sailing, World Sailing Policies and the 2026 FIV class regulations; existing “on board” ticks are kept.", "Salva gli elenchi": "Save the lists", "Togli dall’elenco": "Remove from list", "Dati salvati su questo dispositivo.": "Data saved on this device.", "Fai un backup": "Make a backup", "per spostarli su un altro telefono o conservarli.": "to move it to another phone or keep it safe.", "Spazio esaurito su questo dispositivo: rimuovi qualche immagine per continuare a salvare.": "Storage full on this device: remove some images to keep saving.", "Backup dei dati": "Data backup", "Salva tutti i dati dell’evento, immagini comprese, in un file. Lo puoi riaprire su un altro telefono o tenere come copia di sicurezza.": "Saves all event data, images included, in a file. You can open it on another phone or keep it as a safety copy.", "Esporta backup": "Export backup", "Importa backup": "Import backup", "Backup salvato.": "Backup saved.", "Questo file non è un backup di Racecourse.": "This file is not a Racecourse backup.", "Sostituire i dati attuali con il backup del": "Replace current data with the backup from", "Sostituisci": "Replace", "Annulla": "Cancel", "Backup importato.": "Backup imported.", "Lingua": "Language", "Installa l’app": "Install the app", "Su iPhone: Condividi, poi «Aggiungi alla schermata Home». Su Android: menu ⋮, poi «Installa app». Così funziona anche offline e i dati restano al sicuro.": "On iPhone: Share, then “Add to Home Screen”. On Android: menu ⋮, then “Install app”. It then works offline and your data stays safe.", "Organizzazione dei campi di regata: squadre, boe, bandiere e percorsi.": "Race course organisation: teams, marks, flags and courses."};
+const EN = {"Racecourse": "Racecourse", "Codice di accesso": "Access code", "Inserisci il codice che ti ha dato l’organizzazione.": "Enter the code you received from the organisers.", "Entra": "Enter", "Codice non corretto.": "Wrong code.", "Nome della manifestazione": "Event name", "Campi da gestire": "Course areas", "Da 1 a 6": "From 1 to 6", "Un campo in meno": "One area less", "Un campo in più": "One area more", "Classi da inserire": "Classes to be added", "VHF campo": "Area VHF", "Dati evento": "Event details", "Segreteria, medico, classifiche, Victor": "Race office, doctor, scoring, Victor", "Archivio bandiere": "Flag library", "Codice internazionale e classi": "International code and classes", "Rubrica": "Contacts", "Cerca persone e barche": "Search people and boats", "Riepilogo mezzi": "Boats summary", "Battelli e gommoni per campo": "Boats and RIBs per area", "Esporta PDF per i circoli": "Export PDF for the clubs", "‹ Campi": "‹ Areas", "Campo": "Area", "Canale comune": "Common channel", "Es. 71": "e.g. 71", "A terra": "Ashore", "Segreteria": "Race office", "Medico": "Doctor", "Classifiche": "Scoring", "Responsabile classifiche": "Scoring manager", "Nessun responsabile.": "No one added.", "Aggiungi responsabile classifiche": "Add scoring manager", "Nuova manifestazione": "New event", "Svuota nomi, numeri, boe e spunte di tutti i campi. Le bandiere di classe dell’archivio restano.": "Clears names, numbers, marks and ticks in every area. Class flags in the library are kept.", "Svuota tutti i dati": "Clear all data", "Tocca di nuovo per svuotare tutto": "Tap again to clear everything", "Conferma": "Confirm", "Elimina": "Delete", "Esporta PDF di questo campo": "Export PDF of this area", "Squadra": "Team", "Boe": "Marks", "Dotazioni": "Equipment", "Bandiere": "Flags", "Percorso": "Course", "Classi": "Classes", "Es. ILCA 7, ILCA 6": "e.g. ILCA 7, ILCA 6", "Canale VHF": "VHF channel", "Es. 72": "e.g. 72", "Responsabile campo": "Area manager", "Comitato di regata": "Race committee", "Presidente": "Principal race officer", "Componente": "Member", "Aggiungi componente": "Add member", "Mezzi in acqua": "Boats on the water", "Imbarcazione": "Boat", "Nome o modello della barca": "Boat name or model", "Sigla": "Code", "Responsabile": "Skipper", "Aiuto": "Helper", "Assistente": "Crew", "Tipo di mezzo": "Boat type", "Aggiungi mezzo": "Add boat", "A terra e sicurezza": "Shore and safety", "Beach master": "Beach master", "Responsabile sicurezza campo": "Area safety officer", "Delegato di classe": "Class representative", "Note": "Notes", "Annotazioni per questo campo": "Notes for this area", "Nome e cognome": "Full name", "Telefono": "Phone", "Chiama": "Call", "Colori boe": "Mark colours", "Boa": "Mark", "Nome boa": "Mark name", "Colore": "Colour", "Colore…": "Colour…", "Quantità": "Quantity", "robotica": "robotic", "Nessuna boa.": "No marks.", "Aggiungi boa": "Add mark", "Totale boe:": "Total marks:", "Partenza": "Start", "Arrivo": "Finish", "Scegli il mezzo": "Choose the boat", "di": "of", "Aggiungi un mezzo nella scheda Squadra.": "Add a boat in the Team tab.", "Caricato": "Loaded", "Dotazione": "Item", "Nessuna dotazione per questo mezzo.": "No equipment for this boat.", "Nuova dotazione": "New item", "Aggiungi": "Add", "Azzera le spunte": "Clear ticks", "Nessuna bandiera assegnata a questo mezzo.": "No flags assigned to this boat.", "Scegli bandiere dall’archivio": "Choose flags from the library", "Modalità": "Mode", "Sposta e seleziona": "Move and select", "Disegna frecce": "Draw arrows", "Freccia": "Arrow", "Inverti verso": "Reverse direction", "Raddrizza": "Straighten", "Togli dal grafico": "Remove from drawing", "Apri scheda": "Open card", "Percorso del campo": "Course of the area", "Caricamento dell’immagine…": "Loading image…", "Carica l’immagine del percorso, oppure lavora sulla griglia": "Upload the course image, or work on the grid", "Tocca un mezzo per vederne la scheda.": "Tap a boat to see its card.", "Disegna col dito il percorso, dritto o curvo, partendo dall’inizio verso la direzione di percorrenza.": "Draw the course with your finger, straight or curved, starting from the beginning towards the sailing direction.", "Trascina i cerchi alle estremità per spostare la freccia e quello centrale per curvarla.": "Drag the end circles to move the arrow and the middle one to bend it.", "Trascina gli oggetti per spostarli. Toccane uno per selezionarlo e toglierlo dal grafico.": "Drag items to move them. Tap one to select it and remove it from the drawing.", "Caricamento…": "Loading…", "Sostituisci immagine": "Replace image", "Carica immagine percorso": "Upload course image", "Rimuovi immagine": "Remove image", "Cancella tutte le frecce": "Delete all arrows", "Tocca una boa per metterla sul percorso. Nomi e colori si cambiano nella scheda Boe.": "Tap a mark to place it on the course. Names and colours are changed in the Marks tab.", "Tutte le boe sono sul percorso.": "All marks are on the course.", "Aggiungi le boe nella scheda Boe.": "Add the marks in the Marks tab.", "Aggiungi un mezzo": "Add a boat", "Il mezzo compare sull’immagine e si apre la sua scheda da compilare.": "The boat appears on the image and its card opens, ready to fill in.", "Mezzi da posizionare": "Boats to place", "Tocca per aggiungere o togliere": "Tap to add or remove", "Fatto": "Done", "Aggiungile da Archivio bandiere nella pagina principale.": "Add them from the Flag library on the main page.", "Scheda mezzo": "Boat card", "Nome": "Name", "Sigla sulla mappa": "Code on the map", "Dotazioni e bandiere di questo mezzo sono nelle schede Dotazioni e Bandiere del campo.": "This boat’s equipment and flags are in the area’s Equipment and Flags tabs.", "Togli dal percorso": "Remove from course", "Metti sul percorso": "Place on course", "Elimina mezzo": "Delete boat", "Immagine troppo grande per essere salvata su questo dispositivo.": "Image too large to be saved on this device.", "Questo file non è un’immagine leggibile. Prova con un JPG o un PNG.": "This file is not a readable image. Try a JPG or PNG.", "Bandiere di classe": "Class flags", "Nome classe": "Class name", "Nessuna bandiera di classe. Aggiungi quelle delle classi in regata.": "No class flags. Add those of the classes racing.", "Aggiungi bandiera di classe": "Add class flag", "I significati sono indicativi: fanno fede il Regolamento di Regata e le Istruzioni di Regata della manifestazione.": "Meanings are indicative: the Racing Rules of Sailing and the event’s Sailing Instructions prevail.", "Classe": "Class", "Carica immagine": "Upload image", "Cambia immagine": "Change image", "Togli immagine": "Remove image", "Per ogni classe puoi caricare la foto o il logo della sua bandiera; senza immagine la miniatura usa colore e nome.": "For each class you can upload a photo or logo of its flag; without an image the thumbnail uses colour and name.", "responsabile campo": "area manager", "presidente comitato": "principal race officer", "componente comitato": "committee member", "beach master": "beach master", "sicurezza": "safety", "delegato di classe": "class representative", "responsabile": "skipper", "aiuto": "helper", "assistente": "crew", "Nome, barca o ruolo": "Name, boat or role", "Nessun risultato per": "No results for", "La rubrica si riempie man mano che inserisci i nomi nei campi.": "Contacts fill in as you add names in the areas.", "Mezzi per campo": "Boats per area", "Tot.": "Tot.", "Totale": "Total", "Il conteggio segue i mezzi inseriti nella scheda Squadra di ogni campo.": "The count follows the boats entered in each area’s Team tab.", "Preparo il PDF…": "Preparing the PDF…", "Manifestazione": "Event", "Organizzazione dei campi di regata": "Race course organisation", "Contatti e canali": "Contacts and channels", "Canale": "Channel", "Ruolo": "Role", "Campi": "Course areas", "VHF": "VHF", "Mezzo": "Boat", "Comitato di regata e responsabili": "Race committee and managers", "Presidente comitato": "Principal race officer", "Sicurezza campo": "Area safety", "Quantita'": "Qty", "Tipo": "Type", "Robotica": "Robotic", "Ancorata": "Anchored", "Dotazioni e bandiere per mezzo": "Equipment and flags per boat", "Pagina": "Page", "PDF pronto.": "PDF ready.", "Non sono riuscito a creare il PDF. Riprova.": "Could not create the PDF. Please try again.", "Battello comitato": "Committee boat", "Controstarter": "Pin end boat", "Battello arrivi": "Finish boat", "Gommone posaboe": "Mark-laying RIB", "Gommone assistenza": "Safety RIB", "Segnali a terra": "Shore signals", "Posaboe": "Mark boat", "Assistenza": "Safety", "Posaboe G1": "Mark boat G1", "Posaboe G2": "Mark boat G2", "Posaboe G3 + assistenza partenza": "Mark boat G3 + start support", "Assistenza A1": "Safety A1", "Assistenza A2": "Safety A2", "CdR": "RC", "Arrivi": "FIN", "Drizze": "Halyards", "Pali": "Poles", "Asta per 1° ripetitore": "Pole for 1st substitute", "Cime per ancoraggio": "Anchor lines", "VHF + scorta, GPS": "VHF + spare, GPS", "Trombe e ricariche": "Horns and refills", "Tabellone gradi bussola e percorso": "Bearing and course board", "Lavagna per UFD/BFD": "Board for UFD/BFD", "Pennarelli non indelebili": "Dry-erase markers", "Bandi, istruzioni, elenco iscritti": "NoR, SIs, entry list", "Registratore": "Recorder", "Binocolo": "Binoculars", "Bussola": "Compass", "Anemometro": "Anemometer", "Asta per bandiera": "Flag pole", "Ormeggio e cime": "Mooring and lines", "Trombe e fischietto": "Horns and whistle", "Carta, penna, registratore": "Paper, pen, recorder", "Boa arrivo": "Finish mark", "2 ormeggi e cime": "2 moorings and lines", "Carta e penna, registratore": "Paper and pen, recorder", "Moduli di arrivo": "Finish sheets", "Elenco iscritti": "Entry list", "Bussola, anemometro": "Compass, anemometer", "Filo di lana": "Wind tell-tale", "1 ormeggio e cime": "1 mooring and lines", "Identificativo del campo": "Area flag", "Pennelli numerici": "Numeral pennants", "Trombetta": "Horn", "Lettere": "Letters", "Intelligenza e ripetitori": "Answering pennant and substitutes", "Regata e colori": "Racing and colours", "Intelligenza": "Answering pennant", "1° ripetitore": "1st substitute", "2° ripetitore": "2nd substitute", "3° ripetitore": "3rd substitute", "Nera": "Black", "Arancione": "Orange", "Blu": "Blue", "Verde": "Green", "Gialla": "Yellow", "Bianca": "White", "Rossa": "Red", "Viola": "Purple", "arancione": "orange", "gialla": "yellow", "rossa": "red", "blu": "blue", "verde": "green", "viola": "purple", "bianca": "white", "nera": "black", "rosa": "pink", "Pennello 1": "Pennant 1", "Pennello 2": "Pennant 2", "Pennello 3": "Pennant 3", "Pennello 4": "Pennant 4", "Pennello 5": "Pennant 5", "Pennello 6": "Pennant 6", "Pennello 7": "Pennant 7", "Pennello 8": "Pennant 8", "Pennello 9": "Pennant 9", "Pennello 0": "Pennant 0", "Sotto intelligenza: nessun’altra prova oggi": "Over AP: no more racing today", "Protesta": "Protest", "Cambio di percorso": "Change of course", "A terra: si può uscire (vedi IdR)": "Ashore: boats may leave harbour (see SIs)", "Sotto intelligenza: altri segnali a terra": "Over AP: further signals ashore", "Regola del minuto (RRS 30.1)": "One-minute rule (RRS 30.1)", "A terra: comunicato esposto. In acqua: venite a portata di voce": "Ashore: notice posted. Afloat: come within hail", "Boa sostitutiva": "Mark replaced", "Annullamento": "Abandonment", "Pompaggio consentito (vedi IdR)": "Pumping allowed (see SIs)", "Segnale preparatorio": "Preparatory signal", "Percorso ridotto": "Shortened course", "Regola della bandiera U": "U flag rule", "Richiamo individuale": "Individual recall", "Obbligo di indossare il salvagente": "Life jackets required", "Regola Z (20%)": "Z flag rule (20%)", "Prove non partite differite": "Races not started are postponed", "Richiamo generale": "General recall", "Regola della bandiera nera": "Black flag rule", "Estremità della linea di partenza": "Starting line end", "Battello arrivi in posizione": "Finish boat on station", "Tinta unita": "Solid", "Metà sotto": "Bottom half", "Metà destra": "Right half", "Diagonale in salita": "Diagonal up", "Diagonale in discesa": "Diagonal down", "Originale": "Original", "Personalizzato": "Custom", "Archivio": "Library", "Bandiera di classe": "Class flag", "Es. ILCA 6": "e.g. ILCA 6", "Logo": "Logo", "Testo": "Text", "Bandiera internazionale": "International flag", "Bandiera": "Flag", "Sfondo": "Background", "Colore bandiera": "Flag colour", "Secondo colore": "Second colour", "Es. ILCA": "e.g. ILCA", "Colore testo": "Text colour", "Nessuno": "None", "Colore logo": "Logo colour", "Salva": "Save", "Elimina bandiera": "Delete flag", "Comuni": "Common", "Altri colori": "Named", "Scegli un colore": "Pick a colour", "Importa e ritaglia un’immagine…": "Import and crop an image…", "Per il logo ufficiale di una classe importa la sua immagine: gli emblemi qui sotto sono tipografici, non i loghi originali.": "For a class’s official logo import its image: the emblems below are typographic, not the original logos.", "Cerca classe": "Search class", "Simboli": "Symbols", "Ritaglia": "Crop", "Rimuovi lo sfondo bianco": "Remove white background", "Trascina e ingrandisci per inquadrare solo il logo. Con lo sfondo rimosso, l’anteprima usa il colore della bandiera.": "Drag and zoom to frame only the logo. With the background removed, the preview uses the flag colour.", "Elaborazione…": "Processing…", "Usa": "Use", "Senza nome": "Unnamed", "Libreria condivisa": "Shared library", "Bandiere caricate dall’organizzazione, disponibili per tutti. Puoi duplicarle per modificarle.": "Flags uploaded by the organisers, available to everyone. You can duplicate them to edit.", "Duplica": "Duplicate", "Condividi con tutti": "Share with everyone", "Esporta le bandiere di classe nel file libreria.json e caricalo nel repository GitHub dell’app: chiunque apra Racecourse le troverà nella Libreria condivisa.": "Export the class flags to a libreria.json file and upload it to the app’s GitHub repository: everyone opening Racecourse will find them in the Shared library.", "Esporta libreria condivisa": "Export shared library", "File libreria.json pronto: caricalo nel repository GitHub con questo nome esatto.": "libreria.json file ready: upload it to the GitHub repository with exactly this name.", "copia": "copy", "imbarcazione, responsabile, assistente": "boat, skipper, crew", "Boe: tipo e colore": "Marks: type and colour", "Richiesta al circolo": "Request to the club", "Fai completare i dati al circolo e importa la risposta": "Have the club fill in data and import the reply", "Spunta i dati che il circolo deve completare. Il circolo riceve un link, compila solo quelli e ti rimanda un link di risposta da importare.": "Tick the data the club must complete. The club receives a link, fills in only those and sends you back a reply link to import.", "Tutto": "All", "Crea e invia la richiesta": "Create and send the request", "Link della richiesta": "Request link", "Importa la risposta": "Import the reply", "Quando il circolo risponde, apri il link ricevuto. Se usi l’app installata, copia il link e incollalo qui.": "When the club replies, open the link you received. If you use the installed app, copy the link and paste it here.", "Incolla qui il link di risposta": "Paste the reply link here", "Apri la risposta": "Open the reply", "la manifestazione": "the event", "Il comitato di regata di": "The race committee of", "ti chiede di completare alcuni dati. Apri il link, compila e premi «Invia la risposta»:": "asks you to complete some data. Open the link, fill it in and tap “Send reply”:", "Richiesta inviata.": "Request sent.", "Link copiato: incollalo in una mail o in WhatsApp per il circolo.": "Link copied: paste it into an email or WhatsApp for the club.", "Copia il link qui sotto e invialo al circolo.": "Copy the link below and send it to the club.", "Questo link non è valido o è incompleto. Chiedi al comitato di inviarlo di nuovo.": "This link is invalid or incomplete. Ask the committee to send it again.", "Il comitato di regata ti chiede di completare questi dati. Correggi quelli già presenti se non sono giusti, poi premi «Invia la risposta» in fondo.": "The race committee asks you to complete this data. Correct any existing entries if wrong, then tap “Send reply” at the bottom.", "Il numero delle boe è deciso dal comitato: indica per ognuna tipo e colore.": "The number of marks is set by the committee: give type and colour for each.", "Tipo…": "Type…", "Invia la risposta": "Send reply", "Link della risposta": "Reply link", "Risposta del circolo per": "Club reply for", "Risposta inviata. Grazie!": "Reply sent. Thank you!", "Link copiato: invialo al comitato via mail o WhatsApp.": "Link copied: send it to the committee by email or WhatsApp.", "Copia il link qui sotto e invialo al comitato.": "Copy the link below and send it to the committee.", "Risposta del circolo": "Club reply", "Questo link di risposta non è valido o è incompleto.": "This reply link is invalid or incomplete.", "Ricevuta il": "Received on", "Controlla i dati e premi «Importa» per inserirli nei campi.": "Check the data and tap “Import” to add it to your areas.", "Importa": "Import", "Risposta importata nei tuoi dati.": "Reply imported into your data.", "Non trovo un link di risposta valido in quello che hai incollato.": "No valid reply link found in what you pasted.", "Cilindrica": "Cylinder", "Conica": "Cone", "Tetraedro": "Tetrahedron", "Siluro": "Spar", "Sferica": "Sphere", "Altro": "Other", "Attenzione: questa risposta non corrisponde a nessuna richiesta inviata da questo dispositivo. Importala solo se è davvero tua (per esempio se hai mandato la richiesta da un altro telefono o dal PC).": "Warning: this reply does not match any request sent from this device. Import it only if it is really yours (for example if you sent the request from another phone or from the PC).", "Importa comunque": "Import anyway", "Togli": "Remove", "Nessuna classe scelta": "No class selected", "Scegli una classe": "Choose a class", "Scegli una classe…": "Choose a class…", "Derive": "Dinghies", "Skiff e multiscafi": "Skiffs and multihulls", "Tavole e kite": "Boards and kites", "Altre classi, scritte a mano": "Other classes, typed in", "Note dalla normativa di classe": "Notes from the class regulations", "bandiera di classe per il segnale di avviso (RRS 26)": "class flag for the warning signal (RRS 26)", "Proponi le bandiere dalle classi": "Suggest flags from the classes", "Scegli prima le classi nella scheda Squadra.": "Choose the classes in the Team tab first.", "Bandiere proposte": "Suggested flags", "già assegnata": "already assigned", "Proposta basata su Regolamento di Regata, Policies World Sailing e normative FIV di classe 2026. Togli o aggiungi le spunte: verranno aggiunte solo le bandiere selezionate, quelle già presenti restano. Puoi sempre modificare tutto a mano dopo.": "Suggestion based on the Racing Rules of Sailing, World Sailing Policies and the 2026 FIV class regulations. Tick or untick: only the selected flags are added and existing ones stay. You can always change everything by hand afterwards.", "Aggiungi le bandiere selezionate": "Add the selected flags", "Le IdR della manifestazione possono prevedere segnali diversi: controllale sempre.": "The event SIs may set different signals: always check them.", "Nessuna bandiera nuova da proporre.": "No new flags to suggest.", "Già assegnate": "Already assigned", "Già nell’elenco del mezzo": "Already in the boat’s list", "Qui sotto c’è l’elenco delle bandiere di ogni mezzo. La spunta serve a segnare quelle già caricate a bordo.": "Below is each boat’s flag list. Tick a flag once it is loaded on board.", "Aggiunta a mano": "Added by hand", "Scegli le bandiere necessarie": "Choose the flags needed", "L’app propone le bandiere in base alle classi del campo; decidi tu quali servono.": "The app suggests flags based on the area’s classes; you decide which are needed.", "Scegli le classi nella scheda Squadra per avere una proposta in base alla normativa.": "Choose the classes in the Team tab to get a suggestion based on the regulations.", "Qui sotto c’è l’elenco delle bandiere necessarie per ogni mezzo. La spunta serve a segnare quelle già caricate a bordo.": "Below is the list of flags each boat needs. Tick a flag once it is loaded on board.", "Già nell’elenco, non proposte": "Already in the list, not suggested", "Nessuna bandiera per questo mezzo. Puoi aggiungerle dall’archivio.": "No flags for this boat. You can add them from the library.", "Bandiere necessarie": "Flags needed", "Spunta solo le bandiere che servono a ogni mezzo: diventeranno il suo elenco. Proposta basata su Regolamento di Regata, Policies World Sailing e normative FIV di classe 2026; le spunte di “a bordo” già messe restano.": "Tick only the flags each boat needs: they become its list. Suggestion based on the Racing Rules of Sailing, World Sailing Policies and the 2026 FIV class regulations; existing “on board” ticks are kept.", "Salva gli elenchi": "Save the lists", "Togli dall’elenco": "Remove from list", "Triangolo verde": "Green triangle", "Rettangolo rosso": "Red rectangle", "Più (+)": "Plus (+)", "Meno (−)": "Minus (−)", "Con C: cambio di direzione a dritta (RRS 33)": "With C: change of bearing to starboard (RRS 33)", "Con C: cambio di direzione a sinistra (RRS 33)": "With C: change of bearing to port (RRS 33)", "Con C: lato più lungo (RRS 33)": "With C: leg length increased (RRS 33)", "Con C: lato più corto (RRS 33)": "With C: leg length decreased (RRS 33)", "Segnali con C (cambio di percorso)": "Signals with C (change of course)", "Segnale da esporre con C (RRS 33)": "Signal displayed with C (RRS 33)", "Scegli le dotazioni necessarie": "Choose the equipment needed", "Qui sotto c’è l’elenco delle dotazioni necessarie per il mezzo. La spunta serve a segnare quelle già caricate a bordo.": "Below is the equipment this boat needs. Tick an item once it is loaded on board.", "Le voci nuove finiscono anche nell’archivio delle dotazioni.": "New items are also added to the equipment library.", "Dotazioni necessarie": "Equipment needed", "Spunta solo le dotazioni che servono a questo mezzo: diventeranno il suo elenco, anche nel PDF. Le spunte di “a bordo” già messe restano.": "Tick only the equipment this boat needs: it becomes its list, also in the PDF. Existing “on board” ticks are kept.", "Consigliate per": "Suggested for", "Altre dall’archivio": "Others from the library", "Voce nuova": "New item", "Es. Cassetta pronto soccorso": "e.g. First aid kit", "Salva l’elenco": "Save the list", "Archivio dotazioni": "Equipment library", "Tutte le dotazioni disponibili. Per ogni mezzo scegli quelle necessarie dalla scheda Dotazioni del campo.": "All available equipment. For each boat choose what is needed in the area’s Equipment tab.", "Predefinite": "Built-in", "Aggiunte da te": "Added by you", "Nessuna voce aggiunta.": "No items added.", "Elenco di tutte le dotazioni": "List of all equipment", "Le mie manifestazioni": "My events", "Con «Duplica» prepari una nuova regata partendo da una vecchia: restano campi, mezzi, boe, bandiere, dotazioni e percorsi; le spunte «a bordo» ripartono da zero.": "With “Duplicate” you prepare a new regatta from an old one: areas, boats, marks, flags, equipment and courses are kept; “on board” ticks start from zero.", "Modificata il": "Changed on", "In uso": "In use", "Apri": "Open", "Copia di": "Copy of", "Le bandiere di classe e l’archivio delle dotazioni sono in comune a tutte le manifestazioni.": "Class flags and the equipment library are shared by all events.", "Riepilogo": "Summary", "Vedi il riepilogo": "View the summary", "Questo è il contenuto del PDF. Controllalo prima di esportarlo.": "This is the content of the PDF. Check it before exporting.", "Backup importato come nuova manifestazione.": "Backup imported as a new event.", "Svuota questa manifestazione": "Clear this event", "Manifestazione in uso": "Event in use", "Cambia": "Change", "Per prepararne un’altra senza perdere questa, usa «Le mie manifestazioni» in home.": "To prepare another one without losing this, use “My events” on the home page.", "Dati salvati su questo dispositivo.": "Data saved on this device.", "Fai un backup": "Make a backup", "per spostarli su un altro telefono o conservarli.": "to move it to another phone or keep it safe.", "Spazio esaurito su questo dispositivo: rimuovi qualche immagine per continuare a salvare.": "Storage full on this device: remove some images to keep saving.", "Backup dei dati": "Data backup", "Salva tutti i dati dell’evento, immagini comprese, in un file. Lo puoi riaprire su un altro telefono o tenere come copia di sicurezza.": "Saves all event data, images included, in a file. You can open it on another phone or keep it as a safety copy.", "Esporta backup": "Export backup", "Importa backup": "Import backup", "Backup salvato.": "Backup saved.", "Questo file non è un backup di Racecourse.": "This file is not a Racecourse backup.", "Sostituire i dati attuali con il backup del": "Replace current data with the backup from", "Sostituisci": "Replace", "Annulla": "Cancel", "Backup importato.": "Backup imported.", "Lingua": "Language", "Installa l’app": "Install the app", "Su iPhone: Condividi, poi «Aggiungi alla schermata Home». Su Android: menu ⋮, poi «Installa app». Così funziona anche offline e i dati restano al sicuro.": "On iPhone: Share, then “Add to Home Screen”. On Android: menu ⋮, then “Install app”. It then works offline and your data stays safe.", "Organizzazione dei campi di regata: squadre, boe, bandiere e percorsi.": "Race course organisation: teams, marks, flags and courses."};
 let LANG = (()=>{ try{ const s=localStorage.getItem("racecourse-lang"); if (s==="it"||s==="en") return s; }catch(e){} return /^it\b/i.test(navigator.language||"") ? "it" : "en"; })();
 function t(s){ return LANG==="en" && EN[s]!=null ? EN[s] : s; }
 document.documentElement.lang = LANG;
@@ -337,9 +347,13 @@ const FLAGS = [
  {id:"VERDE",g:"R",nome:"Verde",d:r(0,0,60,40,"#2E8B3A")},
  {id:"GIALLA",g:"R",nome:"Gialla",d:r(0,0,60,40,C.Y)},
  {id:"BIANCA",g:"R",nome:"Bianca",d:r(0,0,60,40,C.W)},
- {id:"ROSSA",g:"R",nome:"Rossa",d:r(0,0,60,40,C.R)}
+ {id:"ROSSA",g:"R",nome:"Rossa",d:r(0,0,60,40,C.R)},
+ {id:"C_TRI",g:"X",nome:"Triangolo verde",d:r(0,0,60,40,C.W)+pg("30,6 50,34 10,34","#2E8B3A"),sig:"Con C: cambio di direzione a dritta (RRS 33)"},
+ {id:"C_RET",g:"X",nome:"Rettangolo rosso",d:r(0,0,60,40,C.W)+r(13,10,34,20,C.R),sig:"Con C: cambio di direzione a sinistra (RRS 33)"},
+ {id:"C_PLUS",g:"X",nome:"Più (+)",d:r(0,0,60,40,C.W)+r(26,7,8,26,C.K)+r(17,16,26,8,C.K),sig:"Con C: lato più lungo (RRS 33)"},
+ {id:"C_MINUS",g:"X",nome:"Meno (−)",d:r(0,0,60,40,C.W)+r(15,16,30,8,C.K),sig:"Con C: lato più corto (RRS 33)"}
 ];
-const GROUPS = [["L","Lettere"],["S","Intelligenza e ripetitori"],["N","Pennelli numerici"],["R","Regata e colori"],["C","Bandiere di classe"]];
+const GROUPS = [["L","Lettere"],["S","Intelligenza e ripetitori"],["N","Pennelli numerici"],["R","Regata e colori"],["X","Segnali con C (cambio di percorso)"],["C","Bandiere di classe"]];
 const FMAP = Object.fromEntries(FLAGS.map(f=>[f.id,f]));
 const CLASS_COLS = [["#1D4E9E","Blu"],["#C8102E","Rossa"],["#F5C400","Gialla"],["#2E8B3A","Verde"],["#7B3FA0","Viola"],["#F07A12","Arancione"],["#FFFFFF","Bianca"],["#1A1A1A","Nera"]];
 let uid = 0;
@@ -393,7 +407,7 @@ const P = () => ({n:"",t:""});
 const rid = () => Math.random().toString(36).slice(2,8);
 function newMezzo(tipo,nome){
   const fl = {};
-  return {id:rid(),tipo,nome:nome||TIPI[tipo],barca:"",resp:P(),ass:P(),dot:(DOT[tipo]||[]).map(x=>({t:t(x),ok:false})),fl};
+  return {id:rid(),tipo,nome:nome||TIPI[tipo],barca:"",resp:P(),ass:P(),dot:[],fl};
 }
 function defCampo(){
   const g3 = newMezzo("gp",t("Posaboe G3 + assistenza partenza"));
@@ -403,10 +417,25 @@ function defCampo(){
 }
 const defConfig = () => ({nome:"",n:1,victor:"",segreteria:P(),medico:P(),classifiche:[P()],classi:[]});
 
-const LKEY = "racecourse-v1";
-let S = {config:defConfig()};
-CAMPI.forEach(([k])=>S[k]=null);
-try { const c = JSON.parse(localStorage.getItem(LKEY)||"null"); if (c && c.config) S = Object.assign(S,c); } catch(e){}
+const LKEY = "racecourse-v1", EKEY = "racecourse-events", CKEY = "racecourse-cur", GKEY = "racecourse-mylib";
+function lsGet(k,d){ try{ const v = JSON.parse(localStorage.getItem(k)||"null"); return v==null ? d : v; }catch(e){ return d; } }
+function blankS(){ const s = {config:defConfig()}; CAMPI.forEach(([k])=>s[k]=null); return s; }
+function stripLib(s){ const c = JSON.parse(JSON.stringify(s)); delete c.config.classi; delete c.config.dotArch; return c; }
+function loadEventData(id){
+  const d = lsGet("racecourse-ev-"+id, null); S = blankS();
+  if (d && d.config){ S.config = Object.assign(defConfig(), d.config); CAMPI.forEach(([k])=>S[k]=d[k]||null); }
+  const g = lsGet(GKEY, {classi:[], dotArch:[]}); S.config.classi = g.classi||[]; S.config.dotArch = g.dotArch||[];
+}
+let S = blankS(), EVENTS = lsGet(EKEY, null), CUR = null, MIGRATE_IMGS = false;
+if (!Array.isArray(EVENTS) || !EVENTS.length){
+  const old = lsGet(LKEY, null), id = "ev"+Date.now().toString(36);
+  if (old && old.config){ Object.assign(S, old); MIGRATE_IMGS = id;
+    try{ localStorage.setItem(GKEY, JSON.stringify({classi:old.config.classi||[], dotArch:old.config.dotArch||[]})); }catch(e){} }
+  EVENTS = [{id, nome:(old&&old.config&&old.config.nome)||"", upd:Date.now()}];
+  try{ localStorage.setItem("racecourse-ev-"+id, JSON.stringify(stripLib(S))); localStorage.setItem(EKEY, JSON.stringify(EVENTS)); localStorage.setItem(CKEY, id); localStorage.removeItem(LKEY); }catch(e){}
+}
+try{ CUR = localStorage.getItem(CKEY); }catch(e){} if (!EVENTS.some(e=>e.id===CUR)) CUR = EVENTS[0].id;
+loadEventData(CUR);
 const campo = k => S[k] || (S[k] = defCampo());
 const clone = o => JSON.parse(JSON.stringify(o));
 function migrate(){
@@ -420,14 +449,34 @@ migrate();
 
 /* ---------- salvataggio sul dispositivo ---------- */
 let mode = "local", readOnly = false, editingDoc = null, storageFull = false;
-function cacheLocal(){ try{ localStorage.setItem(LKEY, JSON.stringify(S)); if (storageFull){ storageFull=false; render(); } }catch(e){ if (!storageFull){ storageFull=true; render(); } } }
+function cacheLocal(){ try{
+    localStorage.setItem("racecourse-ev-"+CUR, JSON.stringify(stripLib(S)));
+    localStorage.setItem(GKEY, JSON.stringify({classi:S.config.classi||[], dotArch:S.config.dotArch||[]}));
+    const e = EVENTS.find(x=>x.id===CUR); if (e){ e.nome = S.config.nome||""; e.upd = Date.now(); }
+    localStorage.setItem(EKEY, JSON.stringify(EVENTS));
+    if (storageFull){ storageFull=false; render(); } }catch(e){ if (!storageFull){ storageFull=true; render(); } } }
 function touch(){ cacheLocal(); }
 function applyQueued(){}
 try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch(e){}
 let alertMsg = "";
 let uploading = null, upMsg = "";
 const IMGS = {};
-CAMPI.forEach(([k])=>{ try{ const v=localStorage.getItem("racecourse-img-"+k); if(v) IMGS[k]=v; }catch(e){} });
+/* immagini dei percorsi in IndexedDB (più spazio di localStorage) */
+const HASIDB = typeof indexedDB !== "undefined";
+let _idb = null;
+function idbOpen(){ return _idb || (_idb = new Promise((ok,ko)=>{ const r = indexedDB.open("racecourse",1); r.onupgradeneeded = () => r.result.createObjectStore("img"); r.onsuccess = () => ok(r.result); r.onerror = () => ko(r.error); })); }
+function idbGet(k){ if (!HASIDB) return Promise.resolve(localStorage.getItem("racecourse-img-"+k)); return idbOpen().then(d=>new Promise((ok,ko)=>{ const q = d.transaction("img").objectStore("img").get(k); q.onsuccess = () => ok(q.result); q.onerror = () => ko(q.error); })); }
+function idbSet(k,v){ if (!HASIDB){ localStorage.setItem("racecourse-img-"+k, v); return Promise.resolve(); } return idbOpen().then(d=>new Promise((ok,ko)=>{ const x = d.transaction("img","readwrite"); x.objectStore("img").put(v,k); x.oncomplete = () => ok(); x.onerror = () => ko(x.error); })); }
+function idbDel(k){ if (!HASIDB){ try{ localStorage.removeItem("racecourse-img-"+k); }catch(e){} return Promise.resolve(); } return idbOpen().then(d=>new Promise(ok=>{ const x = d.transaction("img","readwrite"); x.objectStore("img").delete(k); x.oncomplete = () => ok(); x.onerror = () => ok(); })).catch(()=>{}); }
+const imgKey = k => CUR+":"+k;
+async function loadImgs(){
+  for (const k in IMGS) delete IMGS[k];
+  if (MIGRATE_IMGS){ const id = MIGRATE_IMGS; MIGRATE_IMGS = false;
+    for (const [k] of CAMPI){ try{ const v = localStorage.getItem("racecourse-img-"+k); if (v){ await idbSet(id+":"+k, v); if (HASIDB) localStorage.removeItem("racecourse-img-"+k); } }catch(e){} } }
+  for (const [k] of CAMPI){ try{ const v = await idbGet(imgKey(k)); if (v) IMGS[k] = v; }catch(e){} }
+  if (typeof render === "function") render();
+}
+loadImgs();
 const imgSrc = (k,f) => f.img ? IMGS[k]||"" : "";
 
 /* file: condividi su telefono, altrimenti scarica */
@@ -464,10 +513,11 @@ function readBackup(file){
 }
 function applyBackup(){
   const d = pendingImport; if (!d) return;
-  CAMPI.forEach(([k])=>{ delete IMGS[k]; try{ localStorage.removeItem("racecourse-img-"+k); }catch(e){} });
-  S = {config:Object.assign(defConfig(), d.data.config)}; CAMPI.forEach(([k])=>S[k]=d.data[k]||null);
-  for (const k in (d.imgs||{})){ if (!S.hasOwnProperty(k)) continue; IMGS[k]=d.imgs[k]; try{ localStorage.setItem("racecourse-img-"+k,d.imgs[k]); }catch(e){ storageFull=true; } }
-  cacheLocal(); pendingImport = null; bkMsg = t("Backup importato."); location.hash = ""; render();
+  const s = blankS(); s.config = Object.assign(defConfig(), d.data.config); CAMPI.forEach(([k])=>s[k]=d.data[k]||null);
+  mergeLib(d.data.config.classi, d.data.config.dotArch);
+  const id = createEvent(s, d.imgs||{});
+  pendingImport = null; bkMsg = t("Backup importato come nuova manifestazione.");
+  switchEvent(id).then(()=>{ location.hash = ""; render(); });
 }
 
 /* ---------- utilità ---------- */
@@ -507,6 +557,10 @@ function render(){
   else if (h==="mezzi") viewMezzi();
   else if (h==="bandiere") viewArchivio();
   else if (h==="circolo") viewCircolo();
+  else if (h==="eventi") viewEventi();
+  else if (h==="riep") viewRiep("all");
+  else if (h.startsWith("riep-")) viewRiep(h.slice(5));
+  else if (h==="dotazioni") viewDotArch();
   else if (h.startsWith("risposta=")) viewRisposta(h.slice(9));
   else if (h.startsWith("ed-")) viewEditor();
   else if (h==="evento") viewEvento();
@@ -523,6 +577,7 @@ function viewHome(){
   const standalone = matchMedia("(display-mode: standalone)").matches || navigator.standalone;
   $("#app").innerHTML = `<div class="wrap">
     <div class="brand"><img src="icons/icon-192.png" alt=""><b>Racecourse</b><div class="lang" role="group" aria-label="${t("Lingua")}"><button data-act="lang" data-v="it" aria-pressed="${LANG==="it"}">IT</button><button data-act="lang" data-v="en" aria-pressed="${LANG==="en"}">EN</button></div></div>
+    <div class="evbar"><span class="r">${t("Manifestazione in uso")}${EVENTS.length>1?` (${EVENTS.length})`:""}</span><a class="btn" href="#eventi">${t("Le mie manifestazioni")}</a></div>
     <div class="top"><input class="evname" data-d="config" data-p="nome" value="${esc(c.nome)}" placeholder="${t("Nome della manifestazione")}" ${ro()} aria-label="${t("Nome della manifestazione")}"></div>
     <div class="stepper"><div class="lbl">${t("Campi da gestire")}<span>${t("Da 1 a 6")}</span></div>
       <div class="ctl"><button data-act="n" data-v="-1" ${n<=1||readOnly?"disabled":""} aria-label="${t("Un campo in meno")}">−</button><b>${n}</b><button data-act="n" data-v="1" ${n>=6||readOnly?"disabled":""} aria-label="${t("Un campo in più")}">+</button></div></div>
@@ -535,8 +590,10 @@ function viewHome(){
       <a href="#bandiere">${t("Archivio bandiere")}<span>${t("Codice internazionale e classi")}</span></a>
       <a href="#rubrica">${t("Rubrica")}<span>${t("Cerca persone e barche")}</span></a>
       <a href="#mezzi">${t("Riepilogo mezzi")}<span>${t("Battelli e gommoni per campo")}</span></a>
-      <a href="#circolo" style="grid-column:1/-1">${t("Richiesta al circolo")}<span>${t("Fai completare i dati al circolo e importa la risposta")}</span></a>
+      <a href="#dotazioni">${t("Archivio dotazioni")}<span>${t("Elenco di tutte le dotazioni")}</span></a>
+      <a href="#circolo">${t("Richiesta al circolo")}<span>${t("Fai completare i dati al circolo e importa la risposta")}</span></a>
     </div>
+    <div class="btnrow" style="margin-top:16px"><a class="btn" href="#riep">${t("Vedi il riepilogo")}</a></div>
     ${pdfBtn("all",t("Esporta PDF per i circoli"))}
     ${standalone?"":`<div class="install"><b>${t("Installa l’app")}</b>${t("Su iPhone: Condividi, poi «Aggiungi alla schermata Home». Su Android: menu ⋮, poi «Installa app». Così funziona anche offline e i dati restano al sicuro.")}</div>`}
     ${statusLine()}
@@ -556,8 +613,8 @@ function viewEvento(){
     <div class="btnrow"><button class="btn pri" data-act="bkExport">${t("Esporta backup")}</button><label class="btn">${t("Importa backup")}<input type="file" accept="application/json,.json" data-imp></label></div>
     ${pendingImport?`<div class="selbar"><span class="n">${t("Sostituire i dati attuali con il backup del")} ${new Date(pendingImport.date).toLocaleDateString(LANG==="en"?"en-GB":"it-IT")}?</span><button class="btn pri" data-act="bkApply">${t("Sostituisci")}</button><button class="btn" data-act="bkCancel">${t("Annulla")}</button></div>`:""}
     ${bkMsg?`<p class="hint">${esc(bkMsg)}</p>`:""}
-    <h2>${t("Nuova manifestazione")}</h2>
-    <p class="muted">${t("Svuota nomi, numeri, boe e spunte di tutti i campi. Le bandiere di classe dell’archivio restano.")}</p>
+    <h2>${t("Svuota questa manifestazione")}</h2>
+    <p class="muted">${t("Svuota nomi, numeri, boe e spunte di tutti i campi. Le bandiere di classe dell’archivio restano.")} <a href="#eventi">${t("Per prepararne un’altra senza perdere questa, usa «Le mie manifestazioni» in home.")}</a></p>
     ${readOnly?"":`<button class="x" data-act="reset" data-confirm style="padding:10px 0">${t("Svuota tutti i dati")}</button>`}
     ${statusLine()}
   </div>`;
@@ -567,7 +624,9 @@ function viewCampo(k){
   const [,L,nome] = CAMPI.find(c=>c[0]===k), f = campo(k);
   document.title = `${t("Campo")} ${nome}`;
   $("#app").innerHTML = bar(`${t("Campo")} ${nome}`) + `<div class="wrap">
-    <div class="hero">${flagSVG(L,72)}<div><h1>${nome}</h1><div class="muted">${f.classi?esc(f.classi):t("Classi da inserire")}</div></div></div>
+    <div class="hero">${flagSVG(L,72)}<div><h1>${nome}</h1></div></div>
+    <div class="blk"><div class="sec">${classPicker(k,f)}</div></div>
+    <div class="btnrow" style="margin-top:12px"><a class="btn" href="#riep-${k}">${t("Vedi il riepilogo")}</a></div>
     ${pdfBtn(k,t("Esporta PDF di questo campo"))}
     <div class="tabs" role="tablist">${[["squadra",t("Squadra")],["boe",t("Boe")],["dotazioni",t("Dotazioni")],["bandiere",t("Bandiere")],["percorso",t("Percorso")]].map(([t,l])=>`<button role="tab" data-tab="${t}" aria-selected="${tab===t}">${l}</button>`).join("")}</div>
     <div id="pane">${({squadra:paneSquadra,boe:paneBoe,dotazioni:paneDot,bandiere:paneBand,percorso:panePerc})[tab](k,f)}</div>
@@ -577,7 +636,6 @@ function viewCampo(k){
 
 function paneSquadra(k,f){
   let h = `<h2>${t("Campo")}</h2><div class="blk"><div class="sec"><div class="kv2">
-      <div style="grid-column:1/-1">${classPicker(k,f)}</div>
       <div><div class="r">${t("Canale VHF")}</div>${inp(k,"vhf",t("Es. 72"),'inputmode="numeric"')}</div></div></div>
     ${person(k,"resp",t("Responsabile campo"))}</div>
     <h2>${t("Comitato di regata")}</h2><div class="blk">${person(k,"cdr.pres",t("Presidente"))}
@@ -615,18 +673,6 @@ function mezzoPicker(f){
   return `<div class="pick" role="group" aria-label="${t("Scegli il mezzo")}">${f.mezzi.map(m=>`<button data-sel="${m.id}" aria-pressed="${m.id===selM}">${esc((m.nome||TIPI[m.tipo]).replace(" + assistenza partenza","").replace(" + start support",""))}</button>`).join("")}</div>`;
 }
 const prog = (a,b) => `<div class="prog"><div class="track"><div class="fill" style="width:${b?100*a/b:0}%"></div></div><span class="muted">${a} ${t("di")} ${b}</span></div>`;
-
-function paneDot(k,f){
-  if (!f.mezzi.length) return `<div class="empty">${t("Aggiungi un mezzo nella scheda Squadra.")}</div>`;
-  const pick = mezzoPicker(f), i = f.mezzi.findIndex(m=>m.id===selM), m = f.mezzi[i];
-  const done = m.dot.filter(x=>x.ok).length;
-  return pick + prog(done,m.dot.length) + `<div class="blk">${m.dot.map((x,j)=>`<div class="chk${x.ok?" done":""}">
-      <input type="checkbox" data-d="${k}" data-p="mezzi.${i}.dot.${j}.ok" ${x.ok?"checked":""} ${readOnly?"disabled":""} aria-label="${t("Caricato")}">
-      <input class="inp" data-d="${k}" data-p="mezzi.${i}.dot.${j}.t" value="${esc(x.t)}" ${ro()} aria-label="${t("Dotazione")}">
-      ${xbtn("rmDot",`data-i="${i}" data-j="${j}"`,"✕")}</div>`).join("")||`<div class="empty">${t("Nessuna dotazione per questo mezzo.")}</div>`}</div>
-    ${readOnly?"":`<div class="addrow"><input class="inp" id="nd" placeholder="${t("Nuova dotazione")}" style="flex:1"><button data-act="addDot" data-i="${i}">${t("Aggiungi")}</button></div>
-    ${done?`<button class="lnk" data-act="clrDot" data-i="${i}">${t("Azzera le spunte")}</button>`:""}`}`;
-}
 
 function paneBand(k,f){
   if (!f.mezzi.length) return `<div class="empty">${t("Aggiungi un mezzo nella scheda Squadra.")}</div>`;
@@ -714,6 +760,7 @@ function drawSheet(){
   if (sheetOpen.kind==="logo") return drawLogoSheet();
   if (sheetOpen.kind==="crop") return drawCropSheet();
   if (sheetOpen.kind==="prop") return drawProposal();
+  if (sheetOpen.kind==="dot") return drawDotSheet();
   const {k,i} = sheetOpen, f = campo(k), m = f.mezzi[i];
   if (!m) { sheetOpen = null; $("#sheet").innerHTML=""; return; }
   const sc = $(".sheet .pane") ? $(".sheet .pane").scrollTop : 0;
@@ -755,7 +802,7 @@ async function uploadImg(k,file){
     const im = await loadImg(file), f = campo(k), url = shrinkToData(im);
     if (!url) throw new Error("big");
     IMGS[k]=url; f.img={doc:true};
-    try{ localStorage.setItem("racecourse-img-"+k,url); }catch(e){ upMsg="Immagine troppo grande per essere salvata su questo dispositivo."; }
+    try{ await idbSet(imgKey(k),url); }catch(e){ upMsg=t("Immagine troppo grande per essere salvata su questo dispositivo."); }
     touch(k);
   }catch(e){ upMsg = t("Questo file non è un’immagine leggibile. Prova con un JPG o un PNG."); }
   uploading=null; render();
@@ -765,7 +812,7 @@ async function classImg(i,file){
     c.img = toCanvas(im,300).toDataURL("image/jpeg",.85); touch("config"); render(); }catch(e){}
 }
 function clearImg(k){
-  delete IMGS[k]; try{ localStorage.removeItem("racecourse-img-"+k); }catch(e){}
+  delete IMGS[k]; idbDel(imgKey(k));
 }
 
 /* mappa: trascinamento, selezione, frecce */
@@ -850,7 +897,7 @@ document.addEventListener("pointercancel", endDrag);
 function viewArchivio(){
   const cl = S.config.classi||[];
   $("#app").innerHTML = bar(t("Archivio bandiere")) + `<div class="wrap">
-    ${GROUPS.slice(0,4).map(([g,l])=>`<h2>${l}</h2><div class="blk">${FLAGS.filter(f=>f.g===g).map(f=>`<div class="arow">${flagSVG(f.id,48)}<div><div class="n">${t(f.nome)}</div>${f.sig?`<div class="r">${t(f.sig)}</div>`:""}</div></div>`).join("")}</div>`).join("")}
+    ${GROUPS.filter(g=>g[0]!=="C").map(([g,l])=>`<h2>${l}</h2><div class="blk">${FLAGS.filter(f=>f.g===g).map(f=>`<div class="arow">${flagSVG(f.id,48)}<div><div class="n">${t(f.nome)}</div>${f.sig?`<div class="r">${t(f.sig)}</div>`:""}</div></div>`).join("")}</div>`).join("")}
     <h2>${t("Bandiere di classe")}</h2>
     <div class="blk">${cl.map(c=>`<a class="arow clink" href="#ed-${c.id}">${flagSVG(c.id,48)}<div><div class="n">${c.nome?esc(c.nome):t("Senza nome")}</div><div class="r">${t(SNAME[normClassFlag(c).style])}</div></div><span class="chev" aria-hidden="true">›</span></a>`).join("")||`<div class="empty">${t("Nessuna bandiera di classe. Aggiungi quelle delle classi in regata.")}</div>`}</div>
     ${readOnly?"":`<button class="add" data-act="addClasse">${t("Aggiungi bandiera di classe")}</button>`}
@@ -1421,6 +1468,8 @@ const BASE_RULES = [
   ["cs","ARAN","Estremità della linea di partenza (Policies WS 3.3)",1],
   ["ar","BLU","Battello arrivi in posizione (Policies WS 14.4)",1], ["ar","S","Percorso ridotto all’arrivo (RRS 32.2)",0],
   ["gp","M","Boa sostitutiva (RRS 34)",1], ["gp","C","Cambio di percorso alla boa (RRS 33)",0],
+  ["gp","C_TRI","Segnale da esporre con C (RRS 33)",0], ["gp","C_RET","Segnale da esporre con C (RRS 33)",0], ["gp","C_PLUS","Segnale da esporre con C (RRS 33)",0], ["gp","C_MINUS","Segnale da esporre con C (RRS 33)",0],
+  ["rc","C_TRI","Segnale da esporre con C (RRS 33)",0], ["rc","C_RET","Segnale da esporre con C (RRS 33)",0], ["rc","C_PLUS","Segnale da esporre con C (RRS 33)",0], ["rc","C_MINUS","Segnale da esporre con C (RRS 33)",0],
   ["terra","AP","Differimento a terra",1], ["terra","D","Uscita in acqua (vedi IdR)",0], ["terra","L","Comunicato esposto",0], ["terra","A","Nessun’altra prova oggi",0]
 ];
 const CLASS_RULES = {
@@ -1544,6 +1593,183 @@ function presetAct(a, ds){
       f.mezzi.forEach(m=>{ const pm = P[m.id]||{}, old = m.fl||{}, nf = {}; Object.entries(pm).forEach(([id,p])=>{ if (p.on) nf[id] = !!old[id]; }); m.fl = nf; });
       sheetOpen = null; drawSheet(); touch(h); render(); return; }
   }
+}
+
+/* ---------- archivio dotazioni: scelta per mezzo, poi spunta a bordo ---------- */
+const ALL_DOT = [...new Set(Object.values(DOT).flat())];
+function dotArchive(){
+  const own = (S.config.dotArch||[]).map(x=>x.t).filter(Boolean);
+  return [...new Set(ALL_DOT.map(x=>t(x)).concat(own))];
+}
+function paneDot(k,f){
+  if (!f.mezzi.length) return `<div class="empty">${t("Aggiungi un mezzo nella scheda Squadra.")}</div>`;
+  const pick = mezzoPicker(f), i = f.mezzi.findIndex(m=>m.id===selM), m = f.mezzi[i];
+  const done = m.dot.filter(x=>x.ok).length;
+  return pick + (readOnly?"":`<div class="btnrow" style="margin-top:12px"><button class="btn pri" data-act="dotOpen" data-i="${i}">${t("Scegli le dotazioni necessarie")}</button></div>`)
+    + `<p class="hint">${t("Qui sotto c’è l’elenco delle dotazioni necessarie per il mezzo. La spunta serve a segnare quelle già caricate a bordo.")}</p>`
+    + (m.dot.length?prog(done,m.dot.length):"")
+    + `<div class="blk">${m.dot.map((x,j)=>`<label class="chk${x.ok?" done":""}"><input type="checkbox" data-d="${k}" data-p="mezzi.${i}.dot.${j}.ok" ${x.ok?"checked":""} ${readOnly?"disabled":""} aria-label="${t("Caricato")}"><span class="fn">${esc(x.t)}</span>${readOnly?"":`<button class="x" data-act="rmDot" data-i="${i}" data-j="${j}" aria-label="${t("Togli dall’elenco")}">✕</button>`}</label>`).join("")||`<div class="empty">${t("Nessuna dotazione per questo mezzo.")}</div>`}</div>
+    ${readOnly?"":`<div class="addrow"><input class="inp" id="nd" placeholder="${t("Nuova dotazione")}" style="flex:1"><button data-act="addDot" data-i="${i}">${t("Aggiungi")}</button></div>
+    <p class="hint">${t("Le voci nuove finiscono anche nell’archivio delle dotazioni.")}</p>
+    ${done?`<button class="lnk" data-act="clrDot" data-i="${i}">${t("Azzera le spunte")}</button>`:""}`}`;
+}
+function addToDotArch(v){
+  v = (v||"").trim(); if (!v) return;
+  if (dotArchive().some(x=>x.toLowerCase()===v.toLowerCase())) return;
+  (S.config.dotArch = S.config.dotArch||[]).push({id:rid(), t:v}); touch("config");
+}
+function drawDotSheet(){
+  const o = sheetOpen, f = campo(o.k), m = f.mezzi[o.i];
+  if (!m){ sheetOpen=null; $("#sheet").innerHTML=""; return; }
+  const sc = $(".sheet .pane") ? $(".sheet .pane").scrollTop : 0;
+  const sug = (DOT[m.tipo]||[]).map(x=>t(x)), cur = m.dot.map(x=>x.t), arch = dotArchive();
+  if (!o.sel){ o.sel = {}; (cur.length?cur:sug).forEach(x=>o.sel[x]=true); }
+  const lc = s => s.toLowerCase();
+  const sugL = sug, curOnly = cur.filter(x=>!sug.some(s=>lc(s)===lc(x))), rest = arch.filter(x=>!sug.some(s=>lc(s)===lc(x)) && !cur.some(c=>lc(c)===lc(x)));
+  o.items = sugL.concat(curOnly, rest);
+  const row = x => { const j = o.items.indexOf(x); return `<label class="chk"><input type="checkbox" data-di="${j}" ${o.sel[x]?"checked":""}><span class="fn">${esc(x)}</span></label>`; };
+  const n = o.items.filter(x=>o.sel[x]).length;
+  $("#sheet").innerHTML = `<div class="sheet" data-act="closeSheet"><div class="pane" role="dialog" aria-label="${t("Dotazioni necessarie")}">
+    <div class="head"><div class="mzh">${boatSVG(m.tipo,18)}<div><h3 style="margin:0">${t("Dotazioni necessarie")}</h3><div class="r">${esc(m.nome||TIPI[m.tipo])}</div></div></div><button data-act="closeSheet">${t("Annulla")}</button></div>
+    <p class="hint">${t("Spunta solo le dotazioni che servono a questo mezzo: diventeranno il suo elenco, anche nel PDF. Le spunte di “a bordo” già messe restano.")}</p>
+    ${sugL.length?`<h3>${t("Consigliate per")} ${esc(TIPI[m.tipo])}</h3><div class="blk">${sugL.map(row).join("")}</div>`:""}
+    ${curOnly.length?`<h3>${t("Già nell’elenco del mezzo")}</h3><div class="blk">${curOnly.map(row).join("")}</div>`:""}
+    ${rest.length?`<h3>${t("Altre dall’archivio")}</h3><div class="blk">${rest.map(row).join("")}</div>`:""}
+    <h3>${t("Voce nuova")}</h3>
+    <div class="addrow"><input class="inp" id="ndArch" placeholder="${t("Es. Cassetta pronto soccorso")}" style="flex:1"><button data-act="dotNew">${t("Aggiungi")}</button></div>
+    <div class="btnrow" style="margin:18px 0 6px"><button class="btn pri" data-act="dotApply">${t("Salva l’elenco")} (${n})</button></div>
+  </div></div>`;
+  $(".sheet .pane").scrollTop = sc;
+}
+document.addEventListener("change", e=>{
+  const di = e.target.dataset && e.target.dataset.di;
+  if (di==null || !sheetOpen || sheetOpen.kind!=="dot") return;
+  const x = sheetOpen.items[+di]; if (x==null) return;
+  sheetOpen.sel[x] = e.target.checked; drawSheet();
+});
+function viewDotArch(){
+  document.title = t("Archivio dotazioni")+" | Racecourse";
+  const own = S.config.dotArch||[];
+  $("#app").innerHTML = bar(t("Archivio dotazioni")) + `<div class="wrap">
+    <p class="muted" style="margin-top:16px">${t("Tutte le dotazioni disponibili. Per ogni mezzo scegli quelle necessarie dalla scheda Dotazioni del campo.")}</p>
+    <h2>${t("Predefinite")}</h2>
+    <div class="blk">${ALL_DOT.map(x=>`<div class="row"><span>${esc(t(x))}</span></div>`).join("")}</div>
+    <h2>${t("Aggiunte da te")}</h2>
+    <div class="blk">${own.map((x,i)=>`<div class="brow"><input class="inp" style="flex:1" data-d="config" data-p="dotArch.${i}.t" value="${esc(x.t)}" ${ro()}>${readOnly?"":`<button class="x" data-act="dotArchRm" data-i="${i}" aria-label="${t("Elimina")}">✕</button>`}</div>`).join("")||`<div class="empty">${t("Nessuna voce aggiunta.")}</div>`}</div>
+    ${readOnly?"":`<div class="addrow"><input class="inp" id="ndA" placeholder="${t("Nuova dotazione")}" style="flex:1"><button data-act="dotArchAdd">${t("Aggiungi")}</button></div>`}
+    ${statusLine()}</div>`;
+}
+function dotAct(a, ds){
+  const h = location.hash.slice(1);
+  switch(a){
+    case "dotOpen": sheetOpen = {kind:"dot", k:h, i:+ds.i}; drawSheet(); return;
+    case "dotNew": { const el = $("#ndArch"), v = el && el.value.trim(); if (!v) return; addToDotArch(v); sheetOpen.sel[v] = true; drawSheet(); return; }
+    case "dotApply": { const o = sheetOpen, f = campo(o.k), m = f.mezzi[o.i]; if (!m) return;
+      const old = {}; m.dot.forEach(x=>old[x.t.toLowerCase()] = x.ok);
+      m.dot = o.items.filter(x=>o.sel[x]).map(x=>({t:x, ok:!!old[x.toLowerCase()]}));
+      sheetOpen = null; drawSheet(); touch(o.k); render(); return; }
+    case "addDot": { const v = $("#nd").value.trim(); if (!v){ $("#nd").focus(); return; } const f = campo(h); f.mezzi[+ds.i].dot.push({t:v, ok:false}); addToDotArch(v); touch(h); render(); return; }
+    case "dotArchAdd": { const v = $("#ndA").value.trim(); if (!v) return; addToDotArch(v); render(); return; }
+    case "dotArchRm": { (S.config.dotArch||[]).splice(+ds.i,1); touch("config"); render(); return; }
+  }
+}
+
+/* ---------- manifestazioni: elenco, nuova, duplica, elimina ---------- */
+function newEventId(){ return "ev"+Date.now().toString(36)+rid(); }
+async function switchEvent(id){
+  cacheLocal(); CUR = id; try{ localStorage.setItem(CKEY, id); }catch(e){}
+  loadEventData(id); migrate(); sheetOpen = null; selM = null; tab = "squadra";
+  await loadImgs();
+}
+function createEvent(s, imgs){
+  const id = newEventId();
+  try{ localStorage.setItem("racecourse-ev-"+id, JSON.stringify(stripLib(s))); }catch(e){ storageFull = true; }
+  EVENTS.push({id, nome:(s.config&&s.config.nome)||"", upd:Date.now()});
+  for (const k in (imgs||{})) idbSet(id+":"+k, imgs[k]);
+  try{ localStorage.setItem(EKEY, JSON.stringify(EVENTS)); }catch(e){}
+  return id;
+}
+function mergeLib(classi, dotArch){
+  const own = S.config.classi = S.config.classi||[];
+  (classi||[]).forEach(c=>{ if (c && c.id && !own.some(x=>x.id===c.id)) own.push(c); });
+  const da = S.config.dotArch = S.config.dotArch||[];
+  (dotArch||[]).forEach(x=>{ if (x && x.t && !da.some(y=>y.t.toLowerCase()===x.t.toLowerCase())) da.push(x); });
+}
+async function eventAct(a, ds){
+  switch(a){
+    case "evNew": { const s = blankS(); const id = createEvent(s, {}); await switchEvent(id); location.hash = ""; render(); return; }
+    case "evOpen": await switchEvent(ds.id); location.hash = ""; render(); return;
+    case "evDup": {
+      cacheLocal();
+      const src = lsGet("racecourse-ev-"+ds.id, null); if (!src) return;
+      const s = blankS(); s.config = Object.assign(defConfig(), src.config); CAMPI.forEach(([k])=>s[k]=src[k]||null);
+      s.config.nome = `${t("Copia di")} ${src.config.nome||t("Senza nome")}`; s.config.richieste = [];
+      CAMPI.forEach(([k])=>{ const f = s[k]; if (!f || !f.mezzi) return; f.mezzi.forEach(m=>{ (m.dot||[]).forEach(x=>x.ok=false); Object.keys(m.fl||{}).forEach(id=>m.fl[id]=false); }); });
+      const imgs = {}; for (const [k] of CAMPI){ try{ const v = await idbGet(ds.id+":"+k); if (v) imgs[k] = v; }catch(e){} }
+      const id = createEvent(s, imgs); await switchEvent(id); location.hash = ""; render(); return; }
+    case "evDel": {
+      const id = ds.id; try{ localStorage.removeItem("racecourse-ev-"+id); }catch(e){}
+      CAMPI.forEach(([k])=>idbDel(id+":"+k));
+      EVENTS = EVENTS.filter(e=>e.id!==id);
+      if (!EVENTS.length){ createEvent(blankS(), {}); }
+      try{ localStorage.setItem(EKEY, JSON.stringify(EVENTS)); }catch(e){}
+      if (id===CUR){ CUR = null; const next = EVENTS.slice().sort((a,b)=>b.upd-a.upd)[0].id; CUR = next; try{ localStorage.setItem(CKEY,next); }catch(e){} loadEventData(next); migrate(); await loadImgs(); }
+      render(); return; }
+  }
+}
+function viewEventi(){
+  document.title = t("Le mie manifestazioni")+" | Racecourse";
+  cacheLocal();
+  const list = EVENTS.slice().sort((a,b)=>b.upd-a.upd);
+  const fmt = ms => new Date(ms).toLocaleDateString(LANG==="en"?"en-GB":"it-IT", {day:"numeric", month:"short", year:"numeric"});
+  $("#app").innerHTML = bar(t("Le mie manifestazioni")) + `<div class="wrap">
+    <div class="btnrow" style="margin-top:16px"><button class="btn pri" data-act="evNew">${t("Nuova manifestazione")}</button></div>
+    <p class="hint">${t("Con «Duplica» prepari una nuova regata partendo da una vecchia: restano campi, mezzi, boe, bandiere, dotazioni e percorsi; le spunte «a bordo» ripartono da zero.")}</p>
+    <div class="blk" style="margin-top:12px">${list.map(e=>{ const cur = e.id===CUR;
+      return `<div class="sec"><div class="mzh"><div style="margin-right:auto;min-width:0"><div class="n" style="font-weight:600">${e.nome?esc(e.nome):`<span class="tbd">${t("Senza nome")}</span>`}</div><div class="r">${t("Modificata il")} ${fmt(e.upd)}</div></div>${cur?`<span class="tag">${t("In uso")}</span>`:""}</div>
+        <div class="btnrow" style="margin-top:8px">${cur?`<a class="btn" href="#">${t("Apri")}</a>`:`<button class="btn" data-act="evOpen" data-id="${e.id}">${t("Apri")}</button>`}<button class="btn" data-act="evDup" data-id="${e.id}">${t("Duplica")}</button><button class="x" data-act="evDel" data-id="${e.id}" data-confirm>${t("Elimina")}</button></div></div>`; }).join("")}</div>
+    <p class="hint">${t("Le bandiere di classe e l’archivio delle dotazioni sono in comune a tutte le manifestazioni.")}</p>
+    ${statusLine()}</div>`;
+}
+
+/* ---------- riepilogo prima del PDF ---------- */
+const RIEP_MAPS = {};
+function riepField(k){
+  const [,L,nome] = CAMPI.find(c=>c[0]===k), f = campo(k);
+  const pr = (label, p) => p && (p.n||p.t) ? `<div class="row"><div style="min-width:0"><div class="r">${label}</div><div class="n">${esc(p.n||"–")}</div></div>${telOk(p.t)?`<a class="call" style="margin-left:auto" href="${telHref(p.t)}">${t("Chiama")}</a>`:""}</div>` : "";
+  const mz = f.mezzi.filter(m=>m.tipo!=="terra"), terra = f.mezzi.find(m=>m.tipo==="terra");
+  const flagsRow = m => { const ids = Object.keys(m.fl||{}).filter(id=>FMAP[id]||allClasses().some(c=>c.id===id)); return ids.length ? `<div class="rflags">${ids.map(id=>`<span title="${esc(flagName(id))}">${flagSVG(id,30)}<small>${esc(flagName(id))}</small></span>`).join("")}</div>` : `<div class="r">${t("Nessuna bandiera assegnata a questo mezzo.")}</div>`; };
+  const dotsRow = m => (m.dot||[]).length ? `<div class="r" style="margin-top:6px">${t("Dotazioni")}: ${m.dot.map(x=>esc(x.t)).join(", ")}</div>` : "";
+  const hasMap = imgSrc(k,f) || (f.marks||[]).length || (f.arrows||[]).length || Object.keys(f.pos||{}).length;
+  if (hasMap && !RIEP_MAPS[k]){ RIEP_MAPS[k] = "…"; mapImage(k,f).then(r=>{ RIEP_MAPS[k] = r ? r.url : ""; const el = document.getElementById("rmap-"+k); if (el && r) el.innerHTML = `<img src="${r.url}" alt="${t("Percorso del campo")}">`; }); }
+  return `<section class="riep">
+    <div class="hero" style="padding-top:18px">${flagSVG(L,56)}<div><h2 style="margin:0">${t("Campo")} ${nome}</h2><div class="muted">${esc([f.classi, f.vhf?`${t("VHF campo")} ${f.vhf}`:"", S.config.victor?`Victor ${S.config.victor}`:""].filter(Boolean).join(" · ")||t("Classi da inserire"))}</div></div></div>
+    <h3>${t("Comitato di regata e responsabili")}</h3>
+    <div class="blk">${pr(t("Responsabile campo"),f.resp)}${pr(t("Presidente comitato"),f.cdr.pres)}${f.cdr.comp.map(p=>pr(t("Componente"),p)).join("")}${pr(t("Beach master"),f.beach)}${pr(t("Sicurezza campo"),f.sicurezza)}${pr(t("Delegato di classe"),f.delegato)}</div>
+    <h3>${t("Mezzi in acqua")}</h3>
+    ${mz.map(m=>`<div class="blk"><div class="sec"><div class="mzh">${boatSVG(m.tipo,18)}<b style="margin-right:auto">${esc(m.nome||TIPI[m.tipo])}</b><span class="tag">${esc(sigla(m))}</span></div>
+      <div class="r" style="margin-top:4px">${esc([m.barca, m.resp.n?`${t("responsabile")} ${m.resp.n}${m.resp.t?" ("+m.resp.t+")":""}`:"", m.ass.n?`${m.tipo==="rc"?t("aiuto"):t("assistente")} ${m.ass.n}${m.ass.t?" ("+m.ass.t+")":""}`:""].filter(Boolean).join(" · ")||"–")}</div>
+      ${flagsRow(m)}${dotsRow(m)}</div></div>`).join("")}
+    ${terra?`<h3>${esc(terra.nome||TIPI.terra)}</h3><div class="blk"><div class="sec">${flagsRow(terra)}${dotsRow(terra)}</div></div>`:""}
+    ${(f.boe||[]).length?`<h3>${t("Boe")}</h3><div class="blk">${f.boe.map(b=>`<div class="row"><span class="dot${b.robo?" robo":""}" style="background:${bhex(b.c)==="transparent"?"#BBB":bhex(b.c)};width:20px;height:20px"></span><b style="min-width:70px">${esc(b.l)}</b><span class="muted">× ${b.q||1}</span><span style="margin-left:auto">${esc([b.c?t(b.c):"", b.tipo?t(b.tipo):(b.robo?t("Robotica"):"")].filter(Boolean).join(", ")||"–")}</span></div>`).join("")}</div><p class="hint">${t("Totale boe:")} ${f.boe.reduce((a,b)=>a+(parseInt(b.q)||0),0)}</p>`:""}
+    ${hasMap?`<h3>${t("Percorso")}</h3><div class="map" id="rmap-${k}" style="background:#fff">${RIEP_MAPS[k] && RIEP_MAPS[k]!=="…" ? `<img src="${RIEP_MAPS[k]}" alt="">` : `<p class="hint" style="padding:20px">${t("Caricamento…")}</p>`}</div>`:""}
+    ${f.note?`<h3>${t("Note")}</h3><div class="blk"><div class="sec">${esc(f.note)}</div></div>`:""}
+  </section>`;
+}
+function viewRiep(which){
+  for (const k in RIEP_MAPS) delete RIEP_MAPS[k];
+  const all = which==="all", keys = all ? CAMPI.slice(0,S.config.n).map(c=>c[0]) : [which];
+  const back = all ? "#" : "#"+which;
+  document.title = t("Riepilogo")+" | Racecourse";
+  const c = S.config, pr = (l,p) => p && (p.n||p.t) ? `<div class="row"><div><div class="r">${l}</div><div class="n">${esc(p.n||"–")}</div></div>${telOk(p.t)?`<a class="call" style="margin-left:auto" href="${telHref(p.t)}">${t("Chiama")}</a>`:""}</div>` : "";
+  $("#app").innerHTML = `<div class="bar"><div class="in"><a class="back" href="${back}">‹ ${all?t("Campi"):t("Campo")}</a><span class="t">${t("Riepilogo")}</span></div></div><div class="wrap">
+    <h1 style="margin-top:16px">${esc(c.nome||t("Manifestazione"))}</h1>
+    <p class="hint">${t("Questo è il contenuto del PDF. Controllalo prima di esportarlo.")}</p>
+    ${pdfBtn(which, all?t("Esporta PDF per i circoli"):t("Esporta PDF di questo campo"))}
+    ${all?`<h3>${t("Contatti e canali")}</h3><div class="blk">${c.victor?`<div class="row"><div><div class="r">VHF Victor</div><div class="n">${esc(c.victor)}</div></div></div>`:""}${pr(t("Segreteria"),c.segreteria)}${pr(t("Medico"),c.medico)}${(c.classifiche||[]).map(p=>pr(t("Classifiche"),p)).join("")}</div>`:""}
+    ${keys.map(riepField).join("")}
+    ${pdfBtn(which, all?t("Esporta PDF per i circoli"):t("Esporta PDF di questo campo"))}
+  </div>`;
 }
 /* ---------- esportazione PDF ---------- */
 let pdfBusy = null, pdfMsg = "";
@@ -1782,6 +2008,8 @@ function addMezzo(f,tp){
 }
 function place(f){ const n = Object.keys(f.pos||{}).length; return {x:.5+((n%5)-2)*.08, y:.5+(Math.floor(n/5)%3-1)*.1}; }
 function act(a, ds){
+  if (["evNew","evOpen","evDup","evDel"].includes(a)) return eventAct(a, ds);
+  if (["dotOpen","dotNew","dotApply","addDot","dotArchAdd","dotArchRm"].includes(a)) return dotAct(a, ds);
   if (["clAdd","clRm","propOpen","propApply","flRm"].includes(a)) return presetAct(a, ds);
   if (["rqAll","rqSend","rqPaste","mdAdd","mdSend","rsImport"].includes(a)) return circoloAct(a, ds);
   const h = location.hash.slice(1), i = +ds.i;
